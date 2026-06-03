@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <img src="./public/images/preview.webp" alt="Better Flow Preview" width="100%" />
+</p>
 
-## Getting Started
+# Better Flow
 
-First, run the development server:
+> An open-source screenshot studio and browser tool. Transform raw captures into production-ready graphics instantly.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<!-- TODO: Add project screenshot here when available -->
+<!-- <p align="center">
+  <img src="/images/screenshot.png" alt="Better Flow Preview" width="100%" />
+</p> -->
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<p align="center">
+  <img src="https://newshields.vercel.app/api/badge.svg?label=Built%20with&title=React&icon=react_dark&theme=midnight" alt="Built with React" />
+  <img src="https://newshields.vercel.app/api/badge.svg?label=Built%20with&title=Next.js&icon=nextjs_icon_dark&theme=graphite" alt="Built with Next.js" />
+  <img src="https://newshields.vercel.app/api/badge.svg?label=Built%20with&title=Tailwind%20CSS&icon=tailwindcss&theme=midnight" alt="Built with Tailwind CSS" />
+  <img src="https://newshields.vercel.app/api/badge.svg?label=Built%20with&title=shadcn%2Fui&icon=shadcn-ui_dark&theme=graphite" alt="Built with shadcn/ui" />
+</p>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Overview
 
-## Learn More
+**Better Flow** is a landing page and coming-soon site for an upcoming open-source screenshot beautification tool. The site showcases the product's features, tech stack, and roadmap while maintaining a premium, dark-themed aesthetic.
 
-To learn more about Next.js, take a look at the following resources:
+## What is Better Flow?
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Better Flow is an upcoming open-source tool that turns raw screenshots into polished, production-ready visuals. Think of it as a screenshot studio inside your browser — no uploads, no servers, no data leaving your machine.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Features
 
-## Deploy on Vercel
+- **Screenshot Studio** — One-click transformations with browser mockups, device frames, and 3D effects
+- **Visual Effects** — Add glow, particles, spotlight, and tilt to make captures stand out
+- **Export Any Format** — PNG, MP4, GIF — whatever your content needs
+- **Local Processing** — Everything happens in your browser. No server uploads, no cloud dependencies
+- **Open Source** — Apache 2.0 License. Use it, modify it, ship it
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Technology | Role |
+|------------|------|
+| [React](https://react.dev) | UI Framework |
+| [Next.js](https://nextjs.org) | App Framework |
+| [Tailwind CSS](https://tailwindcss.com) | Styling Engine |
+| [shadcn/ui](https://ui.shadcn.com) | Component Library |
+
+## Privacy & Open Source
+
+- **Zero Telemetry** — No tracking pixels, no analytics cookies, no usage data collection
+- **Local-First** — All image processing happens directly in your browser
+- **Community Driven** — Transparent roadmap and open for contributions
+- **Auditable Code** — Every line is public. No hidden tracking, no proprietary black boxes
+
+## Roadmap
+
+| Version | Status | Milestone |
+|---------|--------|-----------|
+| v0.1 | DONE | Landing Page |
+| v0.2 | SOON | Studio Launch — Editor, browser frames, device mockups |
+| v0.3 | LATER | Export & Video — PNG/WebP, 4K, MP4/GIF |
+| v0.4 | LATER | Chrome Extension — One-click capture & quick export |
+| v0.5 | LATER | Social Integrations — Direct publishing to Twitter/X, LinkedIn |
+
+## License
+
+[Apache 2.0](LICENSE) — Commercial use fully permitted.
+
+---
+
+Built with modern open-source technologies. TypeScript-first, locally processed, no telemetry.
