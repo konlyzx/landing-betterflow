@@ -2,7 +2,7 @@
 
 import LoadingScreen from "./components/LoadingScreen";
 import Footer from "./components/Footer";
-import { Hero, Features, LiveDemo, Privacy, RoadmapSection, CTA } from "./sections";
+import { Hero, Features, LiveDemo, Privacy, RoadmapSection, CTA, AIInfo } from "./sections";
 
 export default function LandingPage() {
   return (
@@ -15,6 +15,7 @@ export default function LandingPage() {
       <Privacy />
       <RoadmapSection />
       <CTA />
+      <AIInfo />
       
       <Footer />
     </main>

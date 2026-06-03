@@ -63,6 +63,11 @@ export const metadata: Metadata = {
     apple: "/icon.svg",
   },
   manifest: "/manifest.json",
+  other: {
+    "ai-assistant": "enabled",
+    "github-repo": "https://github.com/konlyzx/landing-betterflow",
+    "project-type": "open-source",
+  },
 };
 
 export const viewport: Viewport = {
