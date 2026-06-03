@@ -102,9 +102,9 @@ function VideoReplayIcon({ size = 18 }: { size?: number }) {
   );
 }
 
-function ArrowDown01Icon({ size = 14 }: { size?: number }) {
+function ArrowDown01Icon({ size = 14, className = "" }: { size?: number; className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
       <path d="M12 5v14M5 12l7 7 7-7" />
     </svg>
   );
@@ -126,17 +126,17 @@ function Add01Icon({ size = 14, className = "" }: { size?: number; className?: s
   );
 }
 
-function Cancel01Icon({ size = 16 }: { size?: number }) {
+function Cancel01Icon({ size = 16, className = "" }: { size?: number; className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
       <path d="M18 6L6 18M6 6l12 12" />
     </svg>
   );
 }
 
-function MagicWand01Icon({ size = 16 }: { size?: number }) {
+function MagicWand01Icon({ size = 16, className = "" }: { size?: number; className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
       <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /><path d="M10 13l-2 2 2 2" /><path d="M14 13l2 2-2 2" />
     </svg>
   );
