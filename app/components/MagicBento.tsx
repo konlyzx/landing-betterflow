@@ -536,8 +536,8 @@ const MagicBento: React.FC<BentoProps> = ({
 
       {enableSpotlight && <GlobalSpotlight gridRef={gridRef} disableAnimations={shouldDisableAnimations} enabled={enableSpotlight} spotlightRadius={spotlightRadius} glowColor={glowColor} />}
 
-      <section className="bento-section py-20 w-full" ref={gridRef}>
-        <div className="max-w-[1324px] w-full mx-auto">
+      <div className="bento-section w-full" ref={gridRef}>
+        <div className="w-full">
           <div style={{ marginBottom: "32px" }}>
             <h2 style={{ fontFamily: "Geist, sans-serif", fontSize: "32px", fontWeight: 500, color: "#fff", letterSpacing: "-0.02em", margin: 0 }}>What&apos;s inside</h2>
           </div>
@@ -562,7 +562,7 @@ const MagicBento: React.FC<BentoProps> = ({
           ))}
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 };

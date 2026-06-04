@@ -156,11 +156,11 @@ export default function Roadmap() {
                     </div>
 
                     <div className="relative">
-                      <div className="flex items-center gap-3 mb-5">
-                        <h3 className="text-base md:text-lg font-semibold text-white">
+                      <div className="flex items-start gap-3 mb-5 flex-wrap">
+                        <h3 className="text-base md:text-lg font-semibold text-white leading-tight">
                           {m.title}
                         </h3>
-                        <span className="text-[10px] font-medium text-[#71717a] bg-white/[0.06] px-2 py-0.5 rounded-full">
+                        <span className="text-[10px] font-medium text-[#71717a] bg-white/[0.06] px-2 py-0.5 rounded-full flex-shrink-0 whitespace-nowrap">
                           {m.version}
                         </span>
                       </div>
