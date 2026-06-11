@@ -62,11 +62,11 @@ const cards: FloatingCard[] = [
 
 const FloatingCardComponent = ({ card }: { card: FloatingCard }) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  
+
   // Mouse parallax values
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  
+
   // Smooth spring animation for parallax
   const springConfig = { damping: 25, stiffness: 150 };
   const parallaxX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-20, 20]), springConfig);
@@ -76,15 +76,15 @@ const FloatingCardComponent = ({ card }: { card: FloatingCard }) => {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!cardRef.current) return;
-      
+
       const rect = cardRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      
+
       // Normalize mouse position relative to card center (-0.5 to 0.5)
       const normalizedX = (e.clientX - centerX) / window.innerWidth;
       const normalizedY = (e.clientY - centerY) / window.innerHeight;
-      
+
       mouseX.set(normalizedX);
       mouseY.set(normalizedY);
     };
@@ -98,7 +98,7 @@ const FloatingCardComponent = ({ card }: { card: FloatingCard }) => {
   return (
     <motion.div
       ref={cardRef}
-      className={`absolute overflow-hidden border border-white/10 bg-[#111] shadow-2xl group ${isRound ? "rounded-full" : "rounded-3xl"}`}
+      className={`group absolute overflow-hidden border border-white/10 bg-[#111] shadow-2xl ${isRound ? "rounded-full" : "rounded-3xl"}`}
       style={{
         ...card.position,
         zIndex: card.zIndex,
@@ -115,39 +115,56 @@ const FloatingCardComponent = ({ card }: { card: FloatingCard }) => {
       }}
       whileHover={{ scale: 1.03 }}
     >
-      {/* Card image */}
-      <div className="w-full h-full">
-        <img
-          src={card.image}
-          alt={card.label}
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
+      <div className="h-full w-full">
+        <img src={card.image} alt={card.label} className="h-full w-full object-cover" loading="lazy" />
       </div>
-      
-      {/* Hover overlay with label */}
-      <div 
+
+      <div
         className={`pointer-events-none absolute inset-x-0 top-0 z-10 flex h-20 items-start justify-between gap-2 px-3 pt-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${isRound ? "items-center justify-center" : ""}`}
         style={{
-          background: isRound 
+          background: isRound
             ? "radial-gradient(120% 90% at 50% 0%, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.5) 50%, transparent 100%)"
-            : "linear-gradient(rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.25) 50%, transparent 100%)"
+            : "linear-gradient(rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.25) 50%, transparent 100%)",
         }}
       >
         {!isRound && (
           <>
             <span className="text-sm font-medium text-white">{card.label}</span>
             <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 transition-colors duration-300 group-hover:bg-white/20">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-white"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
               </svg>
             </div>
           </>
         )}
         {isRound && (
           <div className="flex aspect-square w-[20%] items-center justify-center rounded-full bg-white/10 transition-colors duration-300 group-hover:bg-white/20">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-              <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-white"
+            >
+              <path d="M7 7h10v10" />
+              <path d="M7 17 17 7" />
             </svg>
           </div>
         )}
@@ -159,27 +176,27 @@ const FloatingCardComponent = ({ card }: { card: FloatingCard }) => {
 // Gradient blob background
 const GradientBlobs = () => (
   <div className="pointer-events-none absolute inset-0 -z-10">
-    <div 
+    <div
       className="absolute inset-x-4 inset-y-8 opacity-70 blur-3xl"
       style={{
         background: "radial-gradient(55% 55% at 35% 40%, #7c3aed 0%, transparent 70%)",
-        animation: "hero-blob-breathe 9s ease-in-out infinite"
+        animation: "hero-blob-breathe 9s ease-in-out infinite",
       }}
     />
-    <div 
+    <div
       className="absolute inset-x-4 inset-y-8 opacity-60 blur-3xl"
       style={{
         background: "radial-gradient(50% 50% at 70% 65%, #ff5fbf 0%, transparent 70%)",
         animation: "hero-blob-breathe 11s ease-in-out infinite",
-        animationDelay: "-3s"
+        animationDelay: "-3s",
       }}
     />
-    <div 
+    <div
       className="absolute inset-x-4 inset-y-8 opacity-55 blur-3xl"
       style={{
         background: "radial-gradient(45% 45% at 25% 75%, #a855f7 0%, transparent 70%)",
         animation: "hero-blob-breathe 13s ease-in-out infinite",
-        animationDelay: "-6s"
+        animationDelay: "-6s",
       }}
     />
     <style>{`
@@ -193,7 +210,7 @@ const GradientBlobs = () => (
 
 export function FloatingCardsContainer() {
   return (
-    <div className="relative w-full max-w-[500px] aspect-[4/5] sm:aspect-[5/6] md:aspect-square">
+    <div className="relative aspect-[4/5] w-full max-w-[500px] sm:aspect-[5/6] md:aspect-square">
       <GradientBlobs />
       {cards.map((card) => (
         <FloatingCardComponent key={card.id} card={card} />

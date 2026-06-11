@@ -9,11 +9,7 @@ interface TiltedCardProps {
   tiltMax?: number;
 }
 
-export default function TiltedCard({
-  children,
-  className = "",
-  tiltMax = 15,
-}: TiltedCardProps) {
+export default function TiltedCard({ children, className = "", tiltMax = 15 }: TiltedCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   // Set up motion values
@@ -62,14 +58,14 @@ export default function TiltedCard({
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="w-full h-full cursor-pointer"
+        className="h-full w-full cursor-pointer"
       >
         <div
           style={{
             transform: "translateZ(30px)",
             transformStyle: "preserve-3d",
           }}
-          className="w-full h-full"
+          className="h-full w-full"
         >
           {children}
         </div>

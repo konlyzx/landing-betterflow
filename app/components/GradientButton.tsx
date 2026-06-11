@@ -24,11 +24,11 @@ export default function GradientButton({
 }: GradientButtonProps) {
   const content = (
     <motion.span
-      className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-medium text-black bg-[linear-gradient(110deg,#c9d4ff_0%,#e0d4ff_45%,#f5d4e8_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(80,60,120,0.15)] transition-all duration-200 hover:brightness-105 hover:-translate-y-0.5 ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-lg bg-[linear-gradient(110deg,#c9d4ff_0%,#e0d4ff_45%,#f5d4e8_100%)] px-5 py-2.5 font-medium text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(80,60,120,0.15)] transition-all duration-200 hover:-translate-y-0.5 hover:brightness-105 ${className}`}
       whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.97 }}
     >
-      {icon && <span className="w-5 h-5">{icon}</span>}
+      {icon && <span className="h-5 w-5">{icon}</span>}
       {children}
     </motion.span>
   );

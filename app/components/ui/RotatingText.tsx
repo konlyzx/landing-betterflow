@@ -9,11 +9,7 @@ interface RotatingTextProps {
   className?: string;
 }
 
-export default function RotatingText({
-  texts,
-  interval = 3000,
-  className = "",
-}: RotatingTextProps) {
+export default function RotatingText({ texts, interval = 3000, className = "" }: RotatingTextProps) {
   const [index, setIdx] = useState(0);
 
   useEffect(() => {
@@ -24,10 +20,7 @@ export default function RotatingText({
   }, [texts, interval]);
 
   return (
-    <span
-      className="inline-block overflow-hidden align-bottom"
-      style={{ height: "1.25em" }}
-    >
+    <span className="inline-block overflow-hidden align-bottom" style={{ height: "1.25em" }}>
       <AnimatePresence mode="wait">
         <motion.span
           key={index}

@@ -15,13 +15,7 @@ interface Orb {
   pulseSpeed: number;
 }
 
-export default function FloatingOrbs({
-  count = 12,
-  className = "",
-}: {
-  count?: number;
-  className?: string;
-}) {
+export default function FloatingOrbs({ count = 12, className = "" }: { count?: number; className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const orbsRef = useRef<Orb[]>([]);
   const dimsRef = useRef({ w: 0, h: 0, dpr: 1 });
@@ -82,19 +76,11 @@ export default function FloatingOrbs({
         if (orb.y > h + 20) orb.y = -20;
 
         // Gentle pulse
-        const pulse =
-          1 + Math.sin(time * 0.001 * orb.pulseSpeed + orb.phase) * 0.3;
+        const pulse = 1 + Math.sin(time * 0.001 * orb.pulseSpeed + orb.phase) * 0.3;
         orb.r = orb.baseR * pulse;
 
         // Draw soft glow
-        const g = ctx.createRadialGradient(
-          orb.x,
-          orb.y,
-          0,
-          orb.x,
-          orb.y,
-          orb.r * 4
-        );
+        const g = ctx.createRadialGradient(orb.x, orb.y, 0, orb.x, orb.y, orb.r * 4);
         g.addColorStop(0, `rgba(201, 212, 255, ${orb.opacity})`);
         g.addColorStop(0.4, `rgba(164, 69, 255, ${orb.opacity * 0.5})`);
         g.addColorStop(1, "rgba(164, 69, 255, 0)");
@@ -123,10 +109,6 @@ export default function FloatingOrbs({
   }, [count]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className={`absolute inset-0 pointer-events-none ${className}`}
-      style={{ zIndex: 0 }}
-    />
+    <canvas ref={canvasRef} className={`pointer-events-none absolute inset-0 ${className}`} style={{ zIndex: 0 }} />
   );
 }

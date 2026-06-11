@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 interface SparklesProps {
   className?: string;
@@ -8,38 +8,38 @@ interface SparklesProps {
   density?: number;
   speed?: number;
   opacity?: number;
-  direction?: 'up' | 'down' | 'left' | 'right';
+  direction?: "up" | "down" | "left" | "right";
   color?: string;
   background?: string;
 }
 
 export function Sparkles({
-  className = '',
+  className = "",
   size = 1.2,
   density = 100,
   speed = 1,
   opacity = 0.8,
-  direction = 'up',
-  color = '#ffffff',
-  background = 'transparent',
+  direction = "up",
+  color = "#ffffff",
+  background = "transparent",
 }: SparklesProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
-    
+
     const container = containerRef.current;
     const particles: HTMLDivElement[] = [];
-    
+
     // Create particles
     for (let i = 0; i < density; i++) {
-      const particle = document.createElement('div');
+      const particle = document.createElement("div");
       const randomX = Math.random() * 100;
       const randomY = Math.random() * 100;
       const randomDelay = Math.random() * 3;
       const randomDuration = 2 + Math.random() * 3;
       const randomSize = size * (0.5 + Math.random());
-      
+
       particle.style.cssText = `
         position: absolute;
         left: ${randomX}%;
@@ -52,15 +52,15 @@ export function Sparkles({
         animation: sparkle-${direction} ${randomDuration}s ease-in-out ${randomDelay}s infinite;
         pointer-events: none;
       `;
-      
+
       container.appendChild(particle);
       particles.push(particle);
     }
-    
+
     // Add keyframes if not already added
-    if (!document.getElementById('sparkles-keyframes')) {
-      const style = document.createElement('style');
-      style.id = 'sparkles-keyframes';
+    if (!document.getElementById("sparkles-keyframes")) {
+      const style = document.createElement("style");
+      style.id = "sparkles-keyframes";
       style.textContent = `
         @keyframes sparkle-up {
           0% { transform: translateY(20px); opacity: 0; }
@@ -85,9 +85,9 @@ export function Sparkles({
       `;
       document.head.appendChild(style);
     }
-    
+
     return () => {
-      particles.forEach(p => p.remove());
+      particles.forEach((p) => p.remove());
     };
   }, [density, size, opacity, direction, color]);
 
@@ -96,11 +96,11 @@ export function Sparkles({
       ref={containerRef}
       className={className}
       style={{
-        position: 'absolute',
+        position: "absolute",
         inset: 0,
         background,
-        overflow: 'hidden',
-        pointerEvents: 'none',
+        overflow: "hidden",
+        pointerEvents: "none",
       }}
     />
   );

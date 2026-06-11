@@ -9,7 +9,10 @@ export default function BeforeAfter() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const dimsRef = useRef({ w: 0, h: 0, dpr: 1 });
-  const imgsRef = useRef<{ before: HTMLImageElement | null; after: HTMLImageElement | null }>({ before: null, after: null });
+  const imgsRef = useRef<{ before: HTMLImageElement | null; after: HTMLImageElement | null }>({
+    before: null,
+    after: null,
+  });
   const hasAutoSlid = useRef(false);
   const posRef = useRef(38);
 
@@ -125,8 +128,12 @@ export default function BeforeAfter() {
   }, []);
 
   useEffect(() => {
-    const onMouseMove = (e: MouseEvent) => { if (isDragging) handleMove(e.clientX); };
-    const onTouchMove = (e: TouchEvent) => { if (isDragging) handleMove(e.touches[0].clientX); };
+    const onMouseMove = (e: MouseEvent) => {
+      if (isDragging) handleMove(e.clientX);
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (isDragging) handleMove(e.touches[0].clientX);
+    };
     const onUp = () => setIsDragging(false);
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("touchmove", onTouchMove);
@@ -141,8 +148,8 @@ export default function BeforeAfter() {
   }, [isDragging, handleMove]);
 
   return (
-    <section className="relative mt-30 z-10 px-6 py-16">
-      <div className="max-w-[1324px] mx-auto flex flex-col items-center">
+    <section className="relative z-10 mt-30 px-6 py-16">
+      <div className="mx-auto flex max-w-[1324px] flex-col items-center">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -150,9 +157,7 @@ export default function BeforeAfter() {
           transition={{ duration: 0.6 }}
           className="mb-4 text-center"
         >
-          <span className="text-xs font-medium tracking-widest uppercase text-[#a1a1aa]">
-            Move to compare
-          </span>
+          <span className="text-xs font-medium tracking-widest text-[#a1a1aa] uppercase">Move to compare</span>
         </motion.div>
 
         <motion.div
@@ -161,31 +166,47 @@ export default function BeforeAfter() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.1 }}
           ref={wrapRef}
-          className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden select-none cursor-ew-resize border border-white/10"
-          onMouseDown={(e) => { setIsDragging(true); handleMove(e.clientX); }}
-          onTouchStart={(e) => { setIsDragging(true); handleMove(e.touches[0].clientX); }}
+          className="relative aspect-[16/10] w-full cursor-ew-resize overflow-hidden rounded-2xl border border-white/10 select-none"
+          onMouseDown={(e) => {
+            setIsDragging(true);
+            handleMove(e.clientX);
+          }}
+          onTouchStart={(e) => {
+            setIsDragging(true);
+            handleMove(e.touches[0].clientX);
+          }}
         >
-          <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+          <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
-          {/* Divider + handle overlay */}
           <div
-            className="absolute top-0 bottom-0 w-[2px] bg-white/60 shadow-[0_0_12px_rgba(255,255,255,0.3)] pointer-events-none"
+            className="pointer-events-none absolute top-0 bottom-0 w-[2px] bg-white/60 shadow-[0_0_12px_rgba(255,255,255,0.3)]"
             style={{ left: `${position}%`, transform: "translateX(-50%)" }}
           />
           <div
-            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.4)] pointer-events-none"
+            className="pointer-events-none absolute top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.4)] backdrop-blur-md"
             style={{ left: `${position}%` }}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white/80">
-              <path d="M5 3L1 8L5 13M11 3L15 8L11 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M5 3L1 8L5 13M11 3L15 8L11 13"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </div>
 
-          {/* Labels */}
-          <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-medium bg-black/40 backdrop-blur-md border border-white/10 text-white/80 pointer-events-none" style={{ opacity: position > 15 ? 1 : 0, transition: "opacity 0.3s" }}>
+          <div
+            className="pointer-events-none absolute top-4 left-4 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 text-xs font-medium text-white/80 backdrop-blur-md"
+            style={{ opacity: position > 15 ? 1 : 0, transition: "opacity 0.3s" }}
+          >
             Original
           </div>
-          <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-medium bg-black/40 backdrop-blur-md border border-white/10 text-white/80 pointer-events-none" style={{ opacity: position < 85 ? 1 : 0, transition: "opacity 0.3s" }}>
+          <div
+            className="pointer-events-none absolute top-4 right-4 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 text-xs font-medium text-white/80 backdrop-blur-md"
+            style={{ opacity: position < 85 ? 1 : 0, transition: "opacity 0.3s" }}
+          >
             Better Flow
           </div>
         </motion.div>

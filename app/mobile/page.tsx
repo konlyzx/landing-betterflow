@@ -13,7 +13,7 @@ import {
 
 export default function MobileLandingPage() {
   return (
-    <main className="relative min-h-screen bg-[#0b0b0c] overflow-x-hidden">
+    <main className="relative min-h-screen overflow-x-hidden bg-[#0b0b0c]">
       <LoadingScreen />
 
       <HeroMobile />

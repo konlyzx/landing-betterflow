@@ -25,6 +25,9 @@ yarn.lock
 /build
 /dist
 
+# scripts
+/scripts
+
 # misc
 .DS_Store
 *.pem

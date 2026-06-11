@@ -22,7 +22,8 @@ export const metadata: Metadata = {
     default: "Better Flow - Coming Soon",
     template: "%s | Better Flow",
   },
-  description: "An open-source, high-performance screenshot studio and browser tool built to elevate your workflow. Transform raw captures into production-ready visuals instantly.",
+  description:
+    "An open-source, high-performance screenshot studio and browser tool built to elevate your workflow. Transform raw captures into production-ready visuals instantly.",
   keywords: [
     "screenshot editor",
     "screenshot beautifier",
@@ -45,7 +46,14 @@ export const metadata: Metadata = {
     siteName: "Better Flow",
     title: "Better Flow - Coming Soon",
     description: "An open-source screenshot studio and browser tool. Transform captures into production-ready visuals.",
-    images: [{ url: "https://betterflow.site/images/preview.webp", width: 1200, height: 630, alt: "Better Flow - Coming Soon" }],
+    images: [
+      {
+        url: "https://betterflow.site/images/preview.webp",
+        width: 1200,
+        height: 630,
+        alt: "Better Flow - Coming Soon",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -69,7 +77,7 @@ export const metadata: Metadata = {
   },
   other: {
     "ai-assistant": "enabled",
-    "github-repo": "https://github.com/konlyzx/landing-betterflow",
+    "github-repo": "https://github.com/betterspacx",
     "project-type": "open-source",
   },
 };
@@ -89,11 +97,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className="flex min-h-full flex-col">
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

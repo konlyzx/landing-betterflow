@@ -30,11 +30,18 @@ export default function Marquee({
         .marquee-pill:hover { border-color: rgba(255, 255, 255, 0.15); color: rgba(255, 255, 255, 0.85); }
         .marquee-item { display: flex; align-items: center; flex-shrink: 0; white-space: nowrap; }
       `}</style>
-      <div style={{ maskImage: "linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%)" }}>
+      <div
+        style={{
+          maskImage: "linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%)",
+        }}
+      >
         <div className="marquee-track">
-          <div className={`marquee-scroll ${isPaused ? 'paused' : ''}`}>
+          <div className={`marquee-scroll ${isPaused ? "paused" : ""}`}>
             {allItems.map((item, i) => (
-              <span key={i} className={typeof item === 'string' ? 'marquee-pill' : 'marquee-item'}>{item}</span>
+              <span key={i} className={typeof item === "string" ? "marquee-pill" : "marquee-item"}>
+                {item}
+              </span>
             ))}
           </div>
         </div>

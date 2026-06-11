@@ -10,15 +10,10 @@ interface AnimatedCardProps {
   span?: number;
 }
 
-export default function AnimatedCard({
-  children,
-  className = "",
-  delay = 0,
-  span = 1,
-}: AnimatedCardProps) {
+export default function AnimatedCard({ children, className = "", delay = 0, span = 1 }: AnimatedCardProps) {
   return (
     <motion.div
-      className={`glass-card overflow-hidden card-lift ${className}`}
+      className={`glass-card card-lift overflow-hidden ${className}`}
       style={{
         gridColumn: `span ${span}`,
       }}

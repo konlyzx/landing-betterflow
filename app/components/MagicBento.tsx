@@ -5,10 +5,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { Palette, Shapes, ImageIcon } from "lucide-react";
 import {
-  FiType, FiCircle, FiLayers, FiImage, FiCode, FiGrid,
-  FiZap, FiBox, FiStar, FiHeart, FiEye, FiCompass,
+  FiType,
+  FiCircle,
+  FiLayers,
+  FiImage,
+  FiCode,
+  FiGrid,
+  FiZap,
+  FiBox,
+  FiStar,
+  FiHeart,
+  FiEye,
+  FiCompass,
 } from "react-icons/fi";
-import { Sparkles } from './ui/Sparkles';
+import { Sparkles } from "./ui/Sparkles";
 
 export interface BentoProps {
   enableSpotlight?: boolean;
@@ -26,15 +36,27 @@ const DEFAULT_GLOW_COLOR = "224, 212, 255";
 const MOBILE_BREAKPOINT = 768;
 
 const ROW_A = [
-  { name: "Screenshot Studio" }, { name: "Chrome Extension" }, { name: "Code Highlight" },
-  { name: "3D Frames" }, { name: "Gradients" }, { name: "Animations" },
-  { name: "Mockups" }, { name: "Export PNG" }, { name: "Export MP4" },
+  { name: "Screenshot Studio" },
+  { name: "Chrome Extension" },
+  { name: "Code Highlight" },
+  { name: "3D Frames" },
+  { name: "Gradients" },
+  { name: "Animations" },
+  { name: "Mockups" },
+  { name: "Export PNG" },
+  { name: "Export MP4" },
 ];
 
 const ROW_B = [
-  { name: "Device Frames" }, { name: "Browser Mockups" }, { name: "Glow Effects" },
-  { name: "Particle Effects" }, { name: "Spotlight" }, { name: "Tilt Effect" },
-  { name: "Export GIF" }, { name: "Shadow Presets" }, { name: "Border Radius" },
+  { name: "Device Frames" },
+  { name: "Browser Mockups" },
+  { name: "Glow Effects" },
+  { name: "Particle Effects" },
+  { name: "Spotlight" },
+  { name: "Tilt Effect" },
+  { name: "Export GIF" },
+  { name: "Shadow Presets" },
+  { name: "Border Radius" },
 ];
 
 const ComponentMarquee = () => (
@@ -42,14 +64,18 @@ const ComponentMarquee = () => (
     <div className="ln-feat-marquee-track">
       <div className="ln-feat-marquee-scroll">
         {[...ROW_A, ...ROW_A].map((c, i) => (
-          <span key={i} className="ln-feat-pill">{c.name}</span>
+          <span key={i} className="ln-feat-pill">
+            {c.name}
+          </span>
         ))}
       </div>
     </div>
     <div className="ln-feat-marquee-track">
       <div className="ln-feat-marquee-scroll ln-feat-marquee-scroll--rev">
         {[...ROW_B, ...ROW_B].map((c, i) => (
-          <span key={i} className="ln-feat-pill">{c.name}</span>
+          <span key={i} className="ln-feat-pill">
+            {c.name}
+          </span>
         ))}
       </div>
     </div>
@@ -58,37 +84,50 @@ const ComponentMarquee = () => (
 
 const ToolsFloat = () => (
   <div className="ln-feat-tools">
-    <motion.div className="ln-feat-tool-box ln-feat-tool-box--center" animate={{ y: [-4, 4, -4] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
+    <motion.div
+      className="ln-feat-tool-box ln-feat-tool-box--center"
+      animate={{ y: [-4, 4, -4] }}
+      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+    >
       <Palette size={22} />
     </motion.div>
-    <motion.div className="ln-feat-tool-box ln-feat-tool-box--left" animate={{ y: [3, -3, 3], x: [-3, 2, -3] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}>
+    <motion.div
+      className="ln-feat-tool-box ln-feat-tool-box--left"
+      animate={{ y: [3, -3, 3], x: [-3, 2, -3] }}
+      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+    >
       <Shapes size={18} />
     </motion.div>
-    <motion.div className="ln-feat-tool-box ln-feat-tool-box--right" animate={{ y: [3, -3, 3], x: [3, -2, 3] }} transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}>
+    <motion.div
+      className="ln-feat-tool-box ln-feat-tool-box--right"
+      animate={{ y: [3, -3, 3], x: [3, -2, 3] }}
+      transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+    >
       <ImageIcon size={18} />
     </motion.div>
   </div>
 );
 
 const SparklesCard = () => (
-  <div className="relative w-full h-full overflow-hidden rounded-[14px]">
+  <div className="relative h-full w-full overflow-hidden rounded-[14px]">
     <div className="absolute inset-0 bg-gradient-to-b from-[#1a1520] to-[#0d0b12]" />
-    
-    <div 
-      className="absolute bottom-0 left-0 right-0 h-full opacity-40"
+
+    <div
+      className="absolute right-0 bottom-0 left-0 h-full opacity-40"
       style={{
-        background: 'radial-gradient(circle at bottom center, #c9d4ff, transparent 70%)'
+        background: "radial-gradient(circle at bottom center, #c9d4ff, transparent 70%)",
       }}
     />
-    
-    <div 
+
+    <div
       className="absolute inset-0 opacity-20"
       style={{
-        backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)',
-        backgroundSize: '40px 40px'
+        backgroundImage:
+          "linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)",
+        backgroundSize: "40px 40px",
       }}
     />
-    
+
     <Sparkles
       density={60}
       speed={1}
@@ -98,17 +137,17 @@ const SparklesCard = () => (
       opacity={0.8}
       className="absolute inset-0"
     />
-    
-    <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+
+    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
       <div className="text-center">
-        <div className="inline-block px-3 py-1 text-xs rounded-full border border-[#c9d4ff] bg-[#1a1520] text-[#c9d4ff] mb-2">
+        <div className="mb-2 inline-block rounded-full border border-[#c9d4ff] bg-[#1a1520] px-3 py-1 text-xs text-[#c9d4ff]">
           Organized
         </div>
-        <div className="flex gap-2 justify-center">
-          <span className="w-2 h-2 rounded-full bg-[#c9d4ff]" />
-          <span className="w-2 h-2 rounded-full bg-[#e0d4ff]" />
-          <span className="w-2 h-2 rounded-full bg-[#f5d4e8]" />
-          <span className="w-2 h-2 rounded-full bg-[#edeffd]" />
+        <div className="flex justify-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-[#c9d4ff]" />
+          <span className="h-2 w-2 rounded-full bg-[#e0d4ff]" />
+          <span className="h-2 w-2 rounded-full bg-[#f5d4e8]" />
+          <span className="h-2 w-2 rounded-full bg-[#edeffd]" />
         </div>
       </div>
     </div>
@@ -132,7 +171,12 @@ const VariantTabs = () => {
   return (
     <div className="ln-feat-vrows">
       {VARIANTS.map((v, i) => (
-        <motion.div key={i} className="ln-feat-vrow" animate={{ opacity: i === active ? 1 : 0.3 }} transition={{ duration: 0.4 }}>
+        <motion.div
+          key={i}
+          className="ln-feat-vrow"
+          animate={{ opacity: i === active ? 1 : 0.3 }}
+          transition={{ duration: 0.4 }}
+        >
           <div className="ln-feat-vrow-dot" style={{ background: v.accent }} />
           <span className="ln-feat-vrow-label">{v.label}</span>
           <div className="ln-feat-vrow-bars">
@@ -172,7 +216,10 @@ const LocalProcessingVisual = () => {
               animate={{ opacity: i === step ? 1 : 0.25, x: i === step ? 0 : -4 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="ln-feat-aichat-dot" style={{ background: i === step ? "rgba(201,212,255,0.8)" : "rgba(255,255,255,0.15)" }} />
+              <div
+                className="ln-feat-aichat-dot"
+                style={{ background: i === step ? "rgba(201,212,255,0.8)" : "rgba(255,255,255,0.15)" }}
+              />
               <div>
                 <div className="ln-feat-aichat-q">{s.label}</div>
                 <div className="ln-feat-aichat-a">{s.sub}</div>
@@ -197,10 +244,18 @@ const OpenSourceVisual = () => (
             <stop offset="100%" stopColor="#f5d4e8" stopOpacity="0" />
           </linearGradient>
         </defs>
-        <path d="M0 45 C15 43,30 40,45 36 C60 32,75 30,90 26 C105 22,115 24,125 20 C140 15,155 12,170 10 C180 8,190 5,200 3 L200 50 L0 50Z" fill="url(#starFill)" />
-        <motion.path d="M0 45 C15 43,30 40,45 36 C60 32,75 30,90 26 C105 22,115 24,125 20 C140 15,155 12,170 10 C180 8,190 5,200 3"
-          stroke="rgba(201,212,255,0.5)" strokeWidth="1.5" strokeLinecap="round"
-          initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2, ease: "easeOut" }}
+        <path
+          d="M0 45 C15 43,30 40,45 36 C60 32,75 30,90 26 C105 22,115 24,125 20 C140 15,155 12,170 10 C180 8,190 5,200 3 L200 50 L0 50Z"
+          fill="url(#starFill)"
+        />
+        <motion.path
+          d="M0 45 C15 43,30 40,45 36 C60 32,75 30,90 26 C105 22,115 24,125 20 C140 15,155 12,170 10 C180 8,190 5,200 3"
+          stroke="rgba(201,212,255,0.5)"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2, ease: "easeOut" }}
         />
       </svg>
     </div>
@@ -219,10 +274,18 @@ const OpenSourceCard = () => (
             <stop offset="100%" stopColor="#f5d4e8" stopOpacity="0" />
           </linearGradient>
         </defs>
-        <path d="M0 45 C15 43,30 40,45 36 C60 32,75 30,90 26 C105 22,115 24,125 20 C140 15,155 12,170 10 C180 8,190 5,200 3 L200 50 L0 50Z" fill="url(#starFill)" />
-        <motion.path d="M0 45 C15 43,30 40,45 36 C60 32,75 30,90 26 C105 22,115 24,125 20 C140 15,155 12,170 10 C180 8,190 5,200 3"
-          stroke="rgba(201,212,255,0.5)" strokeWidth="1.5" strokeLinecap="round"
-          initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2, ease: "easeOut" }}
+        <path
+          d="M0 45 C15 43,30 40,45 36 C60 32,75 30,90 26 C105 22,115 24,125 20 C140 15,155 12,170 10 C180 8,190 5,200 3 L200 50 L0 50Z"
+          fill="url(#starFill)"
+        />
+        <motion.path
+          d="M0 45 C15 43,30 40,45 36 C60 32,75 30,90 26 C105 22,115 24,125 20 C140 15,155 12,170 10 C180 8,190 5,200 3"
+          stroke="rgba(201,212,255,0.5)"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2, ease: "easeOut" }}
         />
       </svg>
     </div>
@@ -230,12 +293,42 @@ const OpenSourceCard = () => (
 );
 
 const CARDS = [
-  { title: "Screenshot Studio", desc: "Transform raw screenshots into production-ready visuals with one click. Browser mockups, device frames, and stunning 3D effects.", span: 5, visual: <ComponentMarquee /> },
-  { title: "Visual Effects", desc: "Add glow, particles, spotlight, and tilt effects to make your screenshots stand out.", span: 3, visual: <ToolsFloat /> },
-  { title: "Well Organized", desc: "Four clear categories: Screenshots, Code Snippets, Device Frames, and Gradients. Find what you need fast.", span: 4, visual: <SparklesCard /> },
-  { title: "Export Any Format", desc: "PNG, MP4, GIF - whatever you need for your content. High quality exports ready to share anywhere.", span: 4, visual: <VariantTabs /> },
-  { title: "Local Processing", desc: "All editing happens in your browser. No server uploads, no data leaving your machine. Privacy first.", span: 5, visual: <LocalProcessingVisual /> },
-  { title: "Open Source", desc: "Built in public with an Apache 2.0 license. Fork it, extend it, or self-host it. The code is yours.", span: 3, visual: <OpenSourceCard /> },
+  {
+    title: "Screenshot Studio",
+    desc: "Transform raw screenshots into production-ready visuals with one click. Browser mockups, device frames, and stunning 3D effects.",
+    span: 5,
+    visual: <ComponentMarquee />,
+  },
+  {
+    title: "Visual Effects",
+    desc: "Add glow, particles, spotlight, and tilt effects to make your screenshots stand out.",
+    span: 3,
+    visual: <ToolsFloat />,
+  },
+  {
+    title: "Well Organized",
+    desc: "Four clear categories: Screenshots, Code Snippets, Device Frames, and Gradients. Find what you need fast.",
+    span: 4,
+    visual: <SparklesCard />,
+  },
+  {
+    title: "Export Any Format",
+    desc: "PNG, MP4, GIF - whatever you need for your content. High quality exports ready to share anywhere.",
+    span: 4,
+    visual: <VariantTabs />,
+  },
+  {
+    title: "Local Processing",
+    desc: "All editing happens in your browser. No server uploads, no data leaving your machine. Privacy first.",
+    span: 5,
+    visual: <LocalProcessingVisual />,
+  },
+  {
+    title: "Open Source",
+    desc: "Built in public with an Apache 2.0 license. Fork it, extend it, or self-host it. The code is yours.",
+    span: 3,
+    visual: <OpenSourceCard />,
+  },
 ];
 
 interface CardData {
@@ -312,11 +405,20 @@ const HoverCard: React.FC<{
       const rect = el.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      const maxDistance = Math.max(Math.hypot(x, y), Math.hypot(x - rect.width, y), Math.hypot(x, y - rect.height), Math.hypot(x - rect.width, y - rect.height));
+      const maxDistance = Math.max(
+        Math.hypot(x, y),
+        Math.hypot(x - rect.width, y),
+        Math.hypot(x, y - rect.height),
+        Math.hypot(x - rect.width, y - rect.height),
+      );
       const ripple = document.createElement("div");
       ripple.style.cssText = `position:absolute;width:${maxDistance * 2}px;height:${maxDistance * 2}px;border-radius:50%;background:radial-gradient(circle,rgba(${glowColor},0.4)0%,rgba(${glowColor},0.2)30%,transparent 70%);left:${x - maxDistance}px;top:${y - maxDistance}px;pointer-events:none;z-index:1000;`;
       el.appendChild(ripple);
-      gsap.fromTo(ripple, { scale: 0, opacity: 1 }, { scale: 1, opacity: 0, duration: 0.8, ease: "power2.out", onComplete: () => ripple.remove() });
+      gsap.fromTo(
+        ripple,
+        { scale: 0, opacity: 1 },
+        { scale: 1, opacity: 0, duration: 0.8, ease: "power2.out", onComplete: () => ripple.remove() },
+      );
     };
 
     el.addEventListener("mousemove", handleMouseMove);
@@ -331,7 +433,11 @@ const HoverCard: React.FC<{
   }, [disableAnimations, enableTilt, enableMagnetism, clickEffect, glowColor]);
 
   return (
-    <div ref={cardRef} className={`${className} ${enableBorderGlow ? "card--border-glow" : ""}`} style={{ position: "relative", overflow: "hidden" }}>
+    <div
+      ref={cardRef}
+      className={`${className} ${enableBorderGlow ? "card--border-glow" : ""}`}
+      style={{ position: "relative", overflow: "hidden" }}
+    >
       {children}
     </div>
   );
@@ -343,7 +449,13 @@ const GlobalSpotlight: React.FC<{
   enabled?: boolean;
   spotlightRadius?: number;
   glowColor?: string;
-}> = ({ gridRef, disableAnimations = false, enabled = true, spotlightRadius = DEFAULT_SPOTLIGHT_RADIUS, glowColor = DEFAULT_GLOW_COLOR }) => {
+}> = ({
+  gridRef,
+  disableAnimations = false,
+  enabled = true,
+  spotlightRadius = DEFAULT_SPOTLIGHT_RADIUS,
+  glowColor = DEFAULT_GLOW_COLOR,
+}) => {
   const spotlightRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -359,12 +471,15 @@ const GlobalSpotlight: React.FC<{
       if (!spotlightRef.current || !gridRef.current) return;
       const section = gridRef.current.closest(".bento-section");
       const rect = section?.getBoundingClientRect();
-      const mouseInside = rect && e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
+      const mouseInside =
+        rect && e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
       const cards = gridRef.current.querySelectorAll(".ln-features-card");
 
       if (!mouseInside) {
         gsap.to(spotlightRef.current, { opacity: 0, duration: 0.3, ease: "power2.out" });
-        cards.forEach((card) => { (card as HTMLElement).style.setProperty("--glow-intensity", "0"); });
+        cards.forEach((card) => {
+          (card as HTMLElement).style.setProperty("--glow-intensity", "0");
+        });
         return;
       }
 
@@ -373,13 +488,15 @@ const GlobalSpotlight: React.FC<{
         const cardRect = cardElement.getBoundingClientRect();
         const centerX = cardRect.left + cardRect.width / 2;
         const centerY = cardRect.top + cardRect.height / 2;
-        const distance = Math.hypot(e.clientX - centerX, e.clientY - centerY) - Math.max(cardRect.width, cardRect.height) / 2;
+        const distance =
+          Math.hypot(e.clientX - centerX, e.clientY - centerY) - Math.max(cardRect.width, cardRect.height) / 2;
         const effectiveDistance = Math.max(0, distance);
         const proximity = spotlightRadius * 0.5;
         const fadeDistance = spotlightRadius * 0.75;
         let glowIntensity = 0;
         if (effectiveDistance <= proximity) glowIntensity = 1;
-        else if (effectiveDistance <= fadeDistance) glowIntensity = (fadeDistance - effectiveDistance) / (fadeDistance - proximity);
+        else if (effectiveDistance <= fadeDistance)
+          glowIntensity = (fadeDistance - effectiveDistance) / (fadeDistance - proximity);
         cardElement.style.setProperty("--glow-intensity", glowIntensity.toString());
       });
 
@@ -534,32 +651,58 @@ const MagicBento: React.FC<BentoProps> = ({
         .ln-feat-stars-chart svg { width: 100%; height: 100%; display: block; }
       `}</style>
 
-      {enableSpotlight && <GlobalSpotlight gridRef={gridRef} disableAnimations={shouldDisableAnimations} enabled={enableSpotlight} spotlightRadius={spotlightRadius} glowColor={glowColor} />}
+      {enableSpotlight && (
+        <GlobalSpotlight
+          gridRef={gridRef}
+          disableAnimations={shouldDisableAnimations}
+          enabled={enableSpotlight}
+          spotlightRadius={spotlightRadius}
+          glowColor={glowColor}
+        />
+      )}
 
       <div className="bento-section w-full" ref={gridRef}>
         <div className="w-full">
           <div style={{ marginBottom: "32px" }}>
-            <h2 style={{ fontFamily: "Geist, sans-serif", fontSize: "32px", fontWeight: 500, color: "#fff", letterSpacing: "-0.02em", margin: 0 }}>What&apos;s inside</h2>
+            <h2
+              style={{
+                fontFamily: "Geist, sans-serif",
+                fontSize: "32px",
+                fontWeight: 500,
+                color: "#fff",
+                letterSpacing: "-0.02em",
+                margin: 0,
+              }}
+            >
+              What&apos;s inside
+            </h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: "16px" }}>
-          {CARDS.map((card, i) => (
-            <motion.div
-              key={card.title}
-              className={`ln-features-card ${enableBorderGlow ? "card--border-glow" : ""}`}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.07, ease: [0.21, 0.47, 0.32, 0.98] }}
-            >
-              <HoverCard disableAnimations={shouldDisableAnimations} enableBorderGlow={enableBorderGlow} glowColor={glowColor} enableTilt={enableTilt} clickEffect={clickEffect} enableMagnetism={enableMagnetism}>
-                <div className="ln-features-card-visual">{card.visual}</div>
-                <div className="ln-features-card-body">
-                  <h3>{card.title}</h3>
-                  <p>{card.desc}</p>
-                </div>
-              </HoverCard>
-            </motion.div>
-          ))}
+            {CARDS.map((card, i) => (
+              <motion.div
+                key={card.title}
+                className={`ln-features-card ${enableBorderGlow ? "card--border-glow" : ""}`}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: i * 0.07, ease: [0.21, 0.47, 0.32, 0.98] }}
+              >
+                <HoverCard
+                  disableAnimations={shouldDisableAnimations}
+                  enableBorderGlow={enableBorderGlow}
+                  glowColor={glowColor}
+                  enableTilt={enableTilt}
+                  clickEffect={clickEffect}
+                  enableMagnetism={enableMagnetism}
+                >
+                  <div className="ln-features-card-visual">{card.visual}</div>
+                  <div className="ln-features-card-body">
+                    <h3>{card.title}</h3>
+                    <p>{card.desc}</p>
+                  </div>
+                </HoverCard>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>

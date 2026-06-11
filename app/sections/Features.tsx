@@ -5,7 +5,7 @@ import MagicBento from "../components/MagicBento";
 export default function Features() {
   return (
     <section id="features" className="relative z-10 py-24">
-      <div className="max-w-[1324px] mx-auto px-6">
+      <div className="mx-auto max-w-[1324px] px-6">
         <MagicBento
           enableSpotlight={true}
           enableBorderGlow={true}
