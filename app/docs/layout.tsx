@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Star, ArrowUpRight, Menu, X } from "lucide-react";
+import { Star, ArrowUpRight } from "lucide-react";
 import DocsSearch from "@/app/components/docs/DocsSearch";
+import MobileNav from "@/app/components/MobileNav";
 
 const GITHUB_URL = "https://github.com/betterspacx";
 const X_URL = "https://x.com/konlyzx_";
@@ -135,7 +136,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
     <div className="min-h-screen bg-[#0b0b0c] text-white">
       <header className="fixed top-5 left-0 right-0 z-50 px-6">
         <div className="mx-auto flex items-center justify-between h-14 rounded-2xl border border-transparent bg-transparent px-5 max-w-[1800px]">
-          <div className="flex items-center gap-4 -ml-15">
+          <div className="flex items-center gap-4 md:-ml-15">
             <Link href="/" className="flex items-center gap-2 group">
               <img
                 src="/logo.svg"
@@ -169,7 +170,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
             </div>
           </div>
 
-          <div className="flex items-center gap-3 -mr-10">
+          <div className="flex items-center gap-3 md:-mr-10">
             <div className="hidden sm:block">
               <DocsSearch />
             </div>
@@ -203,39 +204,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         </div>
       </header>
 
-      {mobileOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black/80 md:hidden"
-          onClick={() => setMobileOpen(false)}
-        />
-      )}
-
-      {mobileOpen && (
-        <div className="fixed top-20 left-4 right-4 z-50 rounded-xl border border-white/[0.08] bg-[#141416] p-4 md:hidden">
-          <nav className="flex flex-col gap-2">
-            <Link href="/" className="px-4 py-2 text-sm text-white/70 hover:text-white" onClick={() => setMobileOpen(false)}>Home</Link>
-            <Link href="/#features" className="px-4 py-2 text-sm text-white/70 hover:text-white" onClick={() => setMobileOpen(false)}>Features</Link>
-            <Link href="/community" className="px-4 py-2 text-sm text-white/70 hover:text-white" onClick={() => setMobileOpen(false)}>Community</Link>
-            <Link href="/docs" className="px-4 py-2 text-sm text-[#ff7e40]" onClick={() => setMobileOpen(false)}>Docs</Link>
-            <div className="border-t border-white/[0.08] my-2" />
-            {navigation.map((group) => (
-              <div key={group.section}>
-                <p className="px-4 py-1 text-[10px] uppercase tracking-wider text-white/30">{group.section}</p>
-                {group.items.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`block px-4 py-2 text-sm ${pathname === item.href ? "text-[#ff7e40]" : "text-white/60 hover:text-white"}`}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            ))}
-          </nav>
-        </div>
-      )}
+      <MobileNav isOpen={mobileOpen} onClose={() => setMobileOpen(false)} pathname={pathname} />
 
       <div className="flex pt-20">
         <aside className="hidden lg:block w-64 xl:w-72 flex-shrink-0 sticky top-20 h-[calc(100vh-80px)] overflow-y-auto border-r border-white/[0.06] px-5 py-6">
