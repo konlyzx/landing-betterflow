@@ -214,6 +214,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         <div className="fixed top-20 left-4 right-4 z-50 rounded-xl border border-white/[0.08] bg-[#141416] p-4 md:hidden">
           <nav className="flex flex-col gap-2">
             <Link href="/" className="px-4 py-2 text-sm text-white/70 hover:text-white" onClick={() => setMobileOpen(false)}>Home</Link>
+            <Link href="/#features" className="px-4 py-2 text-sm text-white/70 hover:text-white" onClick={() => setMobileOpen(false)}>Features</Link>
             <Link href="/community" className="px-4 py-2 text-sm text-white/70 hover:text-white" onClick={() => setMobileOpen(false)}>Community</Link>
             <Link href="/docs" className="px-4 py-2 text-sm text-[#ff7e40]" onClick={() => setMobileOpen(false)}>Docs</Link>
             <div className="border-t border-white/[0.08] my-2" />
