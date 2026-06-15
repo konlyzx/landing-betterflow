@@ -64,6 +64,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 ## Screenshot Studio
 
+### [1.0.0] — 2026-06-15 — **Studio Launch**
+
+#### Added
+
+- **Public launch** — Studio live at https://app.betterflow.site/
+- **Website integration** — Navbar "Go Studio" button + Footer "Studio" link now active
+- **Cloud deployment** — Production build deployed and verified
+
+---
+
 ### [0.1.0] — 2026-06-07
 
 #### Security

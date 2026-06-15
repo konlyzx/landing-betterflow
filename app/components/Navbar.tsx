@@ -78,9 +78,9 @@ export default function Navbar() {
           className="pointer-events-auto w-full flex items-center justify-between h-14 rounded-2xl border border-transparent px-5 transition-all duration-500 ease-out"
           animate={{
             maxWidth: scrolled ? "1324px" : "1680px",
-            backgroundColor: scrolled ? "rgba(11, 11, 12, 0.6)" : "transparent",
+            backgroundColor: scrolled ? "rgba(11, 11, 12, 0.6)" : "rgba(0, 0, 0, 0)",
             backdropFilter: scrolled ? "blur(24px) saturate(1.4)" : "blur(0px)",
-            borderColor: scrolled ? "rgba(255, 255, 255, 0.04)" : "transparent",
+            borderColor: scrolled ? "rgba(255, 255, 255, 0.04)" : "rgba(0, 0, 0, 0)",
           }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
@@ -148,16 +148,17 @@ export default function Navbar() {
               </svg>
             </a>
 
-            <button
-              disabled
-              title="Coming soon"
-              className="hidden md:flex items-center gap-2 px-4 h-9 rounded-md text-[13px] font-medium text-black cursor-not-allowed select-none border border-white/60 bg-[linear-gradient(110deg,#c9d4ff_0%,#e0d4ff_45%,#f5d4e8_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(80,60,120,0.15)] transition-all hover:brightness-105"
+            <a
+              href="https://app.betterflow.site/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:flex items-center gap-2 px-4 h-9 rounded-md text-[13px] font-medium text-black border border-white/60 bg-[linear-gradient(110deg,#c9d4ff_0%,#e0d4ff_45%,#f5d4e8_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(80,60,120,0.15)] transition-all hover:brightness-105"
             >
               <span>Go Studio</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
                 <path d="M20 13.5c0 1.395 0 2.092-.138 2.667a5 5 0 0 1-3.695 3.695C15.592 20 14.894 20 13.5 20H12c-2.8 0-4.2 0-5.27-.545a5 5 0 0 1-2.185-2.185C4 16.2 4 14.8 4 12v-.5c0-2.33 0-3.495.38-4.413A5 5 0 0 1 7.088 4.38c.776-.322 1.73-.372 3.413-.38m9.26 5.454c.262-1.633.31-3.285.142-4.914a.495.495 0 0 0-.142-.3m0 0a.496.496 0 0 0-.301-.143 18.815 18.815 0 0 0-4.913.142m5.214 0L10 14"></path>
               </svg>
-            </button>
+            </a>
 
             <button
               className="md:hidden relative w-9 h-9 flex flex-col justify-center items-center gap-1.5 rounded-xl border border-white/[0.08] bg-[#141416]/60 backdrop-blur-md"

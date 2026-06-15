@@ -9,7 +9,7 @@ const FOOTER_COLUMNS = [
       { label: "Features", href: "#features" },
       { label: "Showcase", href: "#showcase" },
       { label: "Roadmap", href: "#roadmap" },
-      { label: "Studio", href: "#", disabled: true },
+      { label: "Studio", href: "https://app.betterflow.site/", external: true },
     ],
   },
   {
