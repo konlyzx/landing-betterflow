@@ -3,16 +3,18 @@ import CodeBlock from "@/app/components/docs/CodeBlock";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contributing",
+  title: "Contributing — Contribute to Better Flow Open Source",
   description:
-    "Contribute to Better Flow — Setup guide, coding standards, animation conventions, and PR workflow. Open source screenshot studio welcoming contributors.",
+    "Contribute to Better Flow, the open source screenshot beautifier. Fork on GitHub, set up locally, follow coding standards, and submit PRs. Built with Next.js 16 and TypeScript.",
   keywords: [
-    "better flow contributing",
-    "open source contribution",
-    "github workflow",
-    "coding standards",
-    "conventional commits",
-    "developer setup",
+    "contribute to open source screenshot tool",
+    "open source screenshot editor github",
+    "better flow github",
+    "screenshot tool pull request",
+    "next.js open source project contribute",
+    "typescript open source design tool",
+    "screenshot beautifier open source",
+    "open source project for developers",
   ],
   alternates: {
     canonical: "/docs/contributing",

@@ -3,15 +3,18 @@ import CodeBlock from "@/app/components/docs/CodeBlock";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Documentation",
+  title: "Documentation — How to Use Better Flow Screenshot Studio",
   description:
-    "Better Flow documentation — Learn about the screenshot studio architecture, contribution guidelines, and API reference. Open source under Apache 2.0.",
+    "Better Flow documentation. Learn how to use the free open-source screenshot beautifier: browser frames, 3D effects, animations, 4K export, code snippets. Setup guide for developers.",
   keywords: [
-    "better flow docs",
-    "screenshot studio documentation",
-    "open source documentation",
-    "developer guide",
-    "architecture docs",
+    "how to use better flow",
+    "screenshot studio tutorial",
+    "screenshot beautifier guide",
+    "browser mockup how to",
+    "open source screenshot tool docs",
+    "screenshot editor documentation",
+    "better flow setup",
+    "screenshot tool next.js",
   ],
   alternates: {
     canonical: "/docs",

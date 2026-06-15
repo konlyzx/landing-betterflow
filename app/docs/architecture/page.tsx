@@ -3,16 +3,19 @@ import CodeBlock from "@/app/components/docs/CodeBlock";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Architecture",
+  title: "Architecture — Better Flow Technical Stack & Codebase",
   description:
-    "Better Flow technical architecture — Landing page and Screenshot Studio structure, animation patterns, and canvas rendering pipeline. Next.js 16, Konva, FFmpeg WASM.",
+    "Better Flow technical architecture: Next.js 16 App Router, React 19, HTML Canvas, Konva.js, FFmpeg WASM, Cloudflare R2. Open source screenshot studio built for developers.",
   keywords: [
-    "better flow architecture",
-    "screenshot studio architecture",
-    "konva canvas rendering",
-    "ffmpeg wasm export",
-    "next.js 16 app router",
-    "technical documentation",
+    "screenshot tool architecture",
+    "screenshot editor source code",
+    "html canvas screenshot export",
+    "ffmpeg wasm video export browser",
+    "konva js screenshot editor",
+    "next.js screenshot tool",
+    "open source design tool stack",
+    "screenshot studio how it works",
+    "react screenshot editor codebase",
   ],
   alternates: {
     canonical: "/docs/architecture",

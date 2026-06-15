@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Changelog",
+  title: "Changelog — Better Flow Updates & New Features",
   description:
-    "Better Flow changelog — Version history for Screenshot Studio and Landing Page. Security updates, new features, and release notes.",
+    "Better Flow changelog: latest updates to the free screenshot beautifier. New browser frames, 3D effects, export formats, and performance improvements. Version history since launch.",
   keywords: [
-    "better flow changelog",
-    "version history",
-    "release notes",
-    "screenshot studio updates",
-    "what's new",
+    "better flow updates",
+    "screenshot tool new features",
+    "screenshot beautifier changelog",
+    "free screenshot editor updates",
+    "better flow version history",
+    "screenshot studio release notes",
+    "screenshot tool improvements",
   ],
   alternates: {
     canonical: "/docs/changelog",
