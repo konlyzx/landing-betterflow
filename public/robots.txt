@@ -2,20 +2,51 @@
 User-agent: *
 Allow: /
 
-# Allow AI assistants and crawlers
+# Allow OpenAI crawlers
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
+# Allow Google AI crawlers
 User-agent: Google-Extended
 Allow: /
 
+User-agent: Googlebot
+Allow: /
+
+# Allow Anthropic crawlers
 User-agent: anthropic-ai
 Allow: /
 
 User-agent: Claude-Web
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Allow Perplexity crawlers
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Allow other AI crawlers
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: Cohere-User
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: FacebookBot
 Allow: /
 
 # Sitemap location

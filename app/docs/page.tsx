@@ -1,5 +1,22 @@
 import Link from "next/link";
 import CodeBlock from "@/app/components/docs/CodeBlock";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Documentation",
+  description:
+    "Better Flow documentation — Learn about the screenshot studio architecture, contribution guidelines, and API reference. Open source under Apache 2.0.",
+  keywords: [
+    "better flow docs",
+    "screenshot studio documentation",
+    "open source documentation",
+    "developer guide",
+    "architecture docs",
+  ],
+  alternates: {
+    canonical: "/docs",
+  },
+};
 
 export default function DocsPage() {
   return (

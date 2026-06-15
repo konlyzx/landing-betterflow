@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "./components/ui/SmoothScroll";
+import SchemaMarkup from "./components/SchemaMarkup";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,20 +20,27 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Better Flow - Coming Soon",
+    default: "Better Flow — Screenshot Studio & Browser Tool",
     template: "%s | Better Flow",
   },
   description:
-    "An open-source, high-performance screenshot studio and browser tool built to elevate your workflow. Transform raw captures into production-ready visuals instantly.",
+    "Free open-source screenshot studio. Transform screenshots into production-ready visuals with browser frames, 3D effects, animations, and 4K export. Built for developers, designers, and creators.",
   keywords: [
     "screenshot editor",
     "screenshot beautifier",
-    "mockup tool",
-    "browser frames",
-    "3D effects",
-    "code snippets",
+    "screenshot tool",
+    "mockup generator",
+    "browser frame mockup",
+    "3D screenshot effects",
+    "code snippet image",
+    "screenshot to png",
+    "screenshot animation",
+    "screenshot studio",
+    "image beautifier",
+    "developer tools",
+    "design tool",
+    "open source",
     "better flow",
-    "coming soon",
   ],
   authors: [{ name: "Better Flow", url: "https://betterflow.site" }],
   creator: "Better Flow",
@@ -44,21 +52,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     siteName: "Better Flow",
-    title: "Better Flow - Coming Soon",
-    description: "An open-source screenshot studio and browser tool. Transform captures into production-ready visuals.",
+    title: "Better Flow — Screenshot Studio & Browser Tool",
+    description: "Free open-source screenshot studio. Transform screenshots into production-ready visuals with browser frames, 3D effects, and 4K export.",
     images: [
       {
         url: "https://betterflow.site/images/preview.webp",
         width: 1200,
         height: 630,
-        alt: "Better Flow - Coming Soon",
+        alt: "Better Flow Screenshot Studio - Browser frames, 3D effects, and animations",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Better Flow - Coming Soon",
-    description: "An open-source screenshot studio and browser tool. Transform captures into production-ready visuals.",
+    title: "Better Flow — Screenshot Studio & Browser Tool",
+    description: "Free open-source screenshot studio. Transform screenshots into production-ready visuals with browser frames, 3D effects, and 4K export.",
     images: ["https://betterflow.site/images/preview.webp"],
     creator: "@betterflow",
     site: "@betterflow",
@@ -99,6 +107,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
+        <SchemaMarkup />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

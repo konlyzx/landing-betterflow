@@ -1,5 +1,23 @@
 import Link from "next/link";
 import CodeBlock from "@/app/components/docs/CodeBlock";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Architecture",
+  description:
+    "Better Flow technical architecture — Landing page and Screenshot Studio structure, animation patterns, and canvas rendering pipeline. Next.js 16, Konva, FFmpeg WASM.",
+  keywords: [
+    "better flow architecture",
+    "screenshot studio architecture",
+    "konva canvas rendering",
+    "ffmpeg wasm export",
+    "next.js 16 app router",
+    "technical documentation",
+  ],
+  alternates: {
+    canonical: "/docs/architecture",
+  },
+};
 
 function Table({ children }: { children: React.ReactNode }) {
   return (

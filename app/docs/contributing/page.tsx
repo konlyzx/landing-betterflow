@@ -1,5 +1,23 @@
 import Link from "next/link";
 import CodeBlock from "@/app/components/docs/CodeBlock";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contributing",
+  description:
+    "Contribute to Better Flow — Setup guide, coding standards, animation conventions, and PR workflow. Open source screenshot studio welcoming contributors.",
+  keywords: [
+    "better flow contributing",
+    "open source contribution",
+    "github workflow",
+    "coding standards",
+    "conventional commits",
+    "developer setup",
+  ],
+  alternates: {
+    canonical: "/docs/contributing",
+  },
+};
 
 function Table({ children }: { children: React.ReactNode }) {
   return (

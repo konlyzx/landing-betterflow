@@ -1,3 +1,21 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Changelog",
+  description:
+    "Better Flow changelog — Version history for Screenshot Studio and Landing Page. Security updates, new features, and release notes.",
+  keywords: [
+    "better flow changelog",
+    "version history",
+    "release notes",
+    "screenshot studio updates",
+    "what's new",
+  ],
+  alternates: {
+    canonical: "/docs/changelog",
+  },
+};
+
 export default function ChangelogPage() {
   return (
     <section className="docs-section">
