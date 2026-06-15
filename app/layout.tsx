@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "./components/ui/SmoothScroll";
 import SchemaMarkup from "./components/SchemaMarkup";
+import GoogleAnalytics from "./components/GoogleAnalytics";
+import PostHog from "./components/PostHog";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -107,6 +109,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
+        <GoogleAnalytics />
+        <PostHog />
         <SchemaMarkup />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
