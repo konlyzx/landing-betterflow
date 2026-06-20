@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import DotField from "../components/ui/DotField";
 import GradientButton from "../components/GradientButton";
 import RotatingText from "../components/ui/RotatingText";
-import StudioPlayground from "../components/StudioPlayground";
+import VideoShowcase from "../components/VideoShowcase";
 import { GithubIcon, TwitterIcon } from "../components/icons";
 
 export default function Hero() {
@@ -60,7 +60,7 @@ export default function Hero() {
                 backgroundClip: "text",
               }}
             >
-              Coming Soon
+              Out Now
             </span>
             <span style={{ color: "rgba(201,212,255,0.3)" }}>•</span>
             <span
@@ -137,12 +137,33 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98], delay: 0.35 }}
+          >
+            <a
+              href="https://www.producthunt.com/products/better-flow?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-better-flow"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block transition-transform hover:scale-[1.03] active:scale-[0.98]"
+            >
+              <img
+                alt="Better Flow - Design, organize, and export content in one place | Product Hunt"
+                width="250"
+                height="54"
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1164417&theme=neutral&t=1781896353822"
+                className="rounded-lg"
+              />
+            </a>
+          </motion.div>
+
+          <motion.div
             className="mt-12 w-full"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
           >
-            <StudioPlayground />
+            <VideoShowcase />
           </motion.div>
         </div>
       </section>
