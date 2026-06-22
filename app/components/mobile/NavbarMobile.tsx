@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
   { label: "Features", href: "#features" },
+  { label: "Community", href: "/community" },
+  { label: "Docs", href: "/docs" },
   { label: "GitHub", href: "https://github.com/betterspacx", external: true },
 ];
 
@@ -30,7 +32,7 @@ export default function NavbarMobile() {
   return (
     <>
       <motion.header
-        className="pointer-events-none fixed top-3 right-0 left-0 z-50 flex justify-center px-4"
+        className="pointer-events-none fixed top-[calc(3.5rem+0.75rem)] right-0 left-0 z-50 flex justify-center px-4"
         initial={false}
       >
         <motion.div
@@ -100,6 +102,8 @@ export default function NavbarMobile() {
                       setMenuOpen(false);
                       const target = document.querySelector(href);
                       if (target) target.scrollIntoView({ behavior: "smooth" });
+                    } else if (!external) {
+                      setMenuOpen(false);
                     }
                   }}
                 >

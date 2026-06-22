@@ -71,7 +71,7 @@ export default function Navbar() {
   return (
     <>
       <motion.header
-        className="fixed top-5 left-0 right-0 z-50 flex justify-center px-6 pointer-events-none"
+        className="fixed top-[calc(3.5rem+1.25rem)] left-0 right-0 z-50 flex justify-center px-6 pointer-events-none"
         initial={false}
       >
         <motion.div

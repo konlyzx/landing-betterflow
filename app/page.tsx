@@ -1,6 +1,7 @@
 "use client";
 
 import LoadingScreen from "./components/LoadingScreen";
+import DiscordBanner from "./components/DiscordBanner";
 import Footer from "./components/Footer";
 import FooterMobile from "./components/mobile/FooterMobile";
 import { Hero, Features, LiveDemo, Privacy, RoadmapSection, CTA } from "./sections";
@@ -17,6 +18,8 @@ export default function LandingPage() {
   return (
     <main className="relative min-h-screen bg-[#0b0b0c]">
       <LoadingScreen />
+
+      <DiscordBanner />
 
       <div className="hidden md:block">
         <Hero />
