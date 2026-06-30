@@ -11,7 +11,7 @@ const NAV_LINKS = [
 ];
 ---
 
-<header class={`pointer-events-none fixed right-0 left-0 z-50 flex justify-center px-4 ${hasBanner ? 'top-[calc(3.5rem+0.75rem)]' : 'top-[0.75rem]'}`}>
+<header class={`pointer-events-none fixed right-0 left-0 z-50 flex justify-center px-4 md:hidden ${hasBanner ? 'top-[calc(3.5rem+0.75rem)]' : 'top-[0.75rem]'}`}>
   <div class="navbar-inner pointer-events-auto w-full h-12 relative">
     <div class="navbar-content flex items-center justify-between h-full px-6 mx-auto">
       <div class="flex items-center gap-3">
@@ -62,7 +62,7 @@ const NAV_LINKS = [
   </div>
 </header>
 
-<div class="nbm-menu fixed inset-0 z-40 hidden" aria-hidden="true">
+<div class="nbm-menu fixed inset-0 z-40 hidden md:hidden" aria-hidden="true">
   <div class="nbm-backdrop absolute inset-0 bg-black/40 backdrop-blur-md" data-close-menu></div>
   <nav class="nbm-panel absolute right-0 top-0 h-full w-[280px] flex flex-col bg-[#0b0b0c]/95">
     <!-- Primary links -->
