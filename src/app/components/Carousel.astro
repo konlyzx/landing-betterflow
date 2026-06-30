@@ -1,0 +1,1175 @@
+---
+interface Props {
+  id?: string;
+}
+interface CarouselItem {
+  title: string;
+  img: string;
+  href?: string;
+  target?: string;
+}
+const { id = 'moni-carousel' } = Astro.props;
+
+const items: CarouselItem[] = [
+  { title: "Astra", img: "/images/carousel/Astra.webp" },
+  { title: "Bliss", img: "/images/carousel/Bliss.webp" },
+  { title: "Burst", img: "/images/carousel/Burst.webp" },
+  { title: "Dusk", img: "/images/carousel/Dusk.webp" },
+  { title: "Flash", img: "/images/carousel/Flash.webp" },
+  { title: "Ghost", img: "/images/carousel/Ghost.webp" },
+  { title: "Helix", img: "/images/carousel/Helix.webp" },
+  { title: "Horizon", img: "/images/carousel/Horizon.webp" },
+  { title: "Peak", img: "/images/carousel/Peak.webp" },
+  { title: "Pattern 1", img: "/images/carousel/pattern-1.webp" },
+  { title: "Pattern 2", img: "/images/carousel/pattern-2.webp" },
+  { title: "Pattern 3", img: "/images/carousel/pattern-3.webp" },
+  { title: "Pattern 4", img: "/images/carousel/pattern-4.webp" },
+  { title: "Pattern 5", img: "/images/carousel/pattern-5.webp" },
+  { title: "Pattern 6", img: "/images/carousel/pattern-6.webp" },
+  { title: "Pattern 7", img: "/images/carousel/pattern-7.webp" },
+  { title: "Pattern 8", img: "/images/carousel/pattern-8.webp" },
+  { title: "Pattern 9", img: "/images/carousel/pattern-9.webp" },
+  { title: "Pattern 10", img: "/images/carousel/pattern-10.webp" },
+  { title: "Pattern 11", img: "/images/carousel/pattern-11.webp" },
+  { title: "Autumnal Peach", img: "/images/carousel/autumnal-peach.webp" },
+  { title: "Blossom", img: "/images/carousel/blossom-2.webp" },
+  { title: "Blushing Fire", img: "/images/carousel/blushing-fire.webp" },
+  { title: "Bright Rain", img: "/images/carousel/bright-rain.webp" },
+  { title: "Floss", img: "/images/carousel/floss.webp" },
+  { title: "Glass Rainbow", img: "/images/carousel/glass-rainbow.webp" },
+  { title: "Good Vibes", img: "/images/carousel/good-vibes.webp" },
+  { title: "Moonrise", img: "/images/carousel/moonrise.webp" },
+  { title: "Rose Thorn", img: "/images/carousel/rose-thorn.webp" },
+  { title: "Paper 01", img: "/images/carousel/paper-01.webp" },
+  { title: "Paper 02", img: "/images/carousel/paper-02.webp" },
+];
+
+const layout: 'multi-browse' | 'hero' | 'uncontained' = 'multi-browse';
+const auto = true;
+const largeWidth = 220;
+const mediumWidth = 96;
+const smallWidth = 48;
+const gap = 8;
+const padding = 16;
+const borderRadius = 28;
+const hideNav = true;
+const infinite = true;
+const autoplay = true;
+const autoplayInterval = 3000;
+const showAll = false;
+const showAllText = 'Show all';
+const headerText = '';
+
+// Infinite mode computations
+const V_mult = infinite && items.length > 0 ? Math.max(1, Math.ceil(15 / items.length)) : 1;
+const K_sets = infinite && items.length > 0 ? (() => {
+  let k = Math.ceil(1000 / (items.length * V_mult));
+  if (k % 2 === 0) k += 1;
+  return Math.max(3, k);
+})() : 1;
+const snapItemsCount = infinite ? K_sets * (items.length * V_mult) : items.length;
+const visualItems = infinite ? Array.from({ length: V_mult }).flatMap(() => items) : items;
+const showHeader = headerText || showAll;
+---
+
+<section class="moni-carousel-section relative z-10 px-6 mt-0 py-4 md:mt-25 md:py-14">
+  <div class="mx-auto max-w-[1324px]">
+  <div class="mb-4 md:mb-8 hidden md:block">
+    <h2 class="text-[24px] font-medium tracking-[-0.02em] text-white md:text-[32px]" style="font-family:Geist, sans-serif;margin:0">Backgrounds</h2>
+  </div>
+  <div class="carousel-container" id={id} data-layout={layout} data-auto={auto} data-infinite={infinite} data-autoplay={autoplay} data-autoplay-interval={autoplayInterval} style={`
+    --carousel-snap-width: ${largeWidth}px;
+    --carousel-gap: ${gap}px;
+    --carousel-padding: ${padding}px;
+    --carousel-right-padding: 128px;
+    --carousel-border-radius: ${borderRadius}px;
+    --carousel-track-width: 0px;
+  `}>
+    {showHeader && (
+      <div class="carousel-header" style="margin-bottom:32px">
+        {headerText && <h2 style="font-family:Geist, sans-serif;font-size:32px;font-weight:500;color:#fff;letter-spacing:-0.02em;margin:0">{headerText}</h2>}
+        {showAll && <a href="#" class="show-all-link">{showAllText}</a>}
+      </div>
+    )}
+    <div class="carousel-viewport">
+      {!hideNav && (
+        <button class="nav-button prev" aria-label="Previous items">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+      )}
+
+      <div class="scroll-container">
+        <div class="snap-track">
+          {Array.from({ length: snapItemsCount }).map(() => (
+            <div class="snap-item"></div>
+          ))}
+        </div>
+        <div class="visual-track">
+          {visualItems.map((item, idx) => (
+            <div class="card" data-index={idx}>
+              {item.href ? (
+                <a href={item.href} target={item.target || '_self'} style="text-decoration:none; color:inherit;" draggable="false">
+                  <div class="img-parallax-container">
+                    <img src={item.img} alt={item.title} draggable="false" loading="lazy" />
+                  </div>
+                  <h2 class="card-title">{item.title}</h2>
+                </a>
+              ) : (
+                <Fragment>
+                  <div class="img-parallax-container">
+                    <img src={item.img} alt={item.title} draggable="false" loading="lazy" />
+                  </div>
+                  <h2 class="card-title">{item.title}</h2>
+                </Fragment>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {!hideNav && (
+        <button class="nav-button next" aria-label="Next items">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      )}
+    </div>
+  </div>
+  </div>
+</section>
+
+<style>
+  .moni-carousel-section {
+    display: block;
+    width: 100%;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 var(--carousel-padding, 16px);
+    margin-bottom: 8px;
+  }
+
+  .carousel-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #a1a1aa;
+  }
+
+  .show-all-link {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    font-size: 0.875rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .show-all-link:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+
+  .carousel-viewport {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .scroll-container {
+    width: 100%;
+    height: 296px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+  }
+
+  .scroll-container:active {
+    cursor: grabbing;
+  }
+
+  .scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .snap-track {
+    display: flex;
+    width: calc(var(--carousel-track-width, 0px) + var(--carousel-right-padding, 128px));
+    gap: var(--carousel-gap, 8px);
+    padding: 8px 0 8px var(--carousel-padding, 16px);
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .snap-item {
+    flex: 0 0 var(--carousel-snap-width, 220px);
+    height: 100%;
+    scroll-snap-align: start;
+    pointer-events: none;
+  }
+
+  .visual-track {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 0;
+    height: 280px;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .card {
+    position: absolute;
+    top: 0;
+    height: 280px;
+    border-radius: var(--carousel-border-radius, 28px);
+    overflow: hidden;
+    background-color: #1a1a1f;
+    pointer-events: auto;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+    will-change: transform;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4), 0px 8px 12px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .img-parallax-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card img {
+    display: block;
+    width: calc(100% + 50px);
+    max-width: none;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    position: absolute;
+    left: -25px;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    will-change: transform;
+  }
+
+  .card-title {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    color: #ffffff;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 2;
+  }
+
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(26, 26, 31, 0.9);
+    color: rgba(255, 255, 255, 0.85);
+    border: none;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4), 0px 8px 12px 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-button:hover {
+    background-color: rgba(50, 50, 60, 0.9);
+    color: #fff;
+  }
+
+  .nav-button.prev {
+    left: 24px;
+  }
+
+  .nav-button.next {
+    right: 24px;
+  }
+
+  .carousel-viewport:hover .nav-button.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (max-width: 600px) {
+    .nav-button {
+      display: none !important;
+    }
+    .moni-carousel-section {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .moni-carousel-section > .mx-auto {
+      max-width: 100%;
+    }
+    .moni-carousel-section h2 {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .scroll-container {
+      height: 220px;
+    }
+    .visual-track {
+      height: 204px;
+    }
+    .card {
+      height: 204px;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  class MoniCarousel {
+    private scrollContainer: HTMLElement;
+    private snapTrack: HTMLElement;
+    private visualTrack: HTMLElement;
+    private cards: HTMLElement[];
+    private prevBtn: HTMLElement;
+    private nextBtn: HTMLElement;
+    private carouselContainer: HTMLElement;
+
+    // Properties matching @property decorators
+    private items: { title: string; img: string; href?: string; target?: string }[] = [];
+    private layout: 'multi-browse' | 'hero' | 'uncontained' = 'multi-browse';
+    private auto = true;
+    private largeWidth = 220;
+    private mediumWidth = 96;
+    private smallWidth = 48;
+    private gap = 8;
+    private padding = 16;
+    private borderRadius = 28;
+    private hideNav = false;
+    private infinite = false;
+    private autoplay = false;
+    private autoplayInterval = 3000;
+
+    // State matching @state decorators
+    private containerWidth = 0;
+
+    // Private fields matching original
+    private resizeObserver: ResizeObserver | null = null;
+    private isDown = false;
+    private startX = 0;
+    private scrollLeftStart = 0;
+    private velocity = 0;
+    private lastTime = 0;
+    private lastX = 0;
+    private draggedDistance = 0;
+    private rafId: number | null = null;
+    private isMobile = false;
+
+    // Scroll interpolation state
+    private tickerTarget = 0;
+    private tickerCurrent = 0;
+    private isTicking = false;
+
+    // Infinite & Autoplay state
+    private infiniteInitialized = false;
+    private autoplayTimer: any = null;
+
+    // quickSetter caches
+    private cardSetX: ((value: number) => void)[] = [];
+    private cardSetWidth: ((value: number) => void)[] = [];
+    private imgSetX: ((value: number) => void)[] = [];
+    private titleSetOpacity: ((value: number) => void)[] = [];
+
+    private wheelTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    constructor(root: HTMLElement) {
+      this.carouselContainer = root;
+      this.scrollContainer = root.querySelector('.scroll-container')!;
+      this.snapTrack = root.querySelector('.snap-track')!;
+      this.visualTrack = root.querySelector('.visual-track')!;
+      this.cards = Array.from(root.querySelectorAll('.card'));
+      this.prevBtn = root.querySelector('.nav-button.prev')!;
+      this.nextBtn = root.querySelector('.nav-button.next')!;
+
+      // Build items from DOM (matching _handleSlotChange logic)
+      this.items = this.cards.map(c => {
+        const img = c.querySelector('img')!;
+        const title = c.querySelector('.card-title');
+        const anchor = c.querySelector('a');
+        return {
+          title: title?.textContent || img.alt || '',
+          img: img.src,
+          href: anchor?.href,
+          target: anchor?.target,
+        };
+      });
+
+      // Read properties from data attributes
+      this.layout = (root.dataset.layout as any) || 'multi-browse';
+      this.auto = root.dataset.auto !== 'false';
+      this.infinite = root.dataset.infinite === 'true';
+      this.autoplay = root.dataset.autoplay === 'true';
+      this.autoplayInterval = parseInt(root.dataset.autoplayInterval || '3000');
+
+      this.init();
+    }
+
+    get effectiveItems() {
+      return this.items && this.items.length > 0 ? this.items : [];
+    }
+
+    private get visualCardsMultiplier() {
+      if (!this.infinite || this.effectiveItems.length === 0) return 1;
+      const C = this.effectiveItems.length;
+      return Math.max(1, Math.ceil(15 / C));
+    }
+
+    private get snapSetsCount() {
+      if (!this.infinite || this.effectiveItems.length === 0) return 1;
+      const C = this.effectiveItems.length;
+      const V = C * this.visualCardsMultiplier;
+      let K = Math.ceil(1000 / V);
+      if (K % 2 === 0) K += 1;
+      return Math.max(3, K);
+    }
+
+    private get snapItemsCount() {
+      if (this.infinite) {
+        const C = this.effectiveItems.length;
+        const V_mult = this.visualCardsMultiplier;
+        const K = this.snapSetsCount;
+        return K * (C * V_mult);
+      }
+      return this.effectiveItems.length;
+    }
+
+    private init() {
+      // Set containerWidth synchronously to avoid initial layout with width=0
+      this.containerWidth = this.carouselContainer.getBoundingClientRect().width || 0;
+
+      // If container is hidden (width=0), wait for ResizeObserver to trigger
+      if (this.containerWidth === 0) {
+        if (typeof ResizeObserver !== 'undefined') {
+          this.resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+              if (entry.contentRect.width > 0) {
+                this.containerWidth = entry.contentRect.width;
+                this.updateLayout(true);
+                this.resizeObserver?.disconnect();
+                this.resizeObserver = null;
+                this.init();
+              }
+            }
+          });
+          this.resizeObserver.observe(this.carouselContainer);
+        }
+        return;
+      }
+
+      // connectedCallback
+      if (typeof ResizeObserver !== 'undefined') {
+        this.resizeObserver = new ResizeObserver((entries) => {
+          for (const entry of entries) {
+            this.containerWidth = entry.contentRect.width;
+            this.updateLayout(true);
+          }
+        });
+        this.resizeObserver.observe(this.carouselContainer);
+      }
+
+      // Detect mobile for parallax toggle
+      if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
+        const mql = window.matchMedia('(max-width: 600px)');
+        this.isMobile = mql.matches;
+        mql.addEventListener('change', (e) => { this.isMobile = e.matches; });
+      }
+
+      // Set scroll-snap-type based on layout (matching original's updated())
+      this.scrollContainer.style.scrollSnapType =
+        this.layout === 'uncontained' ? 'none' : 'x mandatory';
+
+      // firstUpdated
+      this.buildQuickSetters();
+      this.updateLayout(true);
+
+      this.bindEvents();
+      this.updateNavVisibility();
+
+      if (this.autoplay) {
+        this.startAutoplay();
+      }
+    }
+
+    private buildQuickSetters() {
+      if (!this.cards || this.cards.length === 0) return;
+
+      this.cardSetX = [];
+      this.cardSetWidth = [];
+      this.imgSetX = [];
+      this.titleSetOpacity = [];
+
+      this.cards.forEach((card) => {
+        this.cardSetX.push(gsap.quickSetter(card, 'x', 'px') as (v: number) => void);
+        this.cardSetWidth.push(gsap.quickSetter(card, 'width', 'px') as (v: number) => void);
+
+        const img = card.querySelector('img');
+        this.imgSetX.push(
+          img ? (gsap.quickSetter(img, 'x', 'px') as (v: number) => void) : (() => {})
+        );
+
+        const title = card.querySelector('.card-title');
+        this.titleSetOpacity.push(
+          title ? (gsap.quickSetter(title, 'opacity') as (v: number) => void) : (() => {})
+        );
+      });
+    }
+
+    get computedLayout() {
+      const W_c = this.containerWidth || this.carouselContainer.getBoundingClientRect().width || 360;
+      const gap = this.gap;
+      const padding = this.padding;
+      const W_a = W_c - 2 * padding;
+
+      let L = this.largeWidth;
+      let M = this.mediumWidth;
+      let S = this.smallWidth;
+      let N = 1;
+
+      if (this.auto) {
+        if (this.layout === 'uncontained') {
+          L = Math.min(W_a, 260);
+        } else if (this.layout === 'hero') {
+          S = 48;
+          N = Math.max(1, Math.floor((W_a - S) / (250 + gap)));
+          L = (W_a - S - N * gap) / N;
+
+          if (L < 150) {
+            N = 1;
+            L = W_a - S - gap;
+          }
+        } else {
+          // multi-browse: N large items, 1 medium, 1 small
+          S = 48;
+          let bestN = 1;
+          let bestL = 220;
+          let bestDiff = Infinity;
+
+          for (let n = 1; n <= 10; n++) {
+            const l = (W_a - S - (n + 1) * gap) / (n + 0.45);
+            if (l >= 140 && l <= 340) {
+              const diff = Math.abs(l - 220);
+              if (diff < bestDiff) {
+                bestDiff = diff;
+                bestN = n;
+                bestL = l;
+              }
+            }
+          }
+
+          if (bestDiff === Infinity) {
+            N = 1;
+            L = (W_a - S - 2 * gap) / 1.45;
+          } else {
+            N = bestN;
+            L = bestL;
+          }
+          M = 0.45 * L;
+        }
+      } else {
+        L = this.largeWidth;
+        M = this.mediumWidth;
+        S = this.smallWidth;
+
+        if (this.layout === 'hero') {
+          N = 1;
+        } else if (this.layout === 'uncontained') {
+          N = Math.max(1, Math.floor(W_a / (L + gap)));
+        } else {
+          N = 1;
+        }
+      }
+
+      return { L, M, S, N };
+    }
+
+    get itemSize() {
+      return this.computedLayout.L + this.gap;
+    }
+
+    private getCardLayout(p: number) {
+      const { L, M, S, N } = this.computedLayout;
+      const gap = this.gap;
+      const padding = this.padding;
+
+      let width = L;
+      let x = padding;
+      let opacity = 1;
+
+      if (this.layout === 'uncontained') {
+        width = L;
+        x = padding + p * (L + gap);
+        opacity = 1;
+      } else if (this.layout === 'hero') {
+        const X_N = padding + N * (L + gap);
+        const X_M1 = padding - gap - S;
+
+        if (p <= -1) {
+          width = S;
+          x = X_M1 + (p - -1) * (S + gap);
+          opacity = 0;
+        } else if (p <= 0) {
+          width = gsap.utils.interpolate(S, L, p + 1);
+          x = gsap.utils.interpolate(X_M1, padding, p + 1);
+          opacity = gsap.utils.interpolate(0, 1, p + 1);
+        } else if (p <= N - 1) {
+          width = L;
+          x = padding + p * (L + gap);
+          opacity = 1;
+        } else if (p <= N) {
+          const u = p - (N - 1);
+          const X_last = padding + (N - 1) * (L + gap);
+          width = gsap.utils.interpolate(L, S, u);
+          x = gsap.utils.interpolate(X_last, X_N, u);
+          opacity = gsap.utils.interpolate(1, 0, u);
+        } else {
+          width = S;
+          x = X_N + (p - N) * (S + gap);
+          opacity = 0;
+        }
+      } else {
+        // multi-browse
+        const X_N = padding + N * (L + gap);
+        const X_N1 = X_N + M + gap;
+        const X_M1 = padding - gap - S;
+
+        if (p <= -1) {
+          width = S;
+          x = X_M1 + (p - -1) * (S + gap);
+          opacity = 0;
+        } else if (p <= 0) {
+          width = gsap.utils.interpolate(S, L, p + 1);
+          x = gsap.utils.interpolate(X_M1, padding, p + 1);
+          opacity = gsap.utils.interpolate(0, 1, p + 1);
+        } else if (p <= N - 1) {
+          width = L;
+          x = padding + p * (L + gap);
+          opacity = 1;
+        } else if (p <= N) {
+          const u = p - (N - 1);
+          const X_last = padding + (N - 1) * (L + gap);
+          width = gsap.utils.interpolate(L, M, u);
+          x = gsap.utils.interpolate(X_last, X_N, u);
+          opacity = gsap.utils.interpolate(1, 0, u);
+        } else if (p <= N + 1) {
+          const u = p - N;
+          width = gsap.utils.interpolate(M, S, u);
+          x = gsap.utils.interpolate(X_N, X_N1, u);
+          opacity = 0;
+        } else {
+          width = S;
+          x = X_N1 + (p - (N + 1)) * (S + gap);
+          opacity = 0;
+        }
+      }
+
+      return { width, x, opacity };
+    }
+
+    private tick = () => {
+      const dt = gsap.ticker.deltaRatio();
+      const ease = this.isMobile ? 0.08 : 0.15;
+      this.tickerCurrent += (this.tickerTarget - this.tickerCurrent) * ease * dt;
+
+      if (Math.abs(this.tickerTarget - this.tickerCurrent) < 0.0005) {
+        this.tickerCurrent = this.tickerTarget;
+        gsap.ticker.remove(this.tick);
+        this.isTicking = false;
+        this.checkInfiniteWrap();
+      }
+
+      this.applyLayout(this.tickerCurrent);
+    };
+
+    private scheduleLayout = () => {
+      if (!this.scrollContainer) return;
+      this.tickerTarget = this.scrollContainer.scrollLeft / this.itemSize;
+      if (!this.isTicking) {
+        this.isTicking = true;
+        gsap.ticker.add(this.tick);
+      }
+      this.updateNavVisibility();
+    };
+
+    updateLayout = (instant = false) => {
+      if (!this.scrollContainer || !this.cards || this.cards.length === 0) return;
+
+      if (this.cardSetX.length !== this.cards.length) {
+        this.buildQuickSetters();
+      }
+
+      // Infinite initialization
+      if (this.infinite && !this.infiniteInitialized && this.effectiveItems.length > 0) {
+        const C = this.effectiveItems.length;
+        const V = C * this.visualCardsMultiplier;
+        const K = this.snapSetsCount;
+        const centerSetIndex = Math.floor(K / 2);
+
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            if (this.scrollContainer) {
+              this.scrollContainer.scrollWidth;
+              this.scrollContainer.scrollLeft = centerSetIndex * V * this.itemSize;
+              this.tickerTarget = this.scrollContainer.scrollLeft / this.itemSize;
+              this.tickerCurrent = this.tickerTarget;
+              this.applyLayout(this.tickerCurrent);
+            }
+          }, 20);
+        });
+        this.infiniteInitialized = true;
+      }
+
+      // render() logic: set CSS variables on carousel-container BEFORE applyLayout
+      const { L, M, S } = this.computedLayout;
+      const hasItems = this.effectiveItems && this.effectiveItems.length > 0;
+
+      let rightPadding = 128;
+      if (this.layout === 'hero') {
+        rightPadding = S + this.gap;
+      } else if (this.layout === 'uncontained') {
+        rightPadding = 16;
+      } else {
+        rightPadding = M + S + 2 * this.gap;
+      }
+
+      const W_c = this.containerWidth || this.carouselContainer.getBoundingClientRect().width || 360;
+      const minRightPaddingNeeded = W_c - L - this.padding + 400;
+      if (rightPadding < minRightPaddingNeeded) {
+        rightPadding = minRightPaddingNeeded;
+      }
+
+      const trackWidth = hasItems
+        ? this.snapItemsCount * L + (this.snapItemsCount - 1) * this.gap
+        : 0;
+
+      this.carouselContainer.style.setProperty('--carousel-snap-width', `${L}px`);
+      this.carouselContainer.style.setProperty('--carousel-gap', `${this.gap}px`);
+      this.carouselContainer.style.setProperty('--carousel-padding', `${this.padding}px`);
+      this.carouselContainer.style.setProperty('--carousel-right-padding', `${rightPadding}px`);
+      this.carouselContainer.style.setProperty('--carousel-border-radius', `${this.borderRadius}px`);
+      this.carouselContainer.style.setProperty('--carousel-track-width', `${trackWidth}px`);
+
+      // Set snap items width
+      const snapItems = this.snapTrack.querySelectorAll('.snap-item');
+      snapItems.forEach(item => {
+        (item as HTMLElement).style.flex = `0 0 ${L}px`;
+      });
+
+      this.tickerTarget = this.scrollContainer.scrollLeft / this.itemSize;
+
+      if (instant || (!this.isTicking && this.tickerCurrent === 0)) {
+        this.tickerCurrent = this.tickerTarget;
+        this.applyLayout(this.tickerCurrent);
+      } else {
+        if (!this.isTicking) {
+          this.isTicking = true;
+          gsap.ticker.add(this.tick);
+        }
+      }
+    };
+
+    private applyLayout(t: number) {
+      const isMobile = this.isMobile;
+      const cardCount = this.cards.length;
+      for (let i = 0; i < cardCount; i++) {
+        let p = i - t;
+        if (this.infinite) {
+          p = i - (t % cardCount);
+          if (p > cardCount / 2) p -= cardCount;
+          if (p < -cardCount / 2) p += cardCount;
+        }
+
+        if (p < -15 || p > 15) {
+          this.cardSetX[i](-9999);
+          this.titleSetOpacity[i](0);
+          continue;
+        }
+
+        const layout = this.getCardLayout(p);
+
+        this.cardSetX[i](layout.x);
+        this.cardSetWidth[i](layout.width);
+
+        if (!isMobile) {
+          const clampedP = Math.max(-1, Math.min(1, p));
+          this.imgSetX[i](clampedP * -25);
+        }
+
+        this.titleSetOpacity[i](layout.opacity);
+      }
+    }
+
+    private updateNavVisibility() {
+      const isScrollable = this.effectiveItems.length > 0 &&
+        this.scrollContainer.scrollWidth > this.scrollContainer.clientWidth;
+      const showPrevArrow = this.infinite || (isScrollable && this.scrollContainer.scrollLeft > 5);
+      const showNextArrow = this.infinite || (isScrollable &&
+        (this.scrollContainer.scrollWidth - this.scrollContainer.scrollLeft - this.scrollContainer.clientWidth > 5));
+
+      if (this.prevBtn) this.prevBtn.classList.toggle('visible', showPrevArrow);
+      if (this.nextBtn) this.nextBtn.classList.toggle('visible', showNextArrow);
+    }
+
+    private bindEvents() {
+      // Scroll
+      this.scrollContainer.addEventListener('scroll', this.scheduleLayout, { passive: true });
+
+      // Mouse drag
+      this.scrollContainer.addEventListener('mousedown', (e) => this.handleMouseDown(e));
+      document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+      document.addEventListener('mouseup', () => this.handleMouseUp());
+      this.scrollContainer.addEventListener('mouseenter', () => this.handleMouseEnter());
+      this.scrollContainer.addEventListener('mouseleave', () => this.handleMouseLeave());
+
+      // Touch
+      this.scrollContainer.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
+      this.scrollContainer.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: true });
+      this.scrollContainer.addEventListener('touchend', () => this.handleMouseUp());
+
+      // Wheel
+      this.scrollContainer.addEventListener('wheel', (e) => this.handleWheel(e), { passive: false });
+
+      // Nav buttons
+      if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.scrollPrevious());
+      if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.scrollNext());
+
+      // Card click
+      this.cards.forEach((card, index) => {
+        card.addEventListener('click', (e) => {
+          if (this.draggedDistance > 8) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          }
+          const originalIndex = index % this.effectiveItems.length;
+          this.carouselContainer.dispatchEvent(new CustomEvent('item-click', {
+            detail: { item: this.effectiveItems[originalIndex], index: originalIndex },
+            bubbles: true,
+          }));
+        });
+      });
+
+      // Show all click
+      const showAllLink = this.carouselContainer.querySelector('.show-all-link');
+      if (showAllLink) {
+        showAllLink.addEventListener('click', (e) => {
+          const target = e.target as HTMLElement;
+          if (target.tagName.toLowerCase() === 'a' && target.getAttribute('href') === '#') {
+            e.preventDefault();
+          }
+          this.carouselContainer.dispatchEvent(new CustomEvent('show-all-click', {
+            bubbles: true,
+          }));
+        });
+      }
+    }
+
+    private handleMouseEnter() {
+    }
+
+    private handleMouseLeave() {
+      this.handleMouseUp();
+    }
+
+    private handleMouseDown(e: MouseEvent) {
+      gsap.killTweensOf(this.scrollContainer);
+      this.checkInfiniteWrap();
+      this.isDown = true;
+      this.draggedDistance = 0;
+      this.scrollContainer.style.scrollBehavior = 'auto';
+      this.scrollContainer.style.scrollSnapType = 'none';
+
+      this.startX = e.pageX - this.scrollContainer.offsetLeft;
+      this.scrollLeftStart = this.scrollContainer.scrollLeft;
+      this.velocity = 0;
+      this.lastX = e.pageX;
+      this.lastTime = performance.now();
+    }
+
+    private handleMouseMove(e: MouseEvent) {
+      if (!this.isDown) return;
+      e.preventDefault();
+
+      const currentX = e.pageX;
+      const x = currentX - this.scrollContainer.offsetLeft;
+      this.scrollContainer.scrollLeft = this.scrollLeftStart + (this.startX - x) * 1.25;
+
+      const currentTime = performance.now();
+      const dt = currentTime - this.lastTime;
+      if (dt > 0) {
+        this.velocity = (currentX - this.lastX) / dt;
+      }
+      this.draggedDistance += Math.abs(currentX - this.lastX);
+      this.lastX = currentX;
+      this.lastTime = currentTime;
+    }
+
+    private handleMouseUp() {
+      if (!this.isDown) return;
+      this.isDown = false;
+
+      const currentTime = performance.now();
+      if (currentTime - this.lastTime > 100) {
+        this.velocity = 0;
+      }
+
+      const momentumMultiplier = 350 + Math.abs(this.velocity) * 300;
+      let projectedScrollLeft = this.scrollContainer.scrollLeft - this.velocity * momentumMultiplier;
+
+      const maxThrowDist = 15 * this.itemSize;
+      if (projectedScrollLeft < this.scrollContainer.scrollLeft - maxThrowDist) {
+        projectedScrollLeft = this.scrollContainer.scrollLeft - maxThrowDist;
+      } else if (projectedScrollLeft > this.scrollContainer.scrollLeft + maxThrowDist) {
+        projectedScrollLeft = this.scrollContainer.scrollLeft + maxThrowDist;
+      }
+
+      if (this.layout !== 'uncontained') {
+        this.scrollContainer.style.scrollSnapType = 'none';
+
+        let targetIndex = Math.round(projectedScrollLeft / this.itemSize);
+        const maxIndex = this.effectiveItems.length > 0 ? this.snapItemsCount - 1 : 0;
+        targetIndex = Math.max(0, Math.min(maxIndex, targetIndex));
+        const snapPoint = targetIndex * this.itemSize;
+
+        const currentIndex = Math.round(this.scrollContainer.scrollLeft / this.itemSize);
+        const cardsSkipped = Math.abs(targetIndex - currentIndex);
+        const duration = Math.min(0.85, 0.25 + cardsSkipped * 0.04);
+
+        this.scrollContainer.style.scrollBehavior = 'auto';
+
+        gsap.to(this.scrollContainer, {
+          scrollLeft: snapPoint,
+          duration: duration,
+          ease: 'power3.out',
+          onComplete: () => {
+            if (!this.isDown && this.scrollContainer) {
+              this.scrollContainer.style.scrollSnapType = 'x mandatory';
+            }
+          }
+        });
+      }
+    }
+
+    private handleTouchStart(e: TouchEvent) {
+      gsap.killTweensOf(this.scrollContainer);
+      this.checkInfiniteWrap();
+      this.isDown = true;
+      this.draggedDistance = 0;
+      this.scrollContainer.style.scrollBehavior = 'auto';
+      this.scrollContainer.style.scrollSnapType = 'none';
+
+      const touch = e.touches[0];
+      this.startX = touch.pageX - this.scrollContainer.offsetLeft;
+      this.scrollLeftStart = this.scrollContainer.scrollLeft;
+      this.velocity = 0;
+      this.lastX = touch.pageX;
+      this.lastTime = performance.now();
+    }
+
+    private handleTouchMove(e: TouchEvent) {
+      if (!this.isDown) return;
+
+      const touch = e.touches[0];
+      const currentX = touch.pageX;
+      const x = currentX - this.scrollContainer.offsetLeft;
+      this.scrollContainer.scrollLeft = this.scrollLeftStart + (this.startX - x);
+
+      const currentTime = performance.now();
+      const dt = currentTime - this.lastTime;
+      if (dt > 0) {
+        this.velocity = (currentX - this.lastX) / dt;
+      }
+      this.draggedDistance += Math.abs(currentX - this.lastX);
+      this.lastX = currentX;
+      this.lastTime = currentTime;
+    }
+
+    private handleWheel(e: WheelEvent) {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        const maxScroll = this.scrollContainer.scrollWidth - this.scrollContainer.clientWidth;
+        const currentScroll = this.scrollContainer.scrollLeft;
+
+        const isAtStart = currentScroll <= 0;
+        const isAtEnd = currentScroll >= maxScroll - 1;
+
+        if ((e.deltaY < 0 && isAtStart) || (e.deltaY > 0 && isAtEnd)) {
+          return;
+        }
+
+        e.preventDefault();
+
+        this.scrollContainer.style.scrollSnapType = 'none';
+
+        let delta = e.deltaY;
+        if (e.deltaMode === 1) delta *= 40;
+        else if (e.deltaMode === 2) delta *= 800;
+
+        this.scrollContainer.scrollLeft += delta;
+
+        if (this.wheelTimeout) clearTimeout(this.wheelTimeout);
+        this.wheelTimeout = setTimeout(() => {
+          if (this.layout !== 'uncontained' && !this.isDown) {
+            this.scrollContainer.style.scrollSnapType = 'x mandatory';
+          }
+        }, 150);
+      }
+    }
+
+    private scrollPrevious() {
+      const target = this.scrollContainer.scrollLeft - this.itemSize;
+      this.scrollContainer.style.scrollBehavior = 'smooth';
+      this.scrollContainer.scrollTo({ left: target, behavior: 'smooth' });
+    }
+
+    private scrollNext() {
+      const target = this.scrollContainer.scrollLeft + this.itemSize;
+      this.scrollContainer.style.scrollBehavior = 'smooth';
+      this.scrollContainer.scrollTo({ left: target, behavior: 'smooth' });
+    }
+
+    private checkInfiniteWrap() {
+      if (!this.infinite || this.effectiveItems.length === 0 || !this.scrollContainer) return;
+
+      const C = this.effectiveItems.length;
+      const V = C * this.visualCardsMultiplier;
+      const K = this.snapSetsCount;
+      const centerSetIndex = Math.floor(K / 2);
+
+      const setWidth = V * this.itemSize;
+      const currentScroll = this.scrollContainer.scrollLeft;
+      const currentSet = Math.floor(currentScroll / setWidth);
+
+      if (currentSet !== centerSetIndex) {
+        const delta = (centerSetIndex - currentSet) * setWidth;
+
+        const oldSnap = this.scrollContainer.style.scrollSnapType;
+        const oldBehavior = this.scrollContainer.style.scrollBehavior;
+
+        this.scrollContainer.style.scrollSnapType = 'none';
+        this.scrollContainer.style.scrollBehavior = 'auto';
+
+        this.scrollContainer.scrollLeft += delta;
+
+        this.tickerTarget = this.scrollContainer.scrollLeft / this.itemSize;
+        this.tickerCurrent = this.tickerTarget;
+        this.applyLayout(this.tickerCurrent);
+
+        this.scrollContainer.style.scrollBehavior = oldBehavior;
+
+        if (this.isDown) {
+          this.scrollLeftStart += delta;
+        }
+
+        if (oldSnap && oldSnap !== 'none') {
+          requestAnimationFrame(() => {
+            if (this.scrollContainer && !this.isDown) {
+              this.scrollContainer.style.scrollSnapType = oldSnap;
+            }
+          });
+        }
+      }
+    }
+
+    private startAutoplay() {
+      this.stopAutoplay();
+      if (this.autoplay && this.effectiveItems.length > 0) {
+        this.autoplayTimer = setInterval(() => {
+          if (!this.isDown) {
+            this.scrollNext();
+          }
+        }, this.autoplayInterval);
+      }
+    }
+
+    private stopAutoplay() {
+      if (this.autoplayTimer) {
+        clearInterval(this.autoplayTimer);
+        this.autoplayTimer = null;
+      }
+    }
+  }
+
+  // Initialize
+  function initCarousel() {
+    document.querySelectorAll('.carousel-container').forEach((root) => {
+      new MoniCarousel(root as HTMLElement);
+    });
+
+    // GSAP reveal animation — per instance
+    import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+      gsap.registerPlugin(ScrollTrigger);
+      document.querySelectorAll('.moni-carousel-section').forEach((section) => {
+        gsap.fromTo(section,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: section, start: 'top 85%' },
+          }
+        );
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+  } else {
+    initCarousel();
+  }
+</script>

@@ -1,0 +1,103 @@
+---
+import RotatingText from "../../components/ui/RotatingText.astro";
+---
+
+<div class="relative md:min-h-screen">
+  <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+    <img
+      src="/mesh/red_webdistortion.webp"
+      alt=""
+      class="hero-bg-m absolute inset-0 h-full w-full object-cover opacity-55"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(11,11,12,0.2) 0%, rgba(11,11,12,0.4) 30%, rgba(11,11,12,0.75) 65%, #0b0b0c 100%)"></div>
+    <div class="absolute top-[10%] left-1/2 -translate-x-1/2 h-[350px] w-[350px] rounded-full blur-[80px] opacity-25" style="background:radial-gradient(circle, #ff7e40 0%, transparent 70%)"></div>
+    <div class="absolute top-[30%] right-[5%] h-[200px] w-[200px] rounded-full blur-[60px] opacity-20" style="background:radial-gradient(circle, #a445ff 0%, transparent 70%)"></div>
+  </div>
+
+  <section class="relative z-10 flex flex-col items-center justify-center overflow-hidden px-5 pt-32 pb-30">
+    <div class="relative z-10 mx-auto flex w-full max-w-[480px] flex-col items-center gap-7 text-center">
+      <div
+        class="hm-anim inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 text-xs font-medium"
+        style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(8px)"
+      >
+        <span class="relative flex h-1.5 w-1.5">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ff7e40] opacity-75"></span>
+          <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#ff7e40]"></span>
+        </span>
+        <span style="color:rgba(255,255,255,0.7)">Open Source</span>
+        <span style="color:rgba(255,255,255,0.2)">•</span>
+        <span style="background:linear-gradient(135deg, #ff7e40 0%, #a445ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">v0.1.0 Released</span>
+      </div>
+
+      <div class="hm-anim space-y-4">
+        <h1 class="text-[2.5rem] leading-[1.08] font-semibold tracking-[-0.035em] text-white">
+          <span class="text-white">Better flow for your</span>
+          <br />
+          <RotatingText
+            texts={["screenshots", "code snippets", "browser mockups", "designs"]}
+            interval={3000}
+            class="gradient-text inline-block pb-1"
+          />
+        </h1>
+        <p class="mx-auto max-w-[340px] text-[15px] leading-relaxed text-white/50">
+          An open-source screenshot studio and browser tool. Transform raw captures into production-ready graphics instantly.
+        </p>
+      </div>
+
+      <div class="hm-anim flex w-full flex-col items-center gap-3">
+        <a
+          href="https://github.com/betterspacx"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hero-btn-m inline-flex w-full max-w-[280px] items-center justify-center gap-2 text-sm font-medium"
+          style="background:linear-gradient(110deg,#c9d4ff 0%,#e0d4ff 45%,#f5d4e8 100%);color:#000;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7);border-radius:64px;padding:14px 20px"
+        >
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+          Star on GitHub
+        </a>
+        <a
+          href="https://app.betterflow.site/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hero-btn-m inline-flex w-full max-w-[280px] items-center justify-center gap-2 text-sm font-medium"
+          style="background:linear-gradient(110deg,#c9d4ff 0%,#e0d4ff 45%,#f5d4e8 100%);color:#000;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7);border-radius:64px;padding:14px 20px"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          Go Studio
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .hero-btn-m { position: relative; overflow: hidden; }
+  .hero-btn-m::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    height: 100%;
+    width: 60%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.45) 50%, transparent 100%);
+    transform: skewX(-20deg);
+    pointer-events: none;
+    z-index: 2;
+    transition: left 0.6s ease;
+  }
+  .hero-btn-m:hover::before { left: 120%; }
+  .hero-btn-m > * { position: relative; z-index: 1; }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  const bg = document.querySelector<HTMLImageElement>(".hero-bg-m");
+  if (bg) {
+    gsap.fromTo(bg, { opacity: 0, scale: 1.1, filter: "blur(12px)" }, { opacity: 0.55, scale: 1, filter: "blur(0px)", duration: 1.6, ease: "power3.out" });
+  }
+  gsap.utils.toArray<HTMLElement>(".hm-anim").forEach((el, i) => {
+    gsap.fromTo(el, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.3 + i * 0.12 });
+  });
+</script>

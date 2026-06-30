@@ -1,0 +1,41 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import AlternativePage from "@/app/alternatives/AlternativePage.astro";
+---
+
+<Layout
+  title="Better Flow vs Pika — Free Open Source Screenshot Tool Alternative"
+  description="Compare Better Flow vs Pika. Better Flow is a free, open-source alternative to Pika with browser mockups, 3D effects, video export, and 100+ backgrounds. No watermarks, no account needed."
+  keywords={["pika alternative", "pika style free alternative", "pika screenshot tool alternative", "screenshot beautifier free pika", "open source pika alternative", "better flow vs pika", "pika.style alternative 2026", "screenshot to mockup free"]}
+  canonical="/alternatives/pika"
+>
+  <AlternativePage
+    competitor="Pika"
+    competitorUrl="https://pika.style"
+    tagline="Pika is slick but limited on the free plan. Better Flow gives you browser frames, 3D effects, video export, and 100+ backgrounds — all free, no account needed."
+    summary="Pika (pika.style) is a beautiful screenshot mockup tool but restricts exports and customization behind a paywall. Better Flow is a fully free and open-source alternative with more features: 3D transforms, animated video export to MP4/GIF, and local processing that keeps your screenshots private."
+    verdict="Better Flow is the better choice if you want everything Pika offers without the paid plan. It's open source, completely free, and adds features Pika doesn't have — like video export and 3D perspective effects."
+    pricing={{
+      competitor: "Free tier with watermarks and limited exports. Paid plans required for full resolution, custom backgrounds, and no-watermark exports.",
+      betterFlow: "$0 forever. No watermarks, no plan limits, no account. Open source under Apache 2.0. All features free including 4K export and video."
+    }}
+    features={[
+      { name: "Free to use", competitor: "Limited", betterFlow: true },
+      { name: "No account required", competitor: false, betterFlow: true },
+      { name: "No watermarks", competitor: "Paid", betterFlow: true },
+      { name: "Browser mockups", competitor: true, betterFlow: true },
+      { name: "Gradient backgrounds", competitor: "Limited free", betterFlow: true },
+      { name: "3D perspective effects", competitor: false, betterFlow: true },
+      { name: "Video export (MP4 / GIF)", competitor: false, betterFlow: true },
+      { name: "4K export", competitor: "Paid", betterFlow: true },
+      { name: "Local processing (no uploads)", competitor: false, betterFlow: true },
+      { name: "Open source", competitor: false, betterFlow: true },
+    ]}
+    faqs={[
+      { q: "Is Better Flow a free alternative to Pika?", a: "Yes. Better Flow is fully free with no paid tier, no watermarks, and no account required. All features — browser frames, backgrounds, 3D effects, video export — are available at no cost." },
+      { q: "How is Better Flow different from Pika?", a: "Both tools beautify screenshots with browser frames and backgrounds. Better Flow adds 3D perspective transforms, timeline animation editor, video export (MP4/WebM/GIF), and processes everything locally. Pika requires a paid plan for 4K export and watermark-free downloads." },
+      { q: "Does Better Flow have watermarks like Pika's free tier?", a: "No. Better Flow never adds watermarks regardless of export format or size. There is no paid tier — all exports are clean and full quality." },
+      { q: "Can I use Better Flow commercially?", a: "Yes. Better Flow is licensed under Apache 2.0. You can use it commercially, fork it, modify it, and redistribute it. Even self-hosting for commercial products is permitted." },
+    ]}
+  />
+</Layout>

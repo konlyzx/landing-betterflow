@@ -1,0 +1,381 @@
+---
+import NavbarMobile from "@/app/components/mobile/NavbarMobile.astro";
+
+interface Props {
+  pathname?: string;
+}
+
+const { pathname = "" } = Astro.props;
+
+const GITHUB_URL = "https://github.com/betterspacx";
+
+const navigation = [
+  {
+    section: "Getting Started",
+    items: [{ name: "Introduction", href: "/docs" }],
+  },
+  {
+    section: "Reference",
+    items: [
+      { name: "Architecture", href: "/docs/architecture" },
+      { name: "Contributing", href: "/docs/contributing" },
+      { name: "Changelog", href: "/docs/changelog" },
+    ],
+  },
+];
+
+const ALL_ITEMS = navigation.flatMap((g) => g.items);
+const currentIndex = ALL_ITEMS.findIndex((i) => i.href === pathname);
+const prevDoc = currentIndex > 0 ? ALL_ITEMS[currentIndex - 1] : null;
+const nextDoc = currentIndex >= 0 && currentIndex < ALL_ITEMS.length - 1 ? ALL_ITEMS[currentIndex + 1] : null;
+
+const currentDoc = ALL_ITEMS.find((i) => i.href === pathname);
+const currentGroup = navigation.find((g) => g.items.some((i) => i.href === pathname));
+---
+
+<!-- Sidebar — identical structure to DeckFlow, Better Flow colors -->
+<aside class="fixed left-0 top-0 z-40 hidden h-screen w-[16.5rem] flex-col bg-[#0b0b0c] lg:flex">
+  <div class="flex h-14 items-center px-6">
+    <a href="/" class="flex items-center gap-2">
+      <img src="/logo.svg" alt="Better Flow" class="w-5 h-5" />
+      <span class="text-sm font-semibold text-white">Better Flow</span>
+    </a>
+  </div>
+
+  <div class="relative px-4 pb-3">
+    <button
+      id="docs-search-btn"
+      class="group relative flex h-9 w-full items-center justify-between gap-2 overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.03] px-3.5 text-[13px] text-white/30 transition hover:border-white/10 hover:bg-white/[0.05]"
+    >
+      <div class="pointer-events-none absolute left-1/2 top-0 hidden h-px w-[120px] -translate-x-1/2 md:block" style="background:linear-gradient(90deg, transparent 0%, rgba(255,126,64,0.5) 50%, transparent 100%)"></div>
+      <div class="pointer-events-none absolute -top-1 left-1/2 h-[250px] w-[260px] -translate-x-1/2 -translate-y-1/2" style="background:conic-gradient(from 90deg at 50% 50%, transparent 50%, #0b0b0c 50%), radial-gradient(rgba(255,126,64,0.08) 0%, transparent 80%)"></div>
+      <div class="relative z-10 flex items-center gap-2">
+        <svg class="size-3.5 text-white/25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <span>Search...</span>
+      </div>
+      <span class="relative z-10 text-[11px] font-semibold text-white/20">Ctrl K</span>
+    </button>
+
+    <div id="docs-search-panel" class="absolute left-4 right-4 top-0 z-50 hidden overflow-hidden rounded-xl border border-white/[0.08] bg-[#0f0f0f] p-2 shadow-xl">
+      <div class="pointer-events-none absolute left-1/2 top-0 hidden h-px w-[150px] -translate-x-1/2 md:block" style="background:linear-gradient(90deg, transparent 0%, rgba(255,126,64,0.5) 50%, transparent 100%)"></div>
+      <div class="pointer-events-none absolute -top-1 left-1/2 h-[200px] w-[220px] -translate-x-1/2 -translate-y-1/2" style="background:conic-gradient(from 90deg at 50% 50%, transparent 50%, #0b0b0c 50%), radial-gradient(rgba(255,126,64,0.08) 0%, transparent 80%)"></div>
+      <div class="relative z-10 flex items-center gap-2 px-2">
+        <svg class="size-3.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input
+          id="docs-search-input"
+          type="text"
+          placeholder="Search documentation..."
+          class="h-9 w-full bg-transparent text-[13px] text-white/70 placeholder:text-white/25 focus:outline-none"
+        />
+        <kbd class="text-[10px] text-white/20">Esc</kbd>
+      </div>
+      <ul id="docs-search-results" class="mt-1 max-h-60 overflow-y-auto"></ul>
+    </div>
+  </div>
+
+  <div class="flex-1 overflow-y-auto px-2 py-2">
+    {navigation.map((group) => (
+      <div class="mb-5">
+        <div class="flex items-center gap-2.5 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-white/25">
+          <svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          {group.section}
+        </div>
+        <ul class="flex flex-col gap-px">
+          {group.items.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  class={`block rounded-xl px-3 py-1.5 text-[13px] transition ${active ? "bg-white/[0.06] font-medium text-white/90" : "text-white/35 hover:bg-white/[0.03] hover:text-white/60"}`}
+                >
+                  {item.name}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    ))}
+  </div>
+</aside>
+
+<!-- Mobile navbar (same as main site) -->
+<NavbarMobile />
+
+<!-- Header -->
+<header class="docs-header fixed left-0 right-0 top-0 z-30 hidden bg-[#0b0b0c] lg:left-[16.5rem] lg:block">
+  <div class="flex h-14 items-center justify-between px-6">
+    <a href="/" class="flex items-center gap-2 lg:hidden">
+      <img src="/logo.svg" alt="Better Flow" class="w-5 h-5" />
+      <span class="text-sm font-semibold text-white">Better Flow</span>
+    </a>
+
+    <nav class="hidden items-center gap-2 text-[11px] lg:flex">
+      <span class="text-white/30">{currentGroup?.section}</span>
+      <svg class="size-3 text-white/15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      <span class="font-medium text-white/50">{currentDoc?.name}</span>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <a
+        href="https://app.betterflow.site/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="docs-header-btn inline-flex h-[30px] items-center justify-center gap-1 rounded-lg border border-white/5 px-3 text-[12px] font-semibold text-white backdrop-blur-[12.5px] transition-all duration-200 hover:opacity-90"
+        style="background:linear-gradient(95.11deg, rgba(255,126,64,0.08) 5%, rgba(164,69,255,0.06) 100%)"
+      >
+        Go Studio
+        <svg class="size-3 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Main — fixed like DeckFlow: fixed bottom-4 left-0 right-0 top-14, inner div scrolls -->
+<main class="fixed bottom-4 left-0 right-0 top-[4.5rem] bg-[#0b0b0c] lg:top-14 lg:left-[16.5rem]">
+  <div id="docs-scroll" class="docs-scroll relative ml-0 overflow-y-auto overflow-x-hidden rounded-none border border-white/[0.06] bg-[#0a0a0a] lg:ml-4 lg:rounded-l-2xl" style="height: calc(100vh - 4.5rem - 1rem); overscroll-behavior: contain;">
+    <!-- Shiny top line -->
+    <div class="pointer-events-none absolute left-1/2 top-0 hidden h-px w-[200px] -translate-x-1/2 lg:block" style="background:linear-gradient(90deg, transparent 0%, rgba(255,126,64,0.5) 50%, transparent 100%)"></div>
+    <!-- Conic glow -->
+    <div class="pointer-events-none absolute -top-2 left-1/2 h-[400px] w-[500px] -translate-x-1/2 -translate-y-1/2" style="background:conic-gradient(from 90deg at 50% 50%, transparent 50%, #0b0b0c 50%), radial-gradient(rgba(255,126,64,0.08) 0%, transparent 80%)"></div>
+
+    <div class="mx-auto flex max-w-[900px] flex-col gap-x-12 px-8 pt-10 lg:flex-row lg:px-16">
+      <!-- Article -->
+      <article id="docs-main" class="docs-content flex-1 pb-28">
+        <slot />
+
+        <!-- Pagination -->
+        <div class="mt-16 flex items-center justify-between border-t border-white/[0.06] pt-8">
+          {prevDoc ? (
+            <a href={prevDoc.href} class="flex flex-col rounded-xl border border-white/[0.06] px-4 py-3 transition hover:border-white/10">
+              <span class="text-[12px] text-white/35">Previous</span>
+              <span class="text-[14px] font-medium text-white/80">{prevDoc.name}</span>
+            </a>
+          ) : <div />}
+          {nextDoc ? (
+            <a href={nextDoc.href} class="flex flex-col items-end rounded-xl border border-white/[0.06] px-4 py-3 transition hover:border-white/10">
+              <span class="text-[12px] text-white/35">Next</span>
+              <span class="text-[14px] font-medium text-white/80">{nextDoc.name}</span>
+            </a>
+          ) : <div />}
+        </div>
+      </article>
+
+      <!-- Right sidebar: TOC + Open Source card -->
+      <aside class="hidden w-[16.5rem] shrink-0 xl:block">
+        <div class="sticky top-24 flex flex-col gap-8">
+          <!-- TOC -->
+          <div id="docs-toc-container" style="display: none;">
+            <h2 class="mb-3 text-[11px] font-medium text-white/30">On this page</h2>
+            <ul id="docs-toc-nav" class="flex flex-col gap-2 border-l border-white/[0.06]"></ul>
+          </div>
+
+          <!-- Open Source card -->
+          <div class="relative overflow-hidden rounded-xl border border-white/[0.08] bg-gradient-to-br from-[#ff7e40]/[0.08] via-transparent to-[#a445ff]/[0.05] p-4">
+            <div class="absolute -top-8 -right-8 h-24 w-24 rounded-full bg-[#ff7e40]/10 blur-2xl"></div>
+            <div class="relative">
+              <div class="flex items-center gap-2.5 mb-3">
+                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04]">
+                  <svg class="h-3.5 w-3.5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </div>
+                <div>
+                  <p class="text-[13px] font-semibold text-white">Open Source</p>
+                  <p class="text-[11px] text-white/40">Apache 2.0 License</p>
+                </div>
+              </div>
+              <p class="text-[12px] text-white/50 leading-relaxed mb-3">
+                Better Flow is fully open source. Star the repo, file issues, or contribute.
+              </p>
+              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full rounded-lg bg-[#ff7e40] px-3 py-1.5 text-[12px] font-semibold text-white hover:bg-[#ff8f5a] transition-colors">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.446l-7.416 3.967 1.48-8.279L0 9.306l8.332-1.151z"/></svg>
+                Star on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+
+<style>
+  .docs-header-btn {
+    position: relative;
+    overflow: hidden;
+  }
+  .docs-header-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    height: 100%;
+    width: 60%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+    transform: skewX(-20deg);
+    pointer-events: none;
+    z-index: 2;
+    transition: left 0.6s ease;
+  }
+  .docs-header-btn:hover::before {
+    left: 120%;
+  }
+
+  .docs-search-btn {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .docs-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 126, 64, 0.2) transparent;
+  }
+  @media (min-width: 1024px) {
+    .docs-scroll {
+      height: calc(100vh - 3.5rem - 1rem) !important;
+    }
+  }
+  .docs-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  .docs-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .docs-scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 126, 64, 0.15);
+    border-radius: 9999px;
+  }
+  .docs-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 126, 64, 0.35);
+  }
+</style>
+
+<script>
+  // Search
+  const searchBtn = document.getElementById("docs-search-btn");
+  const searchPanel = document.getElementById("docs-search-panel");
+  const searchInput = document.getElementById("docs-search-input") as HTMLInputElement | null;
+  const searchResults = document.getElementById("docs-search-results");
+
+  const ALL_ITEMS = [
+    { name: "Introduction", href: "/docs" },
+    { name: "Architecture", href: "/docs/architecture" },
+    { name: "Contributing", href: "/docs/contributing" },
+    { name: "Changelog", href: "/docs/changelog" },
+  ];
+
+  let searchOpen = false;
+
+  function openSearch() {
+    searchOpen = true;
+    searchPanel?.classList.remove("hidden");
+    searchInput?.focus();
+  }
+
+  function closeSearch() {
+    searchOpen = false;
+    searchPanel?.classList.add("hidden");
+    if (searchInput) searchInput.value = "";
+    if (searchResults) searchResults.innerHTML = "";
+  }
+
+  function renderResults(query: string) {
+    if (!searchResults) return;
+    const results = query.trim()
+      ? ALL_ITEMS.filter((i) => i.name.toLowerCase().includes(query.toLowerCase()))
+      : ALL_ITEMS;
+
+    searchResults.innerHTML = results
+      .map((item) => {
+        const active = window.location.pathname === item.href;
+        return `<li><a href="${item.href}" class="flex items-center rounded-lg px-2 py-1.5 text-[13px] transition ${active ? "bg-white/[0.06] font-medium text-white/90" : "text-white/50 hover:bg-white/[0.04] hover:text-white/80"}">${item.name}</a></li>`;
+      })
+      .join("");
+
+    if (results.length === 0) {
+      searchResults.innerHTML = '<li class="px-2 py-2 text-[12px] text-white/25">No results</li>';
+    }
+  }
+
+  searchBtn?.addEventListener("click", () => {
+    if (searchOpen) closeSearch();
+    else openSearch();
+  });
+
+  searchInput?.addEventListener("input", (e) => renderResults((e.target as HTMLInputElement).value));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      searchOpen ? closeSearch() : openSearch();
+    }
+    if (e.key === "Escape") closeSearch();
+  });
+
+  // TOC generation
+  const main = document.getElementById("docs-main");
+  const tocContainer = document.getElementById("docs-toc-container");
+  const tocNav = document.getElementById("docs-toc-nav");
+
+  setTimeout(() => {
+    if (!main || !tocContainer || !tocNav) return;
+    const els = main.querySelectorAll<HTMLElement>(".docs-category-title, .docs-category-subtitle");
+    if (els.length === 0) return;
+
+    const headings: { id: string; text: string; level: number }[] = [];
+    els.forEach((el) => {
+      const text = el.textContent || "";
+      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+      if (!el.id) el.id = id;
+      headings.push({
+        id,
+        text,
+        level: el.classList.contains("docs-category-title") ? 2 : 3,
+      });
+    });
+
+    tocNav.innerHTML = headings
+      .map(
+        (h) =>
+          `<li><a href="#${h.id}" data-toc-id="${h.id}" class="block py-1 text-[12px] transition ${h.level === 3 ? "pl-5" : "pl-3"} border-l -ml-px border-transparent text-white/35 hover:text-white/60">${h.text}</a></li>`
+      )
+      .join("");
+
+    tocContainer.style.display = "block";
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            document.querySelectorAll<HTMLElement>("[data-toc-id]").forEach((a) => {
+              const isActive = a.dataset.tocId === entry.target.id;
+              a.classList.toggle("border-[#ff7e40]", isActive);
+              a.classList.toggle("text-white/70", isActive);
+              a.classList.toggle("font-medium", isActive);
+              a.classList.toggle("border-transparent", !isActive);
+              a.classList.toggle("text-white/35", !isActive);
+            });
+          }
+        });
+      },
+      { rootMargin: "-20% 0px -60% 0px" }
+    );
+
+    headings.forEach((h) => {
+      const el = document.getElementById(h.id);
+      if (el) observer.observe(el);
+    });
+
+    tocNav.querySelectorAll<HTMLAnchorElement>("a").forEach((a) => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        const id = a.dataset.tocId;
+        if (id) {
+          const el = document.getElementById(id);
+          el?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+  }, 120);
+</script>

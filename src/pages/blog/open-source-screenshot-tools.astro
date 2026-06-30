@@ -1,0 +1,136 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import BlogPostLayout from "@/app/blog/BlogPostLayout.astro";
+---
+
+<Layout
+  title="Best Open Source Screenshot Tools in 2026"
+  description="A curated list of the best open source screenshot beautifier and mockup tools. Self-hostable, no-subscription, privacy-first tools for developers and designers."
+  keywords={["open source screenshot tool", "open source screenshot beautifier", "self hosted screenshot tool", "free screenshot editor open source", "screenshot tool no subscription", "open source mockup tool", "github screenshot tool", "privacy screenshot editor 2026"]}
+  canonical="/blog/open-source-screenshot-tools"
+  article={true}
+  publishedTime="2026-06-20"
+>
+  <BlogPostLayout
+    title="Best Open Source Screenshot Tools in 2026"
+    description="Most screenshot beautifier tools are SaaS with subscriptions. Here are the best open-source alternatives you can use for free — and self-host if you need full control."
+    publishedDate="June 20, 2026"
+    readTime="5 min"
+    category="Open Source"
+  >
+    <p>
+      Most popular screenshot tools — Shots.so, Pika, Snappify — are closed-source SaaS products. They upload your screenshots to their servers, lock features behind paid plans, and can change their pricing or shut down at any time.
+    </p>
+
+    <p>
+      For developers who care about privacy, self-hosting, or just not paying a monthly subscription for basic tooling, open source alternatives are worth knowing about.
+    </p>
+
+    <h2>1. Better Flow — Full-Featured, Browser-Based</h2>
+
+    <figure>
+      <img src="/images/carousel/Horizon.webp" alt="Better Flow open source screenshot studio" loading="lazy" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,0.08);margin:0 0 12px" />
+      <figcaption>Better Flow: the most feature-complete open-source screenshot studio.</figcaption>
+    </figure>
+
+    <p>
+      <strong>License:</strong> Apache 2.0<br />
+      <strong>GitHub:</strong> <a href="https://github.com/betterspacx" target="_blank" rel="noopener noreferrer">github.com/betterspacx</a><br />
+      <strong>Self-hostable:</strong> Yes
+    </p>
+
+    <p>
+      Better Flow is the most feature-complete open-source screenshot studio available. It runs entirely in the browser — no server required for the core experience. Everything is processed locally using HTML5 Canvas, Konva.js, and FFmpeg WASM.
+    </p>
+
+    <p>Key features:</p>
+    <ul>
+      <li>Browser frames (Safari, Chrome, Arc, Polaroid, glass, outline)</li>
+      <li>100+ backgrounds (gradients, mesh, noise, paper, solids)</li>
+      <li>3D perspective transforms and depth shadows</li>
+      <li>Animation timeline with 20+ presets</li>
+      <li>Video export: MP4, WebM, GIF — all locally</li>
+      <li>4K image export (up to 5x scale)</li>
+      <li>Zero telemetry, zero uploads</li>
+    </ul>
+
+    <p>
+      The studio is built with Next.js 16 (App Router) and TypeScript. The landing page is Astro 5. You can fork either and deploy to Vercel, Cloudflare, or any static host.
+    </p>
+
+    <h2>2. Carbon — Code Screenshot Tool</h2>
+
+    <figure>
+      <img src="/images/carousel/moonrise.webp" alt="Code screenshot with syntax highlighting" loading="lazy" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,0.08);margin:0 0 12px" />
+      <figcaption>Carbon is perfect for turning code into shareable screenshots.</figcaption>
+    </figure>
+
+    <p>
+      <strong>License:</strong> MIT<br />
+      <strong>GitHub:</strong> carbon-app/carbon<br />
+      <strong>Self-hostable:</strong> Yes
+    </p>
+
+    <p>
+      Carbon is the most popular open-source tool for creating beautiful code screenshots. It supports syntax highlighting for dozens of languages, custom themes, fonts, and window styles.
+    </p>
+
+    <p>
+      Carbon doesn't do browser mockups or background beautification — it's specifically for code. Use it alongside Better Flow: Carbon for the code screenshot, Better Flow to frame and background it.
+    </p>
+
+    <h2>3. Flameshot — Desktop Screenshot with Annotations</h2>
+
+    <p>
+      <strong>License:</strong> GPL-3.0<br />
+      <strong>Platform:</strong> Linux, macOS, Windows<br />
+      <strong>Self-hostable:</strong> N/A (desktop app)
+    </p>
+
+    <p>
+      Flameshot is a desktop screenshot tool with annotation support. It's not a beautifier — it's for taking and marking up screenshots with arrows, text, and highlights. Useful for documentation and bug reports.
+    </p>
+
+    <p>
+      Combine with Better Flow: use Flameshot to capture and annotate, then bring to Better Flow to add frames and backgrounds for polished sharing.
+    </p>
+
+    <h2>Why Open Source Matters for Screenshot Tools</h2>
+
+    <figure>
+      <img src="/images/carousel/good-vibes.webp" alt="Screenshot beautified with open source tool" loading="lazy" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,0.08);margin:0 0 12px" />
+      <figcaption>Open source tools give you full control — no subscriptions, no uploads.</figcaption>
+    </figure>
+
+    <p>Three reasons to prefer open-source screenshot tools:</p>
+
+    <ul>
+      <li>
+        <strong>Privacy.</strong> Closed-source tools upload your screenshots to their servers. If your screenshots contain sensitive UI, credentials, or unreleased features, that's a risk. Better Flow processes everything locally — nothing leaves your browser.
+      </li>
+      <li>
+        <strong>Longevity.</strong> SaaS tools shut down. Dozens of screenshot tools have disappeared in the past five years. Open source tools live as long as someone can run them. You can self-host Better Flow and never worry about it being discontinued.
+      </li>
+      <li>
+        <strong>No subscription trap.</strong> Open source tools are free forever. You can fork, modify, and redistribute under the license terms. No monthly fee, no feature paywalls.
+      </li>
+    </ul>
+
+    <h2>How to Self-Host Better Flow</h2>
+
+    <p>
+      Better Flow's studio is a Next.js 16 app. To self-host:
+    </p>
+
+    <ol>
+      <li>Fork the repository at <a href="https://github.com/betterspacx" target="_blank" rel="noopener noreferrer">github.com/betterspacx</a></li>
+      <li>Install dependencies with <code>pnpm install</code></li>
+      <li>Run <code>pnpm build</code> and deploy the output to Vercel, Cloudflare Pages, or any Node.js host</li>
+      <li>All features work — video export, 4K images, everything — with no backend required</li>
+    </ol>
+
+    <p>
+      The Apache 2.0 license permits commercial use, modification, and distribution. You can self-host it for your team, your company, or integrate it into your own product.
+    </p>
+  </BlogPostLayout>
+</Layout>

@@ -1,0 +1,51 @@
+---
+import CodeBlock from "@/app/components/docs/CodeBlock.astro";
+---
+
+<section class="docs-section">
+  <span class="docs-badge">Documentation</span>
+  <h1 class="docs-category-title">Introduction</h1>
+  <p class="docs-paragraph">
+    Welcome to the <strong class="docs-highlight">Better Flow</strong> documentation. Better Flow is an open-source project made of two codebases: a marketing + community <strong class="docs-highlight">Landing Page</strong> and a full browser-based <strong class="docs-highlight">Screenshot Studio</strong>.
+  </p>
+
+  <hr class="docs-separator" />
+
+  <h2 class="docs-category-title">Tech Stack</h2>
+  <ul class="docs-list">
+    <li class="docs-list-item"><span class="docs-highlight">Framework:</span> Next.js 16 (App Router)</li>
+    <li class="docs-list-item"><span class="docs-highlight">Styling:</span> Tailwind CSS v4</li>
+    <li class="docs-list-item"><span class="docs-highlight">Animation:</span> framer-motion, GSAP, Lenis</li>
+    <li class="docs-list-item"><span class="docs-highlight">Package Manager:</span> pnpm</li>
+  </ul>
+
+  <hr class="docs-separator" />
+
+  <h2 class="docs-category-title">Quick Start</h2>
+  <p class="docs-paragraph short">Clone the repository and start the development server:</p>
+  <CodeBlock>{`git clone https://github.com/betterspacx/betterflow.git
+cd betterflow
+pnpm install
+pnpm dev`}</CodeBlock>
+
+  <hr class="docs-separator" />
+
+  <h2 class="docs-category-title">Explore the Docs</h2>
+  <ul class="docs-list">
+    <li class="docs-list-item">
+      <a href="/docs/architecture" class="docs-link">Architecture</a> — Codebase structure, routing, animation strategy, and the Screenshot Studio rendering pipeline.
+    </li>
+    <li class="docs-list-item">
+      <a href="/docs/contributing" class="docs-link">Contributing</a> — Setup, coding standards, animation conventions, and the PR workflow.
+    </li>
+    <li class="docs-list-item">
+      <a href="/docs/changelog" class="docs-link">Changelog</a> — Version history and release notes for both codebases.
+    </li>
+  </ul>
+
+  <hr class="docs-separator" />
+
+  <p class="docs-paragraph dim">
+    Better Flow is open source under the Apache 2.0 License.
+  </p>
+</section>

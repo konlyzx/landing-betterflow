@@ -1,0 +1,142 @@
+---
+const contributionIntensities = [
+  0.15, 0.75, 0.25, 0.05, 0.45, 0.85, 0.12, 0.65, 0.35, 0.95, 0.08, 0.55, 0.28, 0.72, 0.18, 0.42, 0.88, 0.06, 0.62,
+  0.32, 0.78, 0.22, 0.58, 0.92, 0.04, 0.48, 0.82, 0.16,
+];
+function cellBg(intensity: number) {
+  if (intensity > 0.7) return "rgba(201,212,255,0.35)";
+  if (intensity > 0.4) return "rgba(201,212,255,0.2)";
+  if (intensity > 0.1) return "rgba(201,212,255,0.08)";
+  return "rgba(255,255,255,0.04)";
+}
+---
+
+<section class="relative z-10 px-4 py-12" id="privacy">
+  <div class="mx-auto max-w-[1324px]">
+    <div class="posm-reveal mb-6">
+      <h2 class="text-xl font-medium tracking-tight text-white">Privacy & Open Source</h2>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <!-- Local-First -->
+      <div class="posm-card flex flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-[rgba(18,15,23,0.45)] backdrop-blur-xl">
+        <div class="relative flex h-[120px] w-full items-center justify-center overflow-hidden">
+          <div class="relative flex h-full w-full items-center justify-center p-3">
+            <div class="relative h-[90px] w-[140px] overflow-hidden rounded-lg border border-white/[0.08] bg-[#0c0c0e]">
+              <div class="flex h-4 items-center gap-1 border-b border-white/[0.06] px-1.5"><div class="h-1.5 w-1.5 rounded-full bg-white/10"></div><div class="h-1.5 w-1.5 rounded-full bg-white/10"></div><div class="h-1.5 w-1.5 rounded-full bg-white/10"></div></div>
+              <div class="flex h-[calc(100%-16px)] flex-col items-center justify-center gap-1">
+                <div class="flex h-8 w-8 items-center justify-center rounded-full border border-[#c9d4ff]/20 bg-[#c9d4ff]/10"><svg class="h-4 w-4 text-[#c9d4ff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+                <span class="font-mono text-[8px] text-white/40">localhost</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-white/[0.04] p-3"><h3 class="mb-1 text-sm font-semibold text-white">Local-First Processing</h3><p class="text-xs leading-relaxed text-white/50">All image processing happens directly in your browser. No server uploads, no cloud dependencies.</p></div>
+      </div>
+
+      <!-- Zero Telemetry -->
+      <div class="posm-card flex flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-[rgba(18,15,23,0.45)] backdrop-blur-xl">
+        <div class="relative flex h-[120px] w-full items-center justify-center overflow-hidden">
+          <div class="relative flex h-full w-full items-center justify-center p-3">
+            <div class="flex flex-col items-center gap-2">
+              <div class="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03]">
+                <svg class="h-5 w-5 text-[#71717a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path><line x1="2" x2="22" y1="2" y2="22"></line></svg>
+                <div class="absolute -top-0.5 -right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full border border-[#c9d4ff]/30 bg-[#c9d4ff]/20"><span class="text-[6px] font-bold text-[#c9d4ff]">0</span></div>
+              </div>
+              <div class="flex gap-1.5">
+                {["Cookie", "Pixel", "Beacon"].map((label) => (<div class="flex items-center gap-0.5 rounded border border-white/[0.06] bg-white/[0.03] px-1.5 py-0.5"><span class="font-mono text-[7px] text-white/30 line-through">{label}</span></div>))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-white/[0.04] p-3"><h3 class="mb-1 text-sm font-semibold text-white">Zero Telemetry</h3><p class="text-xs leading-relaxed text-white/50">No tracking pixels, no analytics cookies, no usage data collection. We literally know nothing.</p></div>
+      </div>
+
+      <!-- Apache 2.0 -->
+      <div class="posm-card flex flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-[rgba(18,15,23,0.45)] backdrop-blur-xl">
+        <div class="relative flex h-[120px] w-full items-center justify-center overflow-hidden">
+          <div class="relative flex h-full w-full items-center justify-center p-3">
+            <div class="flex flex-col items-center gap-2">
+              <div class="rounded-lg border border-[#c9d4ff]/20 bg-[#c9d4ff]/10 px-3 py-1.5"><span class="text-[10px] font-semibold tracking-wider text-[#c9d4ff]">APACHE 2.0</span></div>
+              <div class="w-full max-w-[120px] space-y-1">
+                {["Use", "Modify", "Distribute", "Private"].map((item) => (
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-10 text-right font-mono text-[7px] text-white/40">{item}</span>
+                    <div class="h-1 flex-1 rounded-full bg-white/[0.04]"><div class="h-full w-full rounded-full bg-[#c9d4ff]/40"></div></div>
+                    <svg class="h-2.5 w-2.5 text-[#c9d4ff]/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"></path></svg>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-white/[0.04] p-3"><h3 class="mb-1 text-sm font-semibold text-white">Apache 2.0</h3><p class="text-xs leading-relaxed text-white/50">Patent-protected open source. Use it, modify it, ship it. Commercial use fully permitted.</p></div>
+      </div>
+
+      <!-- Community Driven -->
+      <div class="posm-card flex flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-[rgba(18,15,23,0.45)] backdrop-blur-xl">
+        <div class="relative flex h-[120px] w-full items-center justify-center overflow-hidden">
+          <div class="relative flex h-full w-full items-center justify-center p-3">
+            <div class="flex flex-col items-center gap-2">
+              <div class="grid grid-cols-7 gap-[2px]">{contributionIntensities.map((intensity) => (<div class="h-[8px] w-[8px] rounded-[2px]" style={`background:${cellBg(intensity)}`}></div>))}</div>
+              <div class="mt-1 flex items-center gap-1"><svg class="h-2.5 w-2.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg><span class="font-mono text-[8px] text-white/30">Open for contributions</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-white/[0.04] p-3"><h3 class="mb-1 text-sm font-semibold text-white">Community Driven</h3><p class="text-xs leading-relaxed text-white/50">Open source and open for contributions. Transparent roadmap on GitHub.</p></div>
+      </div>
+
+      <!-- Auditable Code -->
+      <div class="posm-card flex flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-[rgba(18,15,23,0.45)] backdrop-blur-xl">
+        <div class="relative flex h-[120px] w-full items-center justify-center overflow-hidden">
+          <div class="relative flex h-full w-full items-center justify-center p-3">
+            <div class="w-[160px] overflow-hidden rounded-lg border border-white/[0.06] bg-[#0c0c0e] font-mono text-[8px]">
+              <div class="flex items-center gap-1 border-b border-white/[0.06] px-1.5 py-1"><div class="h-1.5 w-1.5 rounded-full bg-white/10"></div><span class="text-white/20">config.ts</span></div>
+              <div class="space-y-0.5 p-2">
+                <div><span class="text-[#7b9cda]">export</span> <span class="text-[#c9d4ff]">default</span> <span class="text-white/50">{"{"}</span></div>
+                <div class="pl-2"><span class="text-white/60">privacy</span><span class="text-white/30">:</span> <span class="text-[#c9d4ff]">true</span><span class="text-white/30">,</span></div>
+                <div class="pl-2"><span class="text-white/60">telemetry</span><span class="text-white/30">:</span> <span class="text-[#ff7e40]">false</span><span class="text-white/30">,</span></div>
+                <div class="pl-2"><span class="text-white/60">local</span><span class="text-white/30">:</span> <span class="text-[#c9d4ff]">true</span><span class="text-white/30">,</span></div>
+                <div><span class="text-white/50">{"}"}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-white/[0.04] p-3"><h3 class="mb-1 text-sm font-semibold text-white">Auditable Code</h3><p class="text-xs leading-relaxed text-white/50">Every line is public. No hidden tracking, no proprietary black boxes. Verify everything.</p></div>
+      </div>
+
+      <!-- Code Stats -->
+      <div class="posm-card flex flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-[rgba(18,15,23,0.45)] backdrop-blur-xl">
+        <div class="relative flex h-[120px] w-full items-center justify-center overflow-hidden">
+          <div class="relative flex h-full w-full items-center justify-center p-3">
+            <div class="flex w-full max-w-[160px] flex-col gap-2">
+              <div class="flex items-center justify-between"><span class="font-mono text-[8px] text-white/30">TS</span><div class="mx-1.5 h-1 flex-1 rounded-full bg-white/[0.04]"><div class="h-full rounded-full bg-[#c9d4ff]/40" style="width:85%"></div></div><span class="font-mono text-[8px] text-white/30">85%</span></div>
+              <div class="flex items-center justify-between"><span class="font-mono text-[8px] text-white/30">CSS</span><div class="mx-1.5 h-1 flex-1 rounded-full bg-white/[0.04]"><div class="h-full rounded-full bg-[#f5d4e8]/40" style="width:15%"></div></div><span class="font-mono text-[8px] text-white/30">15%</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-white/[0.04] p-3"><h3 class="mb-1 text-sm font-semibold text-white">Code Stats</h3><p class="text-xs leading-relaxed text-white/50">TypeScript-first codebase. Transparent architecture you can audit, extend, and trust.</p></div>
+      </div>
+    </div>
+
+    <div class="posm-reveal mt-6 flex items-center justify-center">
+      <a href="https://github.com/betterspacx" target="_blank" rel="noopener noreferrer" class="font-regular inline-flex items-center gap-2 rounded-lg bg-[linear-gradient(110deg,#c9d4ff_0%,#e0d4ff_45%,#f5d4e8_100%)] px-4 py-2 text-xs text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(80,60,120,0.15)] transition-all hover:brightness-105">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+        View on GitHub
+        <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll<HTMLElement>(".posm-reveal").forEach((el) => {
+    gsap.fromTo(el, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 92%" } });
+  });
+  gsap.utils.toArray<HTMLElement>(".posm-card").forEach((el, i) => {
+    gsap.fromTo(el, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, delay: i * 0.06, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 92%" } });
+  });
+</script>

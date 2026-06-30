@@ -1,0 +1,51 @@
+---
+import "@/styles/globals.css";
+import "@fontsource/geist-sans/400.css";
+import "@fontsource/geist-sans/500.css";
+import "@fontsource/geist-sans/600.css";
+import "@fontsource/geist-sans/700.css";
+import "@fontsource/geist-sans/800.css";
+import "@fontsource/geist-mono/400.css";
+import "@fontsource/geist-mono/500.css";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = "Documentation — Better Flow Screenshot Studio",
+  description = "Better Flow documentation. Learn how to use the free open-source screenshot beautifier.",
+  keywords = ["better flow docs", "screenshot studio documentation"],
+  canonical = Astro.url.pathname,
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = "https://betterflow.site";
+const canonicalUrl = new URL(canonical === "/" ? "" : canonical, siteUrl).href;
+---
+
+<!doctype html>
+<html lang="en" class="h-full antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="theme-color" content="#0b0b0c" />
+    <meta name="color-scheme" content="dark" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(", ")} />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="shortcut icon" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <slot name="head" />
+  </head>
+  <body class="bg-[#0b0b0c] text-[#f4f4f5]">
+    <slot />
+  </body>
+</html>

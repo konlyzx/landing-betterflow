@@ -1,0 +1,61 @@
+---
+import LoadingScreen from "./components/LoadingScreen.astro";
+import TopGlow from "./components/TopGlow.astro";
+import Navbar from "./components/Navbar.astro";
+import Footer from "./components/Footer.astro";
+import FooterMobile from "./components/mobile/FooterMobile.astro";
+import Hero from "./sections/Hero.astro";
+import Features from "./sections/Features.astro";
+import LiveDemo from "./sections/LiveDemo.astro";
+import Privacy from "./sections/Privacy.astro";
+import RoadmapSection from "./sections/RoadmapSection.astro";
+import CTA from "./sections/CTA.astro";
+import HeroMobile from "./sections/mobile/HeroMobile.astro";
+import FeaturesMobile from "./sections/mobile/FeaturesMobile.astro";
+import LiveDemoMobile from "./sections/mobile/LiveDemoMobile.astro";
+import PrivacyMobile from "./sections/mobile/PrivacyMobile.astro";
+import RoadmapSectionMobile from "./sections/mobile/RoadmapSectionMobile.astro";
+import FAQ from "./sections/FAQ.astro";
+import CTAMobile from "./sections/mobile/CTAMobile.astro";
+import BottomGlow from "./components/BottomGlow.astro";
+import QuickNav from "./components/QuickNav.astro";
+---
+
+<main class="relative min-h-screen bg-[#0b0b0c]">
+
+  <TopGlow />
+
+  <!-- Navbar renders once for both breakpoints (fixed position handles visibility) -->
+  <Navbar />
+
+  <div class="hidden md:block">
+    <Hero />
+    <!-- Apple-style gradient transition -->
+    <div class="relative z-10" style="background:linear-gradient(180deg, #0b0b0c 0%, #0e0d11 15%, #0d0b12 40%, #0b0b0c 70%, #0b0b0c 100%)">
+      <LiveDemo />
+      <Features />
+      <Privacy />
+      <RoadmapSection />
+      <FAQ />
+      <CTA />
+    </div>
+    <div class="relative z-10" style="background:linear-gradient(180deg, #0b0b0c 0%, #08080a 50%, #050506 100%)">
+      <Footer />
+    </div>
+  </div>
+
+  <div class="md:hidden">
+    <HeroMobile />
+    <LiveDemoMobile />
+    <FeaturesMobile />
+    <PrivacyMobile />
+    <RoadmapSectionMobile />
+    <FAQ />
+    <CTAMobile />
+    <FooterMobile />
+  </div>
+
+  <QuickNav />
+  <BottomGlow />
+</main>
+

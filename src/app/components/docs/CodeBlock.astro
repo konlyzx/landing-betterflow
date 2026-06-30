@@ -1,0 +1,33 @@
+---
+const text = await Astro.slots.render("default");
+---
+
+<div class="docs-code">
+  <div class="docs-code-header">
+    <button class="docs-copy-button" aria-label="Copy code">
+      <svg class="copy-icon h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      <svg class="check-icon hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </button>
+  </div>
+  <pre class="docs-pre"><code set:html={text}></code></pre>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".docs-code").forEach((block) => {
+    const btn = block.querySelector<HTMLButtonElement>(".docs-copy-button");
+    const code = block.querySelector<HTMLElement>("code");
+    const copyIcon = block.querySelector<HTMLElement>(".copy-icon");
+    const checkIcon = block.querySelector<HTMLElement>(".check-icon");
+    btn?.addEventListener("click", () => {
+      navigator.clipboard.writeText((code?.textContent || "").trim());
+      copyIcon?.classList.add("hidden");
+      checkIcon?.classList.remove("hidden");
+      btn.setAttribute("aria-label", "Copied!");
+      setTimeout(() => {
+        copyIcon?.classList.remove("hidden");
+        checkIcon?.classList.add("hidden");
+        btn.setAttribute("aria-label", "Copy code");
+      }, 2000);
+    });
+  });
+</script>

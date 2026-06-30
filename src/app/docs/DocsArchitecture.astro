@@ -1,0 +1,172 @@
+---
+import CodeBlock from "@/app/components/docs/CodeBlock.astro";
+
+const routes = [
+  ["/", "Main landing page with responsive desktop/mobile variants"],
+  ["/mobile", "Dedicated mobile route duplicating the landing page"],
+  ["/community", "Community page with Manifesto, Contribution Flow, Open Source ethos, Activity, Integrations, CTA"],
+  ["/docs", "Documentation (this site)"],
+];
+
+const animations = [
+  ["framer-motion", "UI entrances, hover effects, stagger children, whileInView triggers"],
+  ["GSAP + ScrollTrigger", "Pinned scrolling sections, parallax, scrub-based animations"],
+  ["Lenis", "Smooth scroll engine for the entire page"],
+];
+
+const communitySections = [
+  ["Hero", "Framer Motion, CSS gradients, Shapes3D"],
+  ["Manifesto", "ScrollStack (React Bits), SpotlightCard"],
+  ["OpenSource", "Framer Motion stagger, SpotlightCard"],
+  ["Activity", "Framer Motion, SpotlightCard"],
+  ["ContributionFlow", "SpotlightCard (mouse-tracking)"],
+  ["Integrations", "Animated SVG, SpotlightCard"],
+  ["CTA", "Aurora canvas, GSAP, Shapes3D"],
+];
+---
+
+<section class="docs-section">
+  <h1 class="docs-category-title">Architecture</h1>
+  <p class="docs-paragraph">
+    Better Flow consists of two separate codebases: the <strong class="docs-highlight">Landing Page</strong> (marketing + community site) and the <strong class="docs-highlight">Screenshot Studio</strong> (full canvas editor). This document covers the architecture of both.
+  </p>
+
+  <hr class="docs-separator" />
+
+  <h2 class="docs-category-title">Landing Page (<code class="docs-highlight">web</code>)</h2>
+
+  <h3 class="docs-category-subtitle">Overview</h3>
+  <p class="docs-paragraph">
+    A Next.js 16 App Router site with no server components — every route and component uses <code class="docs-highlight">"use client"</code>. The site serves as both a marketing landing page and a community hub.
+  </p>
+
+  <h3 class="docs-category-subtitle">Routing</h3>
+  <div class="docs-code" style="margin-bottom: 1.8em;">
+    <pre class="docs-pre" style="padding: 0; overflow: hidden;">
+      <table>
+        <thead>
+          <tr>
+            <th class="docs-highlight" style="font-size: 13px; text-align: left; padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-primary);">Route</th>
+            <th class="docs-highlight" style="font-size: 13px; text-align: left; padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-primary);">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {routes.map(([route, desc]) => (
+            <tr>
+              <td style="padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-secondary); font-size: 14px;"><code class="docs-highlight">{route}</code></td>
+              <td style="padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-secondary); font-size: 14px; color: var(--bf-text-secondary);">{desc}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </pre>
+  </div>
+
+  <h3 class="docs-category-subtitle">Component Architecture</h3>
+  <CodeBlock>{`app/
+├── page.tsx               # Main landing
+├── mobile/page.tsx        # Mobile route
+├── community/page.tsx     # Community route
+├── docs/                  # Documentation
+├── components/
+│   ├── community/         # Community page sections
+│   ├── mobile/            # Mobile variants
+│   ├── ui/                # ScrollStack, SpotlightCard, etc.
+│   ├── Navbar.tsx         # Shared navigation
+│   └── Footer.tsx         # Shared footer
+├── sections/              # Landing page sections
+└── hooks/                 # Custom hooks`}</CodeBlock>
+
+  <h3 class="docs-category-subtitle">Animation Architecture</h3>
+  <div class="docs-code" style="margin-bottom: 1.8em;">
+    <pre class="docs-pre" style="padding: 0; overflow: hidden;">
+      <table>
+        <thead>
+          <tr>
+            <th class="docs-highlight" style="font-size: 13px; text-align: left; padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-primary);">Library</th>
+            <th class="docs-highlight" style="font-size: 13px; text-align: left; padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-primary);">Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          {animations.map(([lib, purpose]) => (
+            <tr>
+              <td style="padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-secondary); font-size: 14px; color: var(--bf-text-secondary);"><strong class="docs-highlight">{lib}</strong></td>
+              <td style="padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-secondary); font-size: 14px; color: var(--bf-text-secondary);">{purpose}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </pre>
+  </div>
+
+  <h3 class="docs-category-subtitle">UI Component Patterns</h3>
+  <ul class="docs-list">
+    <li class="docs-list-item"><span class="docs-highlight">Card Style:</span> <code class="docs-highlight">rgba(18, 15, 23, 0.45)</code> background, <code class="docs-highlight">backdropFilter: blur(32px) saturate(1.3)</code>, <code class="docs-highlight">1px solid rgba(255, 255, 255, 0.08)</code> border</li>
+    <li class="docs-list-item"><span class="docs-highlight">Typography:</span> Dark theme with white text, secondary <code class="docs-highlight">#a1a1aa</code>, tertiary <code class="docs-highlight">#71717a</code></li>
+    <li class="docs-list-item"><span class="docs-highlight">Brand Colors:</span> Orange <code class="docs-highlight">#ff7e40</code>, Pink <code class="docs-highlight">#ff4b72</code>, Purple <code class="docs-highlight">#a445ff</code></li>
+    <li class="docs-list-item"><span class="docs-highlight">Buttons:</span> Glass-style with subtle borders, glow gradient buttons for primary CTAs</li>
+  </ul>
+
+  <h3 class="docs-category-subtitle">Community Page Sections</h3>
+  <div class="docs-code" style="margin-bottom: 1.8em;">
+    <pre class="docs-pre" style="padding: 0; overflow: hidden;">
+      <table>
+        <thead>
+          <tr>
+            <th class="docs-highlight" style="font-size: 13px; text-align: left; padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-primary);">Section</th>
+            <th class="docs-highlight" style="font-size: 13px; text-align: left; padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-primary);">Key Tech</th>
+          </tr>
+        </thead>
+        <tbody>
+          {communitySections.map(([section, tech]) => (
+            <tr>
+              <td style="padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-secondary); font-size: 14px; color: var(--bf-text-secondary);"><strong class="docs-highlight">{section}</strong></td>
+              <td style="padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-secondary); font-size: 14px; color: var(--bf-text-secondary);">{tech}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </pre>
+  </div>
+
+  <hr class="docs-separator" />
+
+  <h2 class="docs-category-title">Screenshot Studio (<code class="docs-highlight">better-flow</code>)</h2>
+
+  <h3 class="docs-category-subtitle">Overview</h3>
+  <p class="docs-paragraph">
+    A full browser-based screenshot editor using Next.js 16 with React 19. Canvas rendering via Konva, video export via FFmpeg WASM, state management via Zustand with undo/redo.
+  </p>
+
+  <h3 class="docs-category-subtitle">Canvas Rendering Architecture</h3>
+  <p class="docs-paragraph">
+    The editor uses a <strong class="docs-highlight">dual rendering approach</strong>:
+  </p>
+  <ul class="docs-list">
+    <li class="docs-list-item"><span class="docs-highlight">HTML/CSS Layer</span> — Backgrounds, shadows, borders, text overlays, annotations (styled with Tailwind)</li>
+    <li class="docs-list-item"><span class="docs-highlight">Konva Canvas Layer</span> — Main image rendering, overlays, and 3D perspective transforms</li>
+  </ul>
+
+  <h3 class="docs-category-subtitle">State Management</h3>
+  <p class="docs-paragraph">
+    Dual Zustand store pattern: <strong class="docs-highlight">useImageStore</strong> (image source, processing, upload, undo/redo via zundo) and <strong class="docs-highlight">useEditorStore</strong> (all editor settings — background, border, shadow, 3D, text, annotations).
+  </p>
+
+  <h3 class="docs-category-subtitle">Export Pipeline</h3>
+  <p class="docs-paragraph">
+    4-stage compositing: HTML Render → Konva Render → Composite → Encode. Supports PNG/JPG for images, FFmpeg WASM / WebCodecs / MediaRecorder for video.
+  </p>
+
+  <h3 class="docs-category-subtitle">Animation System</h3>
+  <ul class="docs-list">
+    <li class="docs-list-item">20+ presets in 5 categories (Fade, Slide, Scale, Rotate, Complex)</li>
+    <li class="docs-list-item">Timeline Editor with keyframe markers, playhead, ruler, and track controls</li>
+    <li class="docs-list-item">Interpolation engine supporting linear, ease, ease-in, ease-out, ease-in-out, and custom cubic beziers</li>
+  </ul>
+
+  <hr class="docs-separator" />
+
+  <p class="docs-paragraph dim">
+    See the <a href="/docs/contributing" class="docs-link">Contributing</a> guide for development setup and standards. Full changelog available <a href="/docs/changelog" class="docs-link">here</a>.
+  </p>
+</section>

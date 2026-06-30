@@ -1,0 +1,349 @@
+---
+const stylePresets = [
+  { value: "default", label: "Default" },
+  { value: "glass-light", label: "Glass Light" },
+  { value: "glass-dark", label: "Glass Dark" },
+  { value: "outline", label: "Outline" },
+  { value: "border-light", label: "Border" },
+  { value: "border-dark", label: "Border Dark" },
+];
+const borderPresets = [
+  { value: 0, label: "Sharp" },
+  { value: 12, label: "Curved" },
+  { value: 20, label: "Round" },
+];
+const shadowPresets = [
+  { value: "hug", label: "Hug", shadow: "rgba(0,0,0,0.2) 0px 2px 12px 0px, rgba(0,0,0,0.14) 0px 1px 4px 0px" },
+  { value: "soft", label: "Soft", shadow: "rgba(0,0,0,0.28) 0px 12px 48px 0px, rgba(0,0,0,0.18) 0px 4px 12px 0px" },
+  { value: "strong", label: "Strong", shadow: "rgba(0,0,0,0.45) 0px 24px 80px 0px, rgba(0,0,0,0.3) 0px 8px 24px 0px" },
+  { value: "none", label: "None", shadow: "none" },
+];
+const bgGradient = "linear-gradient(135deg, rgb(255, 100, 50) 12.8%, rgb(255, 0, 101) 43.52%, rgb(123, 46, 255) 84.34%)";
+const miniGrads = [
+  "linear-gradient(135deg, rgb(255, 100, 50), rgb(255, 0, 101), rgb(123, 46, 255))",
+  "linear-gradient(135deg, rgb(255, 177, 122), rgb(233, 107, 189), rgb(123, 79, 255))",
+  "linear-gradient(135deg, rgb(0, 255, 229), rgb(75, 108, 255), rgb(156, 31, 217))",
+  "linear-gradient(135deg, rgb(255, 184, 107), rgb(255, 69, 133), rgb(47, 28, 150))",
+  "linear-gradient(135deg, rgb(71, 246, 132), rgb(0, 184, 169), rgb(24, 78, 104))",
+  "linear-gradient(135deg, rgb(255, 97, 230), rgb(255, 51, 51), rgb(255, 184, 0))",
+];
+const tabs = [
+  { id: "frame", label: "Frame", icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>' },
+  { id: "background", label: "BG", icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>' },
+  { id: "transforms", label: "3D", icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 12"></path><path d="M21 3v9h-9"></path></svg>' },
+  { id: "animate", label: "Motion", icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>' },
+];
+
+function wrapperStyle(preset: string) {
+  switch (preset) {
+    case "glass-light": return "background:rgba(255,255,255,0.3);padding:3px;border-radius:7px";
+    case "glass-dark": return "background:rgba(0,0,0,0.35);padding:3px;border-radius:7px";
+    case "outline": return "background:rgba(255,255,255,0.4);padding:2px;border-radius:7px";
+    case "border-light": return "background:rgb(255,255,255);padding:4px;border-radius:8px";
+    case "border-dark": return "background:rgb(30,30,30);padding:4px;border-radius:8px";
+    default: return "";
+  }
+}
+---
+
+<div class="spm flex w-full flex-col overflow-hidden rounded-[20px] border border-white/[0.06] bg-[#0c0c0e] shadow-[0_24px_80px_rgba(0,0,0,0.7)] select-none" style="height:580px">
+  <!-- Toolbar -->
+  <div class="flex shrink-0 items-center gap-2 border-b border-white/[0.04] bg-[#0a0a0c] px-3 py-2">
+    <div class="flex h-9 flex-1 items-center rounded-lg border border-white/[0.06] bg-[#141416] px-1">
+      <div class="flex h-8 w-8 items-center justify-center rounded-lg"><img src="/logo.svg" alt="Logo" class="h-5 w-5" /></div>
+      <div class="mx-1 h-5 w-px bg-white/[0.06]"></div>
+      <button class="flex h-8 flex-1 items-center justify-center gap-2 rounded-lg px-3">
+        <svg width="14" height="14" class="text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+        <span class="text-[12px] font-medium text-white/80">Templates</span>
+        <svg width="12" height="12" class="ml-1 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
+      </button>
+    </div>
+    <div class="flex h-9 items-center rounded-lg border border-white/[0.1] bg-white px-1">
+      <button class="flex h-8 items-center gap-2 rounded-lg px-3 text-[11px] font-medium text-black"><span class="font-semibold">Export</span><span class="text-[10px] opacity-60">1x · PNG</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"></path></svg></button>
+    </div>
+  </div>
+
+  <!-- Canvas -->
+  <div class="relative min-h-0 flex-1 shrink-0 p-4" style={`background:${bgGradient}`}>
+    <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_60%,transparent_100%)] bg-[size:2rem_2rem]"></div>
+    <div class="spm-frame relative flex h-full w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-xl border border-white/[0.08] bg-black/20 shadow-2xl backdrop-blur-sm" style="padding:12px">
+      <div class="spm-preview h-full w-full overflow-hidden rounded-xl transition-all duration-300" style={`background:${bgGradient};border-radius:12px;box-shadow:rgba(0,0,0,0.28) 0px 12px 48px 0px, rgba(0,0,0,0.18) 0px 4px 12px 0px`}>
+        <div class="flex h-full w-full items-center justify-center">
+          <div class="mt-5 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 text-white/40"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg></div>
+        </div>
+      </div>
+      <div class="pointer-events-none absolute inset-0 mb-25 flex flex-col items-center justify-center gap-3">
+        <div class="space-y-1 text-center">
+          <p class="text-[13px] font-medium text-white/70">Drag & drop, click to browse, or paste</p>
+          <div class="flex items-center justify-center gap-1.5"><span class="rounded border border-white/10 bg-white/10 px-1.5 py-0.5 font-mono text-[10px] text-white/50">⌘V</span><span class="text-[11px] text-white/40">to paste</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="shrink-0 border-b border-white/[0.06] px-2.5 py-2.5">
+    <div class="flex gap-1 rounded-lg border border-white/10 bg-[#2c2c2e]/50 p-0.5">
+      {tabs.map((tab, i) => (
+        <button class="spm-tab flex items-center justify-center rounded-md px-2 py-2 transition-all duration-300" data-tab={tab.id} class:list={[i === 0 ? "spm-tab-active flex-[1.8] bg-[#3a3a3c] text-white shadow-sm" : "flex-1 text-white/40 hover:text-white/70"]}>
+          <span class="shrink-0" set:html={tab.icon}></span>
+          <span class={`spm-tab-label overflow-hidden text-[11px] font-medium whitespace-nowrap transition-all duration-300 ${i === 0 ? "ml-1.5 max-w-[60px] opacity-100" : "ml-0 max-w-0 opacity-0"}`}>{tab.label}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Panels -->
+  <div class="hide-scrollbar min-h-0 flex-1 overflow-y-auto">
+    <div class="space-y-5 p-4">
+      <!-- Frame panel -->
+      <div class="spm-panel" data-panel="frame">
+        <div class="space-y-2">
+          <span class="text-[10px] font-medium tracking-wide text-white/40 uppercase">Templates</span>
+          <div class="grid grid-cols-2 gap-2">
+            {miniGrads.map((grad, i) => (
+              <div class={`aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-xl border-2 transition-all ${i === 0 ? "border-white/60" : "border-transparent hover:border-white/20"}`}><div class="h-full w-full" style={`background:${grad}`}></div></div>
+            ))}
+          </div>
+        </div>
+        <div class="mt-5">
+          <span class="text-[10px] font-medium tracking-wide text-white/40 uppercase">Border Presets</span>
+          <div class="mt-2 grid grid-cols-3 gap-2">
+            {borderPresets.map((p) => (
+              <button class="spm-border-preset flex flex-col items-center gap-1.5" data-radius={p.value}>
+                <div class={`spm-border-prev relative aspect-square w-full overflow-hidden rounded-xl transition-all ${p.value === 12 ? "ring-2 ring-white/60" : "ring-1 ring-white/10"}`} style="background-color:rgb(45, 45, 50)">
+                  <div class="absolute" style="top:19.5%;left:19.5%;width:95.5%;height:95.5%"><div class="h-full w-full bg-gradient-to-br from-white to-gray-100 shadow-sm" style={`border-radius:${p.value === 0 ? "0px" : p.value === 12 ? "6px" : "12px"}`}></div></div>
+                </div>
+                <span class={`spm-border-label text-[10px] ${p.value === 12 ? "text-white" : "text-white/30"}`}>{p.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        <div class="space-y-3 pt-4">
+          <div class="spm-slider space-y-1.5" data-target="radius" data-min="0" data-max="50" data-suffix="px">
+            <div class="flex items-center justify-between"><span class="text-[10px] text-white/50">Border Radius</span><span class="spm-slider-val font-mono text-[10px] text-white/70">12px</span></div>
+            <div class="relative flex h-4 w-full items-center"><div class="absolute inset-x-0 h-[3px] rounded-full bg-white/[0.08]"></div><div class="spm-slider-fill absolute left-0 h-[3px] rounded-full bg-white/30" style="width:24%"></div><input type="range" min="0" max="50" step="1" value="12" class="spm-slider-input absolute inset-0 h-full w-full cursor-pointer opacity-0" /><div class="spm-slider-knob pointer-events-none absolute h-3 w-3 rounded-full bg-white shadow" style="left:calc(24% - 6px)"></div></div>
+          </div>
+          <div class="spm-slider space-y-1.5" data-target="padding" data-min="0" data-max="80" data-suffix="px">
+            <div class="flex items-center justify-between"><span class="text-[10px] text-white/50">Padding</span><span class="spm-slider-val font-mono text-[10px] text-white/70">24px</span></div>
+            <div class="relative flex h-4 w-full items-center"><div class="absolute inset-x-0 h-[3px] rounded-full bg-white/[0.08]"></div><div class="spm-slider-fill absolute left-0 h-[3px] rounded-full bg-white/30" style="width:30%"></div><input type="range" min="0" max="80" step="1" value="24" class="spm-slider-input absolute inset-0 h-full w-full cursor-pointer opacity-0" /><div class="spm-slider-knob pointer-events-none absolute h-3 w-3 rounded-full bg-white shadow" style="left:calc(30% - 6px)"></div></div>
+          </div>
+          <div class="spm-slider space-y-1.5" data-target="scale" data-min="50" data-max="150" data-suffix="%">
+            <div class="flex items-center justify-between"><span class="text-[10px] text-white/50">Scale</span><span class="spm-slider-val font-mono text-[10px] text-white/70">100%</span></div>
+            <div class="relative flex h-4 w-full items-center"><div class="absolute inset-x-0 h-[3px] rounded-full bg-white/[0.08]"></div><div class="spm-slider-fill absolute left-0 h-[3px] rounded-full bg-white/30" style="width:50%"></div><input type="range" min="50" max="150" step="1" value="100" class="spm-slider-input absolute inset-0 h-full w-full cursor-pointer opacity-0" /><div class="spm-slider-knob pointer-events-none absolute h-3 w-3 rounded-full bg-white shadow" style="left:calc(50% - 6px)"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Background panel -->
+      <div class="spm-panel hidden space-y-5" data-panel="background">
+        <div>
+          <span class="text-[10px] font-medium tracking-wide text-white/40 uppercase">Style Presets</span>
+          <div class="mt-2 grid grid-cols-3 gap-2">
+            {stylePresets.map((p) => {
+              const isDark = p.value === "glass-dark" || p.value === "border-dark";
+              const outerBg = isDark ? "rgb(60, 60, 65)" : "rgb(45, 45, 50)";
+              const hasWrapper = p.value !== "default";
+              return (
+                <button class="spm-style-preset flex flex-col items-center gap-1.5" data-style={p.value}>
+                  <div class={`spm-style-prev relative aspect-square w-full overflow-hidden rounded-xl transition-all ${p.value === "default" ? "ring-2 ring-white/60" : "ring-1 ring-white/10"}`} style={`background-color:${outerBg}`}>
+                    <div class="absolute" style="top:19.5%;left:19.5%;width:95.5%;height:95.5%">
+                      {hasWrapper ? (
+                        <div class="h-full w-full" style={wrapperStyle(p.value)}><div class="h-full w-full rounded-[6px] bg-gradient-to-br from-white to-gray-100 shadow-sm"></div></div>
+                      ) : (
+                        <div class="h-full w-full rounded-[8px] bg-gradient-to-br from-white to-gray-100 shadow-sm"></div>
+                      )}
+                    </div>
+                  </div>
+                  <span class={`spm-style-label text-[10px] ${p.value === "default" ? "text-white" : "text-white/30"}`}>{p.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <div>
+          <span class="text-[10px] font-medium tracking-wide text-white/40 uppercase">Shadow Presets</span>
+          <div class="mt-2 grid grid-cols-2 gap-2">
+            {shadowPresets.map((p) => (
+              <button class="spm-shadow-preset flex flex-col items-center gap-1.5" data-shadow={p.value} data-shadowval={p.shadow}>
+                <div class={`spm-shadow-prev relative aspect-square w-full overflow-hidden rounded-xl transition-all ${p.value === "soft" ? "ring-2 ring-white/60" : "ring-1 ring-white/10"}`} style="background-color:rgb(45, 45, 50)">
+                  <div class="absolute rounded-[10px] bg-gradient-to-br from-white to-gray-100" style={`top:26%;left:26%;width:95%;height:95%;box-shadow:${p.shadow}`}></div>
+                </div>
+                <span class={`spm-shadow-label text-[10px] ${p.value === "soft" ? "text-white" : "text-white/30"}`}>{p.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2"><span class="text-[10px] font-medium tracking-wide text-white/40 uppercase">Gradients</span><div class="h-px flex-1 bg-white/5"></div></div>
+          <div class="grid grid-cols-3 gap-2">
+            {miniGrads.map((grad, i) => (<div class={`aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-xl border-2 transition-all ${i === 0 ? "border-white/60" : "border-transparent hover:border-white/20"}`}><div class="h-full w-full" style={`background:${grad}`}></div></div>))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Transforms panel -->
+      <div class="spm-panel hidden space-y-4" data-panel="transforms">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2 text-[11px] font-medium text-white/60"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>3D Transform</div>
+          <div class="relative h-5 w-9 rounded-full bg-white/30 transition-colors"><div class="absolute top-[2px] left-[18px] h-4 w-4 rounded-full bg-white shadow"></div></div>
+        </div>
+        <div class="flex gap-1 rounded-lg border border-white/10 bg-white/[0.03] p-0.5">
+          <button class="spm-seg flex-1 rounded-md px-2 py-1.5 text-[11px] font-medium transition-all bg-white/10 text-white" data-seg="zoom">Zoom</button>
+          <button class="spm-seg flex-1 rounded-md px-2 py-1.5 text-[11px] font-medium transition-all text-white/40 hover:text-white/60" data-seg="tilt">Tilt</button>
+        </div>
+        <div class="space-y-3 pt-1">
+          <div class="spm-slider space-y-1.5" data-target="brightness" data-min="0" data-max="200" data-suffix="%">
+            <div class="flex items-center justify-between"><span class="text-[10px] text-white/50">Brightness</span><span class="spm-slider-val font-mono text-[10px] text-white/70">100%</span></div>
+            <div class="relative flex h-4 w-full items-center"><div class="absolute inset-x-0 h-[3px] rounded-full bg-white/[0.08]"></div><div class="spm-slider-fill absolute left-0 h-[3px] rounded-full bg-white/30" style="width:50%"></div><input type="range" min="0" max="200" step="1" value="100" class="spm-slider-input absolute inset-0 h-full w-full cursor-pointer opacity-0" /><div class="spm-slider-knob pointer-events-none absolute h-3 w-3 rounded-full bg-white shadow" style="left:calc(50% - 6px)"></div></div>
+          </div>
+          <div class="spm-slider space-y-1.5" data-target="contrast" data-min="0" data-max="200" data-suffix="%">
+            <div class="flex items-center justify-between"><span class="text-[10px] text-white/50">Contrast</span><span class="spm-slider-val font-mono text-[10px] text-white/70">100%</span></div>
+            <div class="relative flex h-4 w-full items-center"><div class="absolute inset-x-0 h-[3px] rounded-full bg-white/[0.08]"></div><div class="spm-slider-fill absolute left-0 h-[3px] rounded-full bg-white/30" style="width:50%"></div><input type="range" min="0" max="200" step="1" value="100" class="spm-slider-input absolute inset-0 h-full w-full cursor-pointer opacity-0" /><div class="spm-slider-knob pointer-events-none absolute h-3 w-3 rounded-full bg-white shadow" style="left:calc(50% - 6px)"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Animate panel -->
+      <div class="spm-panel hidden space-y-4" data-panel="animate">
+        <div class="flex items-center gap-2"><span class="text-[10px] font-medium tracking-wide text-white/40 uppercase">Animation Presets</span><div class="h-px flex-1 bg-white/5"></div></div>
+        <div class="grid grid-cols-1 gap-2">
+          {miniGrads.map((grad, i) => (<div class={`aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-xl border-2 transition-all ${i === 0 ? "border-white/60" : "border-transparent hover:border-white/20"}`}><div class="h-full w-full" style={`background:${grad}`}></div></div>))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const root = document.querySelector<HTMLElement>(".spm");
+  if (root) {
+    const frame = root.querySelector<HTMLElement>(".spm-frame");
+    const preview = root.querySelector<HTMLElement>(".spm-preview");
+    const state: Record<string, number> = { radius: 12, padding: 24, scale: 100, brightness: 100, contrast: 100 };
+
+    function applyPreview() {
+      if (frame) frame.style.padding = `${state.padding * 0.5}px`;
+      if (preview) preview.style.borderRadius = `${state.radius}px`;
+    }
+
+    // Tabs
+    const tabBtns = root.querySelectorAll<HTMLElement>(".spm-tab");
+    const panels = root.querySelectorAll<HTMLElement>(".spm-panel");
+    tabBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.tab;
+        tabBtns.forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle("flex-[1.8]", active);
+          b.classList.toggle("bg-[#3a3a3c]", active);
+          b.classList.toggle("text-white", active);
+          b.classList.toggle("shadow-sm", active);
+          b.classList.toggle("flex-1", !active);
+          b.classList.toggle("text-white/40", !active);
+          const label = b.querySelector<HTMLElement>(".spm-tab-label");
+          if (label) {
+            label.classList.toggle("ml-1.5", active);
+            label.classList.toggle("max-w-[60px]", active);
+            label.classList.toggle("opacity-100", active);
+            label.classList.toggle("ml-0", !active);
+            label.classList.toggle("max-w-0", !active);
+            label.classList.toggle("opacity-0", !active);
+          }
+        });
+        panels.forEach((p) => p.classList.toggle("hidden", p.dataset.panel !== id));
+      });
+    });
+
+    // Sliders
+    root.querySelectorAll<HTMLElement>(".spm-slider").forEach((slider) => {
+      const input = slider.querySelector<HTMLInputElement>(".spm-slider-input");
+      const fill = slider.querySelector<HTMLElement>(".spm-slider-fill");
+      const knob = slider.querySelector<HTMLElement>(".spm-slider-knob");
+      const valEl = slider.querySelector<HTMLElement>(".spm-slider-val");
+      const target = slider.dataset.target!;
+      const min = Number(slider.dataset.min);
+      const max = Number(slider.dataset.max);
+      const suffix = slider.dataset.suffix || "";
+      input?.addEventListener("input", () => {
+        const v = Number(input.value);
+        state[target] = v;
+        const pct = ((v - min) / (max - min)) * 100;
+        if (fill) fill.style.width = `${pct}%`;
+        if (knob) knob.style.left = `calc(${pct}% - 6px)`;
+        if (valEl) valEl.textContent = `${v}${suffix}`;
+        applyPreview();
+      });
+    });
+
+    // Border presets
+    root.querySelectorAll<HTMLElement>(".spm-border-preset").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const radius = Number(btn.dataset.radius);
+        state.radius = radius;
+        root.querySelectorAll<HTMLElement>(".spm-border-preset").forEach((b) => {
+          const active = b === btn;
+          const prev = b.querySelector<HTMLElement>(".spm-border-prev");
+          const label = b.querySelector<HTMLElement>(".spm-border-label");
+          prev?.classList.toggle("ring-2", active);
+          prev?.classList.toggle("ring-white/60", active);
+          prev?.classList.toggle("ring-1", !active);
+          prev?.classList.toggle("ring-white/10", !active);
+          label?.classList.toggle("text-white", active);
+          label?.classList.toggle("text-white/30", !active);
+        });
+        applyPreview();
+      });
+    });
+
+    // Style presets
+    root.querySelectorAll<HTMLElement>(".spm-style-preset").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        root.querySelectorAll<HTMLElement>(".spm-style-preset").forEach((b) => {
+          const active = b === btn;
+          const prev = b.querySelector<HTMLElement>(".spm-style-prev");
+          const label = b.querySelector<HTMLElement>(".spm-style-label");
+          prev?.classList.toggle("ring-2", active);
+          prev?.classList.toggle("ring-white/60", active);
+          prev?.classList.toggle("ring-1", !active);
+          prev?.classList.toggle("ring-white/10", !active);
+          label?.classList.toggle("text-white", active);
+          label?.classList.toggle("text-white/30", !active);
+        });
+      });
+    });
+
+    // Shadow presets
+    root.querySelectorAll<HTMLElement>(".spm-shadow-preset").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const shadow = btn.dataset.shadowval || "none";
+        if (preview) preview.style.boxShadow = shadow;
+        root.querySelectorAll<HTMLElement>(".spm-shadow-preset").forEach((b) => {
+          const active = b === btn;
+          const prev = b.querySelector<HTMLElement>(".spm-shadow-prev");
+          const label = b.querySelector<HTMLElement>(".spm-shadow-label");
+          prev?.classList.toggle("ring-2", active);
+          prev?.classList.toggle("ring-white/60", active);
+          prev?.classList.toggle("ring-1", !active);
+          prev?.classList.toggle("ring-white/10", !active);
+          label?.classList.toggle("text-white", active);
+          label?.classList.toggle("text-white/30", !active);
+        });
+      });
+    });
+
+    // Segmented control
+    root.querySelectorAll<HTMLElement>(".spm-seg").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        root.querySelectorAll<HTMLElement>(".spm-seg").forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle("bg-white/10", active);
+          b.classList.toggle("text-white", active);
+          b.classList.toggle("text-white/40", !active);
+        });
+      });
+    });
+
+    applyPreview();
+  }
+</script>

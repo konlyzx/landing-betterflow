@@ -1,0 +1,268 @@
+---
+const contributionIntensities = [
+  0.15, 0.75, 0.25, 0.05, 0.45, 0.85, 0.12, 0.65, 0.35, 0.95, 0.08, 0.55, 0.28, 0.72, 0.18, 0.42, 0.88, 0.06, 0.62,
+  0.32, 0.78, 0.22, 0.58, 0.92, 0.04, 0.48, 0.82, 0.16, 0.68, 0.38, 0.98, 0.02, 0.52, 0.26, 0.74,
+];
+const statBars = [40, 25, 60, 35, 80, 45, 70, 30, 55, 90, 40, 65, 50, 75, 35, 60, 45, 85, 55, 40];
+
+function cellBg(intensity: number) {
+  if (intensity > 0.7) return "rgba(201,212,255,0.35)";
+  if (intensity > 0.4) return "rgba(201,212,255,0.2)";
+  if (intensity > 0.1) return "rgba(201,212,255,0.08)";
+  return "rgba(255,255,255,0.04)";
+}
+---
+
+<section class="relative z-10 px-6 py-24" id="privacy">
+  <div class="mx-auto max-w-[1324px]">
+    <div class="pos-reveal" style="margin-bottom:32px">
+      <h2 style="font-family:Geist, sans-serif;font-size:32px;font-weight:500;color:#fff;letter-spacing:-0.02em;margin:0">Privacy & Open Source</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(12, 1fr);gap:16px">
+      <!-- Local-First Processing -->
+      <div class="ln-privacy-card pos-card">
+        <div class="ln-privacy-card-visual">
+          <div class="relative flex h-full w-full items-center justify-center p-4">
+            <div class="relative h-[120px] w-[180px] overflow-hidden rounded-lg border border-white/[0.12] bg-[#1a1a1e]">
+              <div class="flex h-5 items-center gap-1.5 border-b border-white/[0.06] px-2">
+                <div class="h-2 w-2 rounded-full bg-white/10"></div>
+                <div class="h-2 w-2 rounded-full bg-white/10"></div>
+                <div class="h-2 w-2 rounded-full bg-white/10"></div>
+              </div>
+              <div class="flex h-[calc(100%-20px)] flex-col items-center justify-center gap-2">
+                <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[#c9d4ff]/20 bg-[#c9d4ff]/10">
+                  <svg class="h-5 w-5 text-[#c9d4ff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </div>
+                <span class="font-mono text-[9px] text-white/40">localhost</span>
+              </div>
+              <svg class="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 180 120">
+                <circle cx="90" cy="55" r="28" fill="none" stroke="rgba(201,212,255,0.1)" stroke-width="1" stroke-dasharray="4 4">
+                  <animateTransform attributeName="transform" type="rotate" from="0 90 55" to="360 90 55" dur="8s" repeatCount="indefinite"></animateTransform>
+                </circle>
+              </svg>
+            </div>
+            <div class="absolute top-1/2 -right-2 -translate-y-1/2"><div class="rotate-90 font-mono text-[9px] text-white/30">No Upload</div></div>
+          </div>
+        </div>
+        <div class="ln-privacy-card-body"><h3>Local-First Processing</h3><p>All image processing happens directly in your browser. No server uploads, no cloud dependencies.</p></div>
+      </div>
+
+      <!-- Zero Telemetry -->
+      <div class="ln-privacy-card pos-card">
+        <div class="ln-privacy-card-visual">
+          <div class="relative flex h-full w-full items-center justify-center p-4">
+            <div class="flex flex-col items-center gap-3">
+              <div class="relative flex h-14 w-14 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03]">
+                <svg class="h-6 w-6 text-[#71717a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path><line x1="2" x2="22" y1="2" y2="22"></line></svg>
+                <div class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full border border-[#c9d4ff]/30 bg-[#c9d4ff]/20"><span class="text-[7px] font-bold text-[#c9d4ff]">0</span></div>
+              </div>
+              <div class="flex gap-2">
+                {["Cookie", "Pixel", "Beacon"].map((label) => (
+                  <div class="flex items-center gap-1 rounded border border-white/[0.06] bg-white/[0.03] px-2 py-1"><span class="font-mono text-[8px] text-white/30 line-through">{label}</span></div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ln-privacy-card-body"><h3>Zero Telemetry</h3><p>No tracking pixels, no analytics cookies, no usage data collection. We literally know nothing.</p></div>
+      </div>
+
+      <!-- Apache 2.0 -->
+      <div class="ln-privacy-card pos-card">
+        <div class="ln-privacy-card-visual">
+          <div class="relative flex h-full w-full items-center justify-center p-4">
+            <div class="flex flex-col items-center gap-3">
+              <div class="rounded-lg border border-[#c9d4ff]/20 bg-[#c9d4ff]/10 px-4 py-2"><span class="text-xs font-semibold tracking-wider text-[#c9d4ff]">APACHE 2.0</span></div>
+              <div class="w-full max-w-[140px] space-y-1.5">
+                {["Use", "Modify", "Distribute", "Private"].map((label) => (
+                  <div class="flex items-center gap-2">
+                    <span class="w-14 text-right font-mono text-[8px] text-white/40">{label}</span>
+                    <div class="h-1.5 flex-1 rounded-full bg-white/[0.04]"><div class="h-full rounded-full bg-[#c9d4ff]/40" style="width:100%"></div></div>
+                    <svg class="h-3 w-3 text-[#c9d4ff]/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 7"></path></svg>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ln-privacy-card-body"><h3>Apache 2.0</h3><p>Patent-protected open source. Use it, modify it, ship it. Commercial use fully permitted.</p></div>
+      </div>
+
+      <!-- Community Driven -->
+      <div class="ln-privacy-card pos-card">
+        <div class="ln-privacy-card-visual">
+          <div class="relative flex h-full w-full items-center justify-center p-4">
+            <div class="flex flex-col items-center gap-2">
+              <div class="grid grid-cols-7 gap-[3px]">
+                {contributionIntensities.map((intensity) => (
+                  <div class="h-[10px] w-[10px] rounded-[2px]" style={`background:${cellBg(intensity)}`}></div>
+                ))}
+              </div>
+              <div class="mt-1 flex items-center gap-1.5">
+                <svg class="h-3 w-3 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg>
+                <span class="font-mono text-[9px] text-white/30">Open for contributions</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ln-privacy-card-body"><h3>Community Driven</h3><p>Open source and open for contributions. Transparent roadmap on GitHub.</p></div>
+      </div>
+
+      <!-- Auditable Code -->
+      <div class="ln-privacy-card pos-card">
+        <div class="ln-privacy-card-visual">
+          <div class="relative flex h-full w-full items-center justify-center p-4">
+            <div class="w-[190px] overflow-hidden rounded-lg border border-white/[0.1] bg-[#1a1a1e] font-mono text-[9px]">
+              <div class="flex items-center gap-1 border-b border-white/[0.08] px-2 py-1"><div class="h-2 w-2 rounded-full bg-white/10"></div><span class="text-white/30">betterflow.config.ts</span></div>
+              <div class="space-y-1 p-2.5">
+                <div><span class="text-[#7b9cda]">export</span> <span class="text-[#c9d4ff]">default</span> <span class="text-white/50">{"{"}</span></div>
+                <div class="pl-3"><span class="text-white/60">privacy</span><span class="text-white/30">:</span> <span class="text-[#c9d4ff]">true</span><span class="text-white/30">,</span></div>
+                <div class="pl-3"><span class="text-white/60">telemetry</span><span class="text-white/30">:</span> <span class="text-[#ff7e40]">false</span><span class="text-white/30">,</span></div>
+                <div class="pl-3"><span class="text-white/60">localOnly</span><span class="text-white/30">:</span> <span class="text-[#c9d4ff]">true</span><span class="text-white/30">,</span></div>
+                <div><span class="text-white/50">{"}"}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ln-privacy-card-body"><h3>Auditable Code</h3><p>Every line is public. No hidden tracking, no proprietary black boxes. Verify everything.</p></div>
+      </div>
+
+      <!-- Code Stats -->
+      <div class="ln-privacy-card pos-card">
+        <div class="ln-privacy-card-visual">
+          <div class="relative flex h-full w-full items-center justify-center p-4">
+            <div class="flex w-full max-w-[200px] flex-col gap-3">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-[9px] text-white/30">TypeScript</span>
+                <div class="mx-2 h-1 flex-1 rounded-full bg-white/[0.04]"><div class="h-full rounded-full bg-[#c9d4ff]/40" style="width:85%"></div></div>
+                <span class="font-mono text-[9px] text-white/30">85%</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-[9px] text-white/30">CSS</span>
+                <div class="mx-2 h-1 flex-1 rounded-full bg-white/[0.04]"><div class="h-full rounded-full bg-[#f5d4e8]/40" style="width:15%"></div></div>
+                <span class="font-mono text-[9px] text-white/30">15%</span>
+              </div>
+              <div class="mt-1 flex h-8 items-end gap-[2px]">
+                {statBars.map((h) => (
+                  <div class="flex-1 rounded-t-[1px]" style={`height:${h}%;background:rgba(201,212,255,${0.15 + (h / 100) * 0.4})`}></div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ln-privacy-card-body"><h3>Code Stats</h3><p>TypeScript-first codebase. Transparent architecture you can audit, extend, and trust.</p></div>
+      </div>
+    </div>
+
+    <div class="pos-reveal mt-8 flex items-center justify-center">
+      <a href="https://github.com/betterspacx" target="_blank" rel="noopener noreferrer" class="pos-gh-btn font-regular inline-flex items-center gap-2 rounded-lg bg-[linear-gradient(110deg,#c9d4ff_0%,#e0d4ff_45%,#f5d4e8_100%)] px-5 py-2.5 text-sm text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(80,60,120,0.15)] transition-all hover:brightness-105">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+        View on GitHub
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ln-privacy-card {
+    grid-column: span 12;
+    background: #131316;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s ease, translate 0.3s ease;
+    overflow: hidden;
+    position: relative;
+  }
+  .ln-privacy-card::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 1px;
+    width: 150px;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(90deg, transparent 0%, rgba(143,143,143,0.67) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .ln-privacy-card::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    height: 300px;
+    width: 320px;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(from 90deg at 50% 50%, transparent 50%, #131316 50%), radial-gradient(rgba(201,221,255,0.1) 0%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ln-privacy-card:hover { border-top-color: rgba(255, 255, 255, 0.18); translate: 0 -2px; }
+  .ln-privacy-card-visual { height: 180px; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; z-index: 1; }
+  .ln-privacy-card-body { padding: 18px 22px 22px; border-top: 1px solid rgba(255, 255, 255, 0.06); position: relative; z-index: 1; }
+  .ln-privacy-card-body h3 { font-family: 'Geist Sans', sans-serif; font-size: 15px; font-weight: 600; color: #fff; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .ln-privacy-card-body p { font-family: 'Geist Sans', sans-serif; font-size: 13px; line-height: 1.55; color: rgba(255, 255, 255, 0.6); margin: 0; }
+  @media (min-width: 1024px) {
+    .ln-privacy-card:nth-child(1) { grid-column: span 5; }
+    .ln-privacy-card:nth-child(2) { grid-column: span 4; }
+    .ln-privacy-card:nth-child(3) { grid-column: span 3; }
+    .ln-privacy-card:nth-child(4) { grid-column: span 3; }
+    .ln-privacy-card:nth-child(5) { grid-column: span 4; }
+    .ln-privacy-card:nth-child(6) { grid-column: span 5; }
+  }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .ln-privacy-card:nth-child(odd) { grid-column: span 6; }
+    .ln-privacy-card:nth-child(even) { grid-column: span 6; }
+  }
+  .pos-gh-btn { position: relative; overflow: hidden; }
+  .pos-gh-btn::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 1px;
+    width: 120px;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .pos-gh-btn::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    height: 200px;
+    width: 200px;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(from 90deg at 50% 50%, transparent 50%, rgba(201,212,255,0.08) 50%), radial-gradient(rgba(201,212,255,0.12) 0%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .pos-gh-btn:hover { translate: 0 -2px; }
+  .pos-gh-btn > * { position: relative; z-index: 1; }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.querySelectorAll<HTMLElement>(".pos-reveal").forEach((el) => {
+    gsap.fromTo(el, { opacity: 0, y: 20 }, {
+      opacity: 1, y: 0, duration: 0.5, ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 90%" },
+    });
+  });
+  gsap.utils.toArray<HTMLElement>(".pos-card").forEach((el, i) => {
+    gsap.fromTo(el, { opacity: 0, y: 24 }, {
+      opacity: 1, y: 0, duration: 0.5, delay: i * 0.08, ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 90%" },
+    });
+  });
+</script>

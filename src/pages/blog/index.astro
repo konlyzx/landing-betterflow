@@ -1,0 +1,134 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Navbar from "@/app/components/Navbar.astro";
+import Footer from "@/app/components/Footer.astro";
+
+const posts = [
+  {
+    href: "/blog/how-to-make-screenshots-look-professional",
+    category: "Tutorial",
+    title: "How to Make Screenshots Look Professional",
+    description: "Transform raw screenshots into polished visuals with browser frames, backgrounds, and 3D effects. Step-by-step guide.",
+    date: "June 1, 2026",
+    readTime: "6 min",
+    image: "/images/carousel/Burst.webp",
+  },
+  {
+    href: "/blog/best-screenshot-tools-2026",
+    category: "Comparison",
+    title: "Best Screenshot Beautifier Tools in 2026",
+    description: "A practical comparison of Better Flow, Shots.so, Screely, Pika, and Snappify. Pricing, features, and honest recommendations.",
+    date: "June 15, 2026",
+    readTime: "8 min",
+    image: "/images/carousel/glass-rainbow.webp",
+  },
+  {
+    href: "/blog/open-source-screenshot-tools",
+    category: "Open Source",
+    title: "Best Open Source Screenshot Tools in 2026",
+    description: "Self-hostable, no-subscription tools for developers who care about privacy. The best open-source screenshot beautifiers.",
+    date: "June 20, 2026",
+    readTime: "5 min",
+    image: "/images/carousel/Horizon.webp",
+  },
+];
+---
+
+<Layout
+  title="Blog — Screenshot Tips, Comparisons & Tutorials | Better Flow"
+  description="Better Flow blog: tutorials on making screenshots look professional, tool comparisons, open source guides, and tips for developers and designers."
+  keywords={["screenshot tips blog", "screenshot tutorial", "screenshot tool comparison", "how to screenshot beautifully", "better flow blog", "open source design tools blog"]}
+  canonical="/blog"
+>
+  <Navbar />
+
+  <main class="relative min-h-screen bg-[#0b0b0c]">
+    <!-- Hero -->
+    <section class="relative z-10 overflow-hidden px-6 pt-40 pb-20">
+      <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <img
+          src="/mesh/red_blogdistortion.webp"
+          alt=""
+          class="absolute inset-0 h-full w-full object-cover opacity-40"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div
+          class="absolute inset-0"
+          style="background:linear-gradient(180deg, rgba(11,11,12,0.2) 0%, rgba(11,11,12,0.4) 30%, rgba(11,11,12,0.75) 65%, #0b0b0c 100%)"
+        ></div>
+        <div
+          class="absolute top-[10%] left-1/2 -translate-x-1/2 h-[400px] w-[600px] rounded-full blur-[120px] opacity-20"
+          style="background:radial-gradient(circle, #ff7e40 0%, transparent 70%)"
+        ></div>
+        <div
+          class="absolute top-[20%] right-[15%] h-[250px] w-[250px] rounded-full blur-[90px] opacity-15"
+          style="background:radial-gradient(circle, #a445ff 0%, transparent 70%)"
+        ></div>
+      </div>
+
+      <div class="relative z-10 mx-auto max-w-[860px] text-center">
+        <div
+          class="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium"
+          style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)"
+        >
+          <span class="relative flex h-1.5 w-1.5">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ff7e40] opacity-75"></span>
+            <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#ff7e40]"></span>
+          </span>
+          <span style="color:rgba(255,255,255,0.7)">Better Flow Blog</span>
+        </div>
+        <h1 style="font-family:Geist, sans-serif;font-size:clamp(36px,5vw,60px);font-weight:600;color:#fff;letter-spacing:-0.035em;line-height:1.05;margin:0 0 16px">
+          Tips, guides & comparisons
+        </h1>
+        <p style="font-family:'Geist Sans', sans-serif;font-size:17px;line-height:1.6;color:rgba(255,255,255,0.5);margin:0 auto;max-width:520px">
+          Learn how to make screenshots look professional, compare the best tools, and discover open-source alternatives.
+        </p>
+      </div>
+    </section>
+
+    <!-- Posts -->
+    <section class="relative z-10 px-6 pb-24">
+      <div class="mx-auto max-w-[860px]">
+        <div class="flex flex-col gap-6">
+          {posts.map((post) => (
+            <a
+              href={post.href}
+              class="group block overflow-hidden rounded-2xl transition-all duration-200 hover:scale-[1.01]"
+              style="background:#131316;border:none;border-top:1px solid rgba(255,255,255,0.08)"
+            >
+              <div class="relative h-48 w-full overflow-hidden sm:h-56">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div
+                  class="absolute inset-0"
+                  style="background:linear-gradient(180deg, rgba(19,19,22,0.3) 0%, rgba(19,19,22,0.7) 60%, #131316 100%)"
+                ></div>
+                <div class="absolute bottom-4 left-6 flex items-center gap-3">
+                  <span class="rounded-full px-2.5 py-0.5 text-[11px] font-medium" style="background:rgba(255,126,64,0.15);color:#ff7e40;border:1px solid rgba(255,126,64,0.25)">{post.category}</span>
+                  <span style="font-family:'Geist Sans', sans-serif;font-size:12px;color:rgba(255,255,255,0.4)">{post.date}</span>
+                  <span style="color:rgba(255,255,255,0.15)">·</span>
+                  <span style="font-family:'Geist Sans', sans-serif;font-size:12px;color:rgba(255,255,255,0.4)">{post.readTime} read</span>
+                </div>
+              </div>
+              <div class="p-6">
+                <h2 style="font-family:Geist, sans-serif;font-size:20px;font-weight:600;color:#fff;letter-spacing:-0.02em;margin:0 0 8px;transition:color 0.2s" class="group-hover:text-white/90">
+                  {post.title}
+                </h2>
+                <p style="font-family:'Geist Sans', sans-serif;font-size:14px;line-height:1.6;color:rgba(255,255,255,0.5);margin:0">
+                  {post.description}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>

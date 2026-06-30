@@ -1,0 +1,21 @@
+---
+const layers = [
+  { z: 1, mask: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 12.5%, rgba(0,0,0,1) 25%, rgba(0,0,0,0) 37.5%)", blur: "blur(0.28125px)" },
+  { z: 2, mask: "linear-gradient(to bottom, rgba(0,0,0,0) 12.5%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 37.5%, rgba(0,0,0,0) 50%)", blur: "blur(0.5625px)" },
+  { z: 3, mask: "linear-gradient(to bottom, rgba(0,0,0,0) 25%, rgba(0,0,0,1) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 62.5%)", blur: "blur(1.125px)" },
+  { z: 4, mask: "linear-gradient(to bottom, rgba(0,0,0,0) 37.5%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 62.5%, rgba(0,0,0,0) 75%)", blur: "blur(2.25px)" },
+  { z: 5, mask: "linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,1) 62.5%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 87.5%)", blur: "blur(4.5px)" },
+  { z: 6, mask: "linear-gradient(to bottom, rgba(0,0,0,0) 62.5%, rgba(0,0,0,1) 75%, rgba(0,0,0,1) 87.5%, rgba(0,0,0,0) 100%)", blur: "blur(9px)" },
+  { z: 7, mask: "linear-gradient(to bottom, rgba(0,0,0,0) 75%, rgba(0,0,0,1) 87.5%, rgba(0,0,0,1) 100%)", blur: "blur(18px)" },
+  { z: 8, mask: "linear-gradient(to bottom, rgba(0,0,0,0) 87.5%, rgba(0,0,0,1) 100%)", blur: "blur(36px)" },
+]
+---
+
+<div class="pointer-events-none fixed inset-x-0 bottom-0 z-30 h-24 overflow-hidden md:h-24" style="height:calc(96px + env(safe-area-inset-bottom))">
+  {layers.map((l) => (
+    <div
+      class="absolute inset-0"
+      style={`z-index: ${l.z}; mask-image: ${l.mask}; -webkit-mask-image: ${l.mask}; backdrop-filter: ${l.blur}; -webkit-backdrop-filter: ${l.blur}; pointer-events: none;`}
+    />
+  ))}
+</div>

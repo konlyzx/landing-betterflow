@@ -1,0 +1,156 @@
+---
+const badges = [
+  { name: "React", url: "https://newshields.vercel.app/api/badge.svg?label=Built%20with&title=React&icon=react_dark&theme=midnight", alt: "Built with React" },
+  { name: "shadcn/ui", url: "/icons/shadcn_ui.svg", alt: "Built with shadcn/ui" },
+  { name: "Next.js", url: "/icons/next.js.svg", alt: "Built with Next.js" },
+  { name: "Tailwind CSS", url: "/icons/tailwind-css.svg", alt: "Built with Tailwind CSS" },
+];
+
+const TECH_DATA = {
+  React: { name: "React", description: "A JavaScript library for building user interfaces. Created by Meta, it enables fast, declarative UI rendering with components, hooks, and virtual DOM diffing.", role: "UI Framework", website: "react.dev" },
+  "shadcn/ui": { name: "shadcn/ui", description: "Beautifully designed components built with Radix UI and Tailwind CSS. Copy-paste ready, fully accessible, and endlessly customizable.", role: "Component Library", website: "ui.shadcn.com" },
+  "Next.js": { name: "Next.js", description: "The React Framework for production. Handles routing, SSR, static generation, and edge deployment with zero config.", role: "App Framework", website: "nextjs.org" },
+  "Tailwind CSS": { name: "Tailwind CSS", description: "A utility-first CSS framework for rapid UI development. Write inline utility classes instead of custom CSS.", role: "Styling Engine", website: "tailwindcss.com" },
+};
+
+const loop = [...badges, ...badges, ...badges, ...badges];
+const techDataJson = JSON.stringify(TECH_DATA);
+const badgesJson = JSON.stringify(badges);
+---
+
+<section class="relative z-10 bg-white/[0.01] px-6 py-8">
+  <div class="mx-auto flex max-w-[1200px] flex-col items-center justify-between gap-6 md:flex-row md:gap-4">
+    <div class="-ml-15 max-w-[280px] text-center text-xs leading-relaxed text-[#71717a] md:text-left">
+      Built with <strong class="font-semibold text-[#a1a1aa]">modern open-source</strong> technologies.
+      TypeScript-first, locally processed, no telemetry.
+    </div>
+
+    <div class="ml-15 max-w-[680px] flex-1 px-4 py-5">
+      <div class="overflow-hidden tsm-marquee" style="mask-image:linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);-webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%)">
+        <div class="marquee-track">
+          <div class="marquee-scroll tsm-scroll">
+            {loop.map((b) => (
+              <span class="marquee-item">
+                <button
+                  class="tsm-badge relative my-2 flex h-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg select-none transition-transform"
+                  data-name={b.name}
+                >
+                  <img src={b.url} alt={b.alt} class="h-full w-auto rounded-lg" draggable="false" />
+                </button>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tsm-detail relative z-10 overflow-hidden" style="height:0;opacity:0" data-tech={techDataJson} data-badges={badgesJson}>
+  <div class="mx-auto max-w-[1200px] px-6 py-8">
+    <div class="relative rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 backdrop-blur-xl md:p-8">
+      <div class="flex flex-col gap-6 md:flex-row md:items-start">
+        <div class="flex-shrink-0">
+          <div class="inline-flex"><img class="tsm-detail-img h-10 rounded-lg" alt="" draggable="false" /></div>
+          <div class="tsm-detail-role mt-3 text-[10px] font-medium tracking-widest text-[#71717a] uppercase"></div>
+        </div>
+        <div class="min-w-0 flex-1">
+          <h3 class="tsm-detail-name mb-2 text-lg font-semibold text-white"></h3>
+          <p class="tsm-detail-desc text-sm leading-relaxed text-[#a1a1aa]"></p>
+          <a class="tsm-detail-link mt-4 inline-flex items-center gap-1.5 text-xs text-[#c9d4ff] transition-colors hover:text-white" target="_blank" rel="noopener noreferrer">
+            <span class="tsm-detail-linktext"></span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="opacity-70"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+        </div>
+      </div>
+      <button class="tsm-detail-close absolute top-4 right-4 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full text-white/40 transition-all hover:bg-white/10 hover:text-white/80">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-75%); } }
+  .marquee-track { width: 100%; }
+  .marquee-scroll { display: flex; gap: 12px; width: max-content; padding: 6px 0; animation: marqueeScroll 20s linear infinite; }
+  .marquee-scroll.paused { animation-play-state: paused; }
+  .marquee-item { display: flex; align-items: center; flex-shrink: 0; white-space: nowrap; }
+  .tsm-badge.active { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2); }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  const scroll = document.querySelector<HTMLElement>(".tsm-scroll");
+  const detail = document.querySelector<HTMLElement>(".tsm-detail");
+  const badges = document.querySelectorAll<HTMLButtonElement>(".tsm-badge");
+  if (detail && scroll) {
+    const TECH_DATA = JSON.parse(detail.dataset.tech || "{}");
+    const BADGES = JSON.parse(detail.dataset.badges || "[]");
+    let activeTech: string | null = null;
+
+    const img = detail.querySelector<HTMLImageElement>(".tsm-detail-img");
+    const role = detail.querySelector<HTMLElement>(".tsm-detail-role");
+    const name = detail.querySelector<HTMLElement>(".tsm-detail-name");
+    const desc = detail.querySelector<HTMLElement>(".tsm-detail-desc");
+    const link = detail.querySelector<HTMLAnchorElement>(".tsm-detail-link");
+    const linktext = detail.querySelector<HTMLElement>(".tsm-detail-linktext");
+    const closeBtn = detail.querySelector<HTMLElement>(".tsm-detail-close");
+
+    function openDetail(tech: string) {
+      const data = TECH_DATA[tech];
+      const badge = BADGES.find((b: any) => b.name === tech);
+      if (!data) return;
+      if (img && badge) img.src = badge.url;
+      if (role) role.textContent = data.role;
+      if (name) name.textContent = data.name;
+      if (desc) desc.textContent = data.description;
+      if (link) link.href = `https://${data.website}`;
+      if (linktext) linktext.textContent = `Visit ${data.website}`;
+      gsap.set(detail, { height: "auto" });
+      gsap.from(detail, { height: 0, opacity: 0, duration: 0.4, ease: "power2.out" });
+      gsap.to(detail, { opacity: 1, duration: 0.4 });
+    }
+
+    function closeDetail() {
+      gsap.to(detail, { height: 0, opacity: 0, duration: 0.4, ease: "power2.out" });
+    }
+
+    function setActive(tech: string | null) {
+      badges.forEach((b) => b.classList.toggle("active", tech !== null && b.dataset.name === tech));
+    }
+
+    badges.forEach((badge) => {
+      badge.addEventListener("mouseenter", () => {
+        scroll!.classList.add("paused");
+        gsap.to(badge, { scale: 1.08, duration: 0.2 });
+      });
+      badge.addEventListener("mouseleave", () => {
+        if (!activeTech) scroll!.classList.remove("paused");
+        gsap.to(badge, { scale: 1, duration: 0.2 });
+      });
+      badge.addEventListener("click", () => {
+        const tech = badge.dataset.name!;
+        if (activeTech === tech) {
+          activeTech = null;
+          setActive(null);
+          scroll!.classList.remove("paused");
+          closeDetail();
+          return;
+        }
+        activeTech = tech;
+        setActive(tech);
+        scroll!.classList.add("paused");
+        openDetail(tech);
+      });
+    });
+
+    closeBtn?.addEventListener("click", () => {
+      activeTech = null;
+      setActive(null);
+      scroll!.classList.remove("paused");
+      closeDetail();
+    });
+  }
+</script>

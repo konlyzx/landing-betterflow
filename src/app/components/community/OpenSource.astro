@@ -1,0 +1,63 @@
+---
+import SpotlightCard from "@/app/components/ui/SpotlightCard.astro";
+
+const cardStyle = "background:#131316;border:none;border-top:1px solid rgba(255, 255, 255, 0.08);border-radius:24px";
+const VALUES = [
+  { icon: "shield", title: "Community-first", description: "Development driven by real user needs. Contributions, discussions, and feedback shape every release." },
+  { icon: "route", title: "Public roadmap", description: "See what's coming next. Vote on priorities, track progress, and know exactly what's being built." },
+  { icon: "eye", title: "Transparent development", description: "Every commit, every decision, every discussion is open. No black boxes, no surprises." },
+  { icon: "message", title: "Open feedback", description: "Direct line to the maintainers. Feature requests, bug reports, and ideas are always welcome." },
+];
+const icons: Record<string, string> = {
+  shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>',
+  route: '<circle cx="6" cy="19" r="3"></circle><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"></path><circle cx="18" cy="5" r="3"></circle>',
+  eye: '<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle>',
+  message: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>',
+};
+const cols = Array.from({ length: 0 });
+---
+
+<section class="relative z-10 overflow-hidden px-6 py-24">
+  <div class="mx-auto max-w-[1324px]">
+    <div class="os-reveal" style="margin-bottom:32px">
+      <h2 style="font-family:Geist, sans-serif;font-size:32px;font-weight:500;color:#fff;letter-spacing:-0.02em;margin:0">Built in the open, <span style="color:rgba(255,255,255,0.5)">by everyone.</span></h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(12, 1fr);gap:16px">
+      {VALUES.map((value) => (
+        <div class="os-card" style="grid-column:span 12">
+          <SpotlightCard class="rounded-2xl border-transparent bg-transparent p-7" style={cardStyle}>
+            <div class="mb-5 flex h-10 w-10 items-center justify-center rounded-lg" style="background:rgba(255, 255, 255, 0.04);border:1px solid rgba(255, 255, 255, 0.06)">
+              <svg class="h-4 w-4" style="color:rgba(255, 126, 64, 0.8)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icons[value.icon]}></svg>
+            </div>
+            <h3 style="font-family:'Geist Sans', sans-serif;font-size:15px;font-weight:600;color:#fff;margin:0 0 6px;letter-spacing:-0.01em">{value.title}</h3>
+            <p style="font-family:'Geist Sans', sans-serif;font-size:13px;line-height:1.55;color:rgba(255, 255, 255, 0.6);margin:0">{value.description}</p>
+          </SpotlightCard>
+        </div>
+      ))}
+    </div>
+
+    <p class="os-reveal mt-12 text-center text-sm text-[#52525b]">Numbers will appear as the community grows.</p>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 1024px) {
+    .os-card { grid-column: span 3 !important; }
+  }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .os-card { grid-column: span 6 !important; }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll<HTMLElement>(".os-reveal").forEach((el) => {
+    gsap.fromTo(el, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 90%" } });
+  });
+  gsap.utils.toArray<HTMLElement>(".os-card").forEach((el, i) => {
+    gsap.fromTo(el, { opacity: 0, scale: 0.92, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.7, delay: i * 0.12, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" } });
+  });
+</script>

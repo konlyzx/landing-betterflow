@@ -1,0 +1,29 @@
+---
+interface Props {
+  class?: string;
+  style?: string;
+  spotlightColor?: string;
+}
+const { class: className = "", style = "", spotlightColor = "rgba(255, 255, 255, 0.25)" } = Astro.props;
+---
+
+<div class={`spotlight-card relative overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900 p-8 ${className}`.trim()} style={style} data-spotlight={spotlightColor}>
+  <div class="spotlight-overlay pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out"></div>
+  <slot />
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".spotlight-card").forEach((card) => {
+    const overlay = card.querySelector<HTMLElement>(".spotlight-overlay");
+    const color = card.dataset.spotlight || "rgba(255, 255, 255, 0.25)";
+    if (!overlay) return;
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      overlay.style.background = `radial-gradient(circle at ${x}px ${y}px, ${color}, transparent 80%)`;
+    });
+    card.addEventListener("mouseenter", () => { overlay.style.opacity = "0.6"; });
+    card.addEventListener("mouseleave", () => { overlay.style.opacity = "0"; });
+  });
+</script>

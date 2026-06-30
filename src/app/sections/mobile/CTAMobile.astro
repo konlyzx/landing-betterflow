@@ -1,0 +1,80 @@
+---
+const cols = Array.from({ length: 6 });
+---
+
+<section class="relative z-10 overflow-hidden px-6 py-24">
+  <div class="pointer-events-none absolute inset-0 flex justify-between px-6">
+    {cols.map(() => <div class="h-full w-px bg-white/[0.02]"></div>)}
+  </div>
+
+  <div class="ctam-reveal relative mx-auto max-w-[800px] text-center">
+    <h2 class="mb-5 text-[2rem] leading-[1.08] font-semibold tracking-tight text-white" style="font-family:Geist, sans-serif">
+      Your screenshots deserve to look{" "}
+      <span class="bg-clip-text text-transparent" style="background-image:linear-gradient(90deg, #ff7e40, #ff4b72, #a445ff, #ff7e40, #ff4b72);background-size:300% 100%;animation:gradient-flow 4s ease infinite">better.</span>
+    </h2>
+
+    <p class="mx-auto mb-8 max-w-[360px] text-sm leading-relaxed text-[#71717a]">
+      Open source screenshot studio. No telemetry, no sign-up, no server roundtrips. Just beautiful visuals.
+    </p>
+
+    <div class="flex flex-col items-center justify-center gap-3">
+      <a href="https://github.com/betterspacx" target="_blank" rel="noopener noreferrer" class="inline-block" title="Star on GitHub">
+        <span class="ctam-gbtn inline-flex items-center justify-center gap-2 rounded-lg bg-[linear-gradient(110deg,#c9d4ff_0%,#e0d4ff_45%,#f5d4e8_100%)] px-5 py-2.5 font-medium text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_1px_2px_rgba(80,60,120,0.15)] transition-all duration-200">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+          Star on GitHub
+        </span>
+      </a>
+      <a href="mailto:hello@betterflow.site" class="ctam-mail group inline-flex items-center justify-center gap-2 rounded-lg bg-[linear-gradient(135deg,#ff7e40_0%,#ff4b72_50%,#a445ff_100%)] px-5 py-2.5 text-sm font-medium text-white shadow-[0_4px_24px_rgba(164,69,255,0.25),inset_0_1px_0_rgba(255,255,255,0.2)] transition-all duration-200">
+        Get in Touch
+        <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+      </a>
+    </div>
+
+    <p class="mt-7 text-[11px] tracking-wide text-[#3f3f46]">One-time clone. Lifetime updates. Unlimited projects.</p>
+  </div>
+</section>
+
+<style>
+  .ctam-gbtn, .ctam-mail { position: relative; overflow: hidden; }
+  .ctam-gbtn::before, .ctam-mail::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 1px;
+    width: 120px;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .ctam-gbtn::after {
+    content: '';
+    position: absolute;
+    top: -1px; left: 50%;
+    height: 200px; width: 200px;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(from 90deg at 50% 50%, transparent 50%, rgba(201,212,255,0.08) 50%), radial-gradient(rgba(201,212,255,0.12) 0%, transparent 80%);
+    pointer-events: none; z-index: 0;
+  }
+  .ctam-mail::after {
+    content: '';
+    position: absolute;
+    top: -1px; left: 50%;
+    height: 200px; width: 200px;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(from 90deg at 50% 50%, transparent 50%, rgba(255,126,64,0.08) 50%), radial-gradient(rgba(255,126,64,0.12) 0%, transparent 80%);
+    pointer-events: none; z-index: 0;
+  }
+  .ctam-gbtn:hover, .ctam-mail:hover { translate: 0 -2px; }
+  .ctam-gbtn > *, .ctam-mail > * { position: relative; z-index: 1; }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll<HTMLElement>(".ctam-reveal").forEach((el) => {
+    gsap.fromTo(el, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 90%" } });
+  });
+</script>

@@ -1,0 +1,54 @@
+---
+interface Props {
+  texts: string[];
+  interval?: number;
+  class?: string;
+}
+
+const { texts, interval = 3000, class: className = "" } = Astro.props;
+---
+
+<span class="rotating-text inline-block overflow-hidden align-baseline" style="height:1.25em" data-texts={JSON.stringify(texts)} data-interval={interval} data-class={className}>
+  <span class={`rotating-text-inner block whitespace-nowrap ${className}`}>{texts[0]}</span>
+</span>
+
+<script>
+  import { gsap } from "gsap";
+
+  function initRotatingText(root: HTMLElement) {
+    const texts: string[] = JSON.parse(root.dataset.texts || "[]");
+    const interval = Number(root.dataset.interval || 3000);
+    const inner = root.querySelector<HTMLElement>(".rotating-text-inner");
+    if (!inner || texts.length === 0) return;
+
+    let index = 0;
+
+    function show(next: number) {
+      const tl = gsap.timeline();
+      tl.to(inner, {
+        yPercent: -100,
+        opacity: 0,
+        filter: "blur(4px)",
+        duration: 0.5,
+        ease: "power3.out",
+        onComplete: () => {
+          if (inner) inner.textContent = texts[next];
+          gsap.set(inner, { yPercent: 100, opacity: 0, filter: "blur(4px)" });
+        },
+      }).to(inner, {
+        yPercent: 0,
+        opacity: 1,
+        filter: "blur(0px)",
+        duration: 0.5,
+        ease: "power3.out",
+      });
+    }
+
+    setInterval(() => {
+      index = (index + 1) % texts.length;
+      show(index);
+    }, interval);
+  }
+
+  document.querySelectorAll<HTMLElement>(".rotating-text").forEach(initRotatingText);
+</script>

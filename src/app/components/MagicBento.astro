@@ -1,0 +1,290 @@
+---
+const ROW_A = ["Screenshot Studio", "Chrome Extension", "Code Highlight", "3D Frames", "Gradients", "Animations", "Mockups", "Export PNG", "Export MP4"];
+const ROW_B = ["Device Frames", "Browser Mockups", "Glow Effects", "Particle Effects", "Spotlight", "Tilt Effect", "Export GIF", "Shadow Presets", "Border Radius"];
+const rowA = [...ROW_A, ...ROW_A];
+const rowB = [...ROW_B, ...ROW_B];
+const variants = [
+  { label: "PNG Export", accent: "rgba(201,212,255,0.7)" },
+  { label: "MP4 Video", accent: "rgba(224,212,255,0.7)" },
+  { label: "GIF Animation", accent: "rgba(245,212,232,0.7)" },
+  { label: "WebP / SVG", accent: "rgba(201,212,255,0.7)" },
+];
+const localSteps = [
+  { label: "Image loaded", sub: "in browser memory" },
+  { label: "Effects applied", sub: "locally via canvas" },
+  { label: "Export ready", sub: "no server roundtrip" },
+  { label: "Privacy kept", sub: "zero telemetry" },
+];
+const glowColor = "201, 221, 255";
+---
+  <div class="mx-auto w-full max-w-[1324px]">
+    <div style="margin-bottom:32px">
+      <h2 style="font-family:Geist, sans-serif;font-size:32px;font-weight:500;color:#fff;letter-spacing:-0.02em;margin:0">What's inside</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(12, 1fr);gap:16px">
+      <!-- Card 1: Screenshot Studio (marquee) -->
+      <div class="ln-features-card mb-card card--deckflow">
+        <div class="ln-features-card-visual">
+          <div class="ln-feat-marquee">
+            <div class="ln-feat-marquee-track"><div class="ln-feat-marquee-scroll">{rowA.map((c) => <span class="ln-feat-pill">{c}</span>)}</div></div>
+            <div class="ln-feat-marquee-track"><div class="ln-feat-marquee-scroll ln-feat-marquee-scroll--rev">{rowB.map((c) => <span class="ln-feat-pill">{c}</span>)}</div></div>
+          </div>
+        </div>
+        <div class="ln-features-card-body"><h3>Screenshot Studio</h3><p>Transform raw screenshots into production-ready visuals with one click. Browser mockups, device frames, and stunning 3D effects.</p></div>
+      </div>
+
+      <!-- Card 2: Visual Effects (tools float) -->
+      <div class="ln-features-card mb-card card--deckflow">
+        <div class="ln-features-card-visual">
+          <div class="ln-feat-tools">
+            <div class="ln-feat-tool-box ln-feat-tool-box--center mb-float" data-float="center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"></path></svg></div>
+            <div class="ln-feat-tool-box ln-feat-tool-box--left mb-float" data-float="left"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.3 10a.7.7 0 0 1-.626-1.079L11.4 3a.7.7 0 0 1 1.198-.043L16.3 8.9a.7.7 0 0 1-.572 1.1Z"></path><rect x="3" y="14" width="7" height="7" rx="1"></rect><circle cx="17.5" cy="17.5" r="3.5"></circle></svg></div>
+            <div class="ln-feat-tool-box ln-feat-tool-box--right mb-float" data-float="right"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg></div>
+          </div>
+        </div>
+        <div class="ln-features-card-body"><h3>Visual Effects</h3><p>Add glow, particles, spotlight, and tilt effects to make your screenshots stand out.</p></div>
+      </div>
+
+      <!-- Card 3: Well Organized (sparkles) -->
+      <div class="ln-features-card mb-card card--deckflow">
+        <div class="ln-features-card-visual">
+          <div class="relative h-full w-full overflow-hidden rounded-[14px]">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#1a1520] to-[#0d0b12]"></div>
+            <div class="absolute right-0 bottom-0 left-0 h-full opacity-40" style="background:radial-gradient(circle at bottom center, #c9d4ff, transparent 70%)"></div>
+            <div class="absolute inset-0 opacity-20" style="background-image:linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);background-size:40px 40px"></div>
+            <div class="mb-sparkles absolute inset-0" data-density="20" data-size="1.5" data-color="#e0d4ff" data-opacity="0.8"></div>
+            <div class="absolute inset-0 z-10 flex flex-col items-center justify-center">
+              <div class="text-center">
+                <div class="mb-2 inline-block rounded-full border border-[#c9d4ff] bg-[#1a1520] px-3 py-1 text-xs text-[#c9d4ff]">Organized</div>
+                <div class="flex justify-center gap-2">
+                  <span class="h-2 w-2 rounded-full bg-[#c9d4ff]"></span>
+                  <span class="h-2 w-2 rounded-full bg-[#e0d4ff]"></span>
+                  <span class="h-2 w-2 rounded-full bg-[#f5d4e8]"></span>
+                  <span class="h-2 w-2 rounded-full bg-[#edeffd]"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ln-features-card-body"><h3>Well Organized</h3><p>Four clear categories: Screenshots, Code Snippets, Device Frames, and Gradients. Find what you need fast.</p></div>
+      </div>
+
+      <!-- Card 4: Export Any Format (variant tabs) -->
+      <div class="ln-features-card mb-card card--deckflow">
+        <div class="ln-features-card-visual">
+          <div class="ln-feat-vrows">
+            {variants.map((v, i) => (
+              <div class="ln-feat-vrow mb-vrow" style={i === 0 ? "opacity:1" : "opacity:0.3"}>
+                <div class="ln-feat-vrow-dot" style={`background:${v.accent}`}></div>
+                <span class="ln-feat-vrow-label">{v.label}</span>
+                <div class="ln-feat-vrow-bars">
+                  <div class="ln-feat-vrow-bar" style={`width:${35 + i * 8}%`}></div>
+                  <div class="ln-feat-vrow-bar" style={`width:${20 + ((i + 2) % 4) * 7}%`}></div>
+                  <div class="ln-feat-vrow-bar" style={`width:${45 + ((i + 1) % 3) * 10}%`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="ln-features-card-body"><h3>Export Any Format</h3><p>PNG, MP4, GIF - whatever you need for your content. High quality exports ready to share anywhere.</p></div>
+      </div>
+
+      <!-- Card 5: Local Processing (steps) -->
+      <div class="ln-features-card mb-card card--deckflow">
+        <div class="ln-features-card-visual">
+          <div class="ln-feat-aichat">
+            <div class="ln-feat-aichat-inner">
+              <div class="ln-feat-aichat-body">
+                {localSteps.map((s, i) => (
+                  <div class="ln-feat-aichat-row mb-step" style={i === 0 ? "opacity:1;transform:translateX(0)" : "opacity:0.25;transform:translateX(-4px)"}>
+                    <div class="ln-feat-aichat-dot" style={i === 0 ? "background:rgba(201,212,255,0.8)" : "background:rgba(255,255,255,0.15)"}></div>
+                    <div><div class="ln-feat-aichat-q">{s.label}</div><div class="ln-feat-aichat-a">{s.sub}</div></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ln-features-card-body"><h3>Local Processing</h3><p>All editing happens in your browser. No server uploads, no data leaving your machine. Privacy first.</p></div>
+      </div>
+
+      <!-- Card 6: Open Source (chart) -->
+      <div class="ln-features-card mb-card card--deckflow">
+        <div class="ln-features-card-visual">
+          <div class="ln-feat-stars">
+            <span class="ln-feat-stars-label">Apache 2.0 License</span>
+            <span class="ln-feat-stars-count">Open Source</span>
+            <div class="ln-feat-stars-chart">
+              <svg viewBox="0 0 200 50" fill="none" preserveAspectRatio="none">
+                <defs><linearGradient id="starFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c9d4ff" stop-opacity="0.08"></stop><stop offset="100%" stop-color="#f5d4e8" stop-opacity="0"></stop></linearGradient></defs>
+                <path d="M0 45 C15 43,30 40,45 36 C60 32,75 30,90 26 C105 22,115 24,125 20 C140 15,155 12,170 10 C180 8,190 5,200 3 L200 50 L0 50Z" fill="url(#starFill)"></path>
+                <path class="mb-chart-line" d="M0 45 C15 43,30 40,45 36 C60 32,75 30,90 26 C105 22,115 24,125 20 C140 15,155 12,170 10 C180 8,190 5,200 3" stroke="rgba(201,212,255,0.5)" stroke-width="1.5" stroke-linecap="round"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="ln-features-card-body"><h3>Open Source</h3><p>Built in public with an Apache 2.0 license. Fork it, extend it, or self-host it. The code is yours.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  .bento-section { --glow-x: 50%; --glow-y: 50%; --glow-intensity: 0; --glow-radius: 200px; --glow-color: 201, 221, 255; }
+  .ln-features-card { grid-column: span 12; }
+  @media (min-width: 1024px) {
+    .ln-features-card:nth-child(1) { grid-column: span 5; }
+    .ln-features-card:nth-child(2) { grid-column: span 3; }
+    .ln-features-card:nth-child(3) { grid-column: span 4; }
+    .ln-features-card:nth-child(4) { grid-column: span 4; }
+    .ln-features-card:nth-child(5) { grid-column: span 5; }
+    .ln-features-card:nth-child(6) { grid-column: span 3; }
+  }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .ln-features-card:nth-child(odd) { grid-column: span 6; }
+    .ln-features-card:nth-child(even) { grid-column: span 6; }
+  }
+  .card--deckflow::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 1px;
+    width: 150px;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(90deg, transparent 0%, rgba(143,143,143,0.67) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .card--deckflow::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    height: 300px;
+    width: 320px;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(from 90deg at 50% 50%, transparent 50%, #131316 50%), radial-gradient(rgba(201,221,255,0.1) 0%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ln-features-card { background: #131316; border: none; border-top: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; display: flex; flex-direction: column; transition: border-color 0.3s ease, translate 0.3s ease; overflow: hidden; position: relative; }
+  .ln-features-card:hover { border-top-color: rgba(255, 255, 255, 0.18); translate: 0 -2px; }
+  .ln-features-card-visual { height: 180px; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; z-index: 1; }
+  .ln-features-card-body { padding: 18px 22px 22px; border-top: 1px solid rgba(255, 255, 255, 0.06); position: relative; z-index: 1; }
+  .ln-features-card-body h3 { font-family: 'Geist Sans', sans-serif; font-size: 15px; font-weight: 600; color: #fff; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .ln-features-card-body p { font-family: 'Geist Sans', sans-serif; font-size: 13px; line-height: 1.55; color: rgba(255, 255, 255, 0.6); margin: 0; }
+  .ln-feat-marquee { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 0; mask-image: linear-gradient(90deg, transparent 0%, #000 15%, #000 85%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 15%, #000 85%, transparent 100%); }
+  .ln-feat-marquee-track { overflow: hidden; width: 100%; }
+  .ln-feat-marquee-scroll { display: flex; gap: 8px; width: max-content; animation: marqueeScroll 25s linear infinite; }
+  .ln-feat-marquee-scroll--rev { animation: marqueeScrollRev 28s linear infinite; }
+  @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  @keyframes marqueeScrollRev { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+  .ln-feat-pill { font-family: 'Geist Mono', monospace; font-size: 12px; color: rgba(255, 255, 255, 0.65); text-decoration: none; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 7px; padding: 5px 12px; white-space: nowrap; flex-shrink: 0; transition: border-color 0.2s, color 0.2s; }
+  .ln-feat-pill:hover { border-color: rgba(255, 255, 255, 0.15); color: rgba(255, 255, 255, 0.85); }
+  .ln-feat-tools { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .ln-feat-tool-box { position: absolute; display: flex; align-items: center; justify-content: center; border-radius: 14px; background: #1e1a26; border: 1px solid rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.65); z-index: 2; }
+  .ln-feat-tool-box--center { width: 56px; height: 56px; top: calc(50% - 40px); left: calc(50% - 28px); color: rgba(255, 255, 255, 0.6); }
+  .ln-feat-tool-box--left { width: 46px; height: 46px; top: calc(50% + 6px); left: calc(50% - 58px); transform: rotate(-12deg); }
+  .ln-feat-tool-box--right { width: 46px; height: 46px; top: calc(50% + 6px); left: calc(50% + 12px); transform: rotate(12deg); }
+  .ln-feat-vrows { display: flex; flex-direction: column; gap: 6px; width: 100%; height: 100%; padding: 14px; box-sizing: border-box; }
+  .ln-feat-vrow { display: flex; align-items: center; gap: 10px; padding: 0 14px; border-radius: 10px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); flex: 1; transition: opacity 0.4s; }
+  .ln-feat-vrow-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .ln-feat-vrow-label { font-family: 'Geist Mono', monospace; font-size: 12px; color: rgba(255, 255, 255, 0.7); white-space: nowrap; flex-shrink: 0; min-width: 80px; }
+  .ln-feat-vrow-bars { display: flex; align-items: center; gap: 5px; flex: 1; min-width: 0; }
+  .ln-feat-vrow-bar { height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.06); }
+  .ln-feat-aichat { width: 100%; height: 100%; padding: 10px; box-sizing: border-box; }
+  .ln-feat-aichat-inner { width: 100%; height: 100%; display: flex; flex-direction: column; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; overflow: hidden; }
+  .ln-feat-aichat-head { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); flex-shrink: 0; }
+  .ln-feat-aichat-body { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 8px 12px; flex: 1; overflow: hidden; }
+  .ln-feat-aichat-row { display: flex; align-items: center; gap: 10px; transition: opacity 0.3s, transform 0.3s; }
+  .ln-feat-aichat-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .ln-feat-aichat-q { font-family: 'Geist Sans', sans-serif; font-size: 11px; color: rgba(255, 255, 255, 0.8); line-height: 1.4; }
+  .ln-feat-aichat-a { font-family: 'Geist Sans', sans-serif; font-size: 9px; color: rgba(255, 255, 255, 0.45); line-height: 1.3; }
+  .ln-feat-stars { width: 100%; height: 100%; padding: 18px 20px 0; box-sizing: border-box; display: flex; flex-direction: column; }
+  .ln-feat-stars-label { font-family: 'Geist Sans', sans-serif; font-size: 11px; color: rgba(255, 255, 255, 0.5); letter-spacing: 0.02em; }
+  .ln-feat-stars-count { font-family: 'Geist Sans', sans-serif; font-size: 52px; color: rgba(255, 255, 255, 0.55); letter-spacing: -0.03em; line-height: 1.15; background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55) 30%, transparent 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .ln-feat-stars-chart { flex: 1; min-height: 0; margin: 0 -20px; overflow: hidden; }
+  .ln-feat-stars-chart svg { width: 100%; height: 100%; display: block; }
+  @keyframes sparkle-up { 0% { transform: translateY(20px); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-20px); opacity: 0; } }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  const isMobile = window.innerWidth <= 768;
+
+  // Card reveal
+  gsap.utils.toArray<HTMLElement>(".mb-card").forEach((el, i) => {
+    gsap.fromTo(el, { opacity: 0, y: 24 }, {
+      opacity: 1, y: 0, duration: 0.5, delay: i * 0.07, ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 90%" },
+    });
+  });
+
+  // Chart line draw
+  const chartLine = document.querySelector<SVGPathElement>(".mb-chart-line");
+  if (chartLine) {
+    const len = chartLine.getTotalLength();
+    gsap.set(chartLine, { strokeDasharray: len, strokeDashoffset: len });
+    gsap.to(chartLine, { strokeDashoffset: 0, duration: 2, ease: "power2.out" });
+  }
+
+  // Floating tools
+  if (!isMobile) {
+    document.querySelectorAll<HTMLElement>('.mb-float[data-float="center"]').forEach((el) => {
+      gsap.to(el, { y: 4, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" });
+    });
+    document.querySelectorAll<HTMLElement>('.mb-float[data-float="left"]').forEach((el) => {
+      gsap.to(el, { y: -3, x: 2, duration: 2.5, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 0.6 });
+    });
+    document.querySelectorAll<HTMLElement>('.mb-float[data-float="right"]').forEach((el) => {
+      gsap.to(el, { y: -3, x: -2, duration: 2.75, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 1.2 });
+    });
+  }
+
+  // Variant tabs cycling
+  const vrows = document.querySelectorAll<HTMLElement>(".mb-vrow");
+  if (vrows.length) {
+    let active = 0;
+    setInterval(() => {
+      active = (active + 1) % vrows.length;
+      vrows.forEach((row, i) => { row.style.opacity = i === active ? "1" : "0.3"; });
+    }, 2200);
+  }
+
+  // Local processing steps cycling
+  const steps = document.querySelectorAll<HTMLElement>(".mb-step");
+  if (steps.length) {
+    let step = 0;
+    setInterval(() => {
+      step = (step + 1) % steps.length;
+      steps.forEach((row, i) => {
+        row.style.opacity = i === step ? "1" : "0.25";
+        row.style.transform = i === step ? "translateX(0)" : "translateX(-4px)";
+        const dot = row.querySelector<HTMLElement>(".ln-feat-aichat-dot");
+        if (dot) dot.style.background = i === step ? "rgba(201,212,255,0.8)" : "rgba(255,255,255,0.15)";
+      });
+    }, 1800);
+  }
+
+  // Sparkles
+  document.querySelectorAll<HTMLElement>(".mb-sparkles").forEach((container) => {
+    const density = Number(container.dataset.density || 100);
+    const size = Number(container.dataset.size || 1.2);
+    const color = container.dataset.color || "#ffffff";
+    const opacity = Number(container.dataset.opacity || 0.8);
+    for (let i = 0; i < density; i++) {
+      const particle = document.createElement("div");
+      const randomX = Math.random() * 100;
+      const randomY = Math.random() * 100;
+      const randomDelay = Math.random() * 3;
+      const randomDuration = 2 + Math.random() * 3;
+      const randomSize = size * (0.5 + Math.random());
+      particle.style.cssText = `position:absolute;left:${randomX}%;top:${randomY}%;width:${randomSize}px;height:${randomSize}px;background:${color};border-radius:50%;opacity:${opacity * (0.3 + Math.random() * 0.7)};animation:sparkle-up ${randomDuration}s ease-in-out ${randomDelay}s infinite;pointer-events:none;`;
+      container.appendChild(particle);
+    }
+  });
+</script>

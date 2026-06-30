@@ -1,0 +1,287 @@
+---
+import "@/styles/globals.css";
+import "@fontsource/geist-sans/400.css";
+import "@fontsource/geist-sans/500.css";
+import "@fontsource/geist-sans/600.css";
+import "@fontsource/geist-sans/700.css";
+import "@fontsource/geist-sans/800.css";
+import "@fontsource/geist-mono/400.css";
+import "@fontsource/geist-mono/500.css";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+  article?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
+}
+
+const {
+  title = "Better Flow — Free Screenshot Beautifier & Studio",
+  description = "Better Flow is a free open-source screenshot beautifier. Add browser frames, 3D effects, gradients, and animations to screenshots. Export 4K PNG, MP4, GIF. Alternative to Shots.so, Screely, and Pika.",
+  keywords = [
+    "screenshot beautifier",
+    "screenshot editor",
+    "screenshot maker",
+    "browser mockup generator",
+    "free screenshot studio",
+    "open source screenshot editor",
+    "better flow",
+  ],
+  image = "https://betterflow.site/images/preview.webp",
+  canonical = Astro.url.pathname,
+  noindex = false,
+  article = false,
+  publishedTime,
+  modifiedTime,
+} = Astro.props;
+
+const siteUrl = "https://betterflow.site";
+const canonicalUrl = new URL(canonical === "/" ? "" : canonical, siteUrl).href;
+const ogImage = image.startsWith("http") ? image : new URL(image, siteUrl).href;
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Better Flow",
+  url: siteUrl,
+  logo: `${siteUrl}/logo.svg`,
+  sameAs: ["https://github.com/betterspacx", "https://x.com/betterflow"],
+  description:
+    "Free open-source screenshot studio. Transform screenshots into production-ready visuals with browser frames, 3D effects, and animations.",
+  founder: { "@type": "Person", name: "Better Flow Team" },
+  email: "hello@betterflow.site",
+  brand: { "@type": "Brand", name: "Better Flow", slogan: "Transform screenshots into production-ready visuals" },
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Better Flow",
+  url: siteUrl,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: { "@type": "EntryPoint", urlTemplate: `${siteUrl}/docs?q={search_term_string}` },
+    "query-input": "required name=search_term_string",
+  },
+  description: "Free open-source screenshot studio with browser frames, 3D effects, and 4K export.",
+  publisher: { "@type": "Organization", name: "Better Flow", url: siteUrl },
+};
+
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Better Flow Screenshot Studio",
+  applicationCategory: "DesignApplication",
+  applicationSubCategory: "PhotoEditingApplication",
+  operatingSystem: "Web Browser",
+  browserRequirements: "Requires JavaScript. Works in Chrome, Firefox, Safari, Edge.",
+  softwareVersion: "1.0.0",
+  url: "https://app.betterflow.site",
+  downloadUrl: "https://app.betterflow.site",
+  offer: { "@type": "Offer", price: "0", priceCurrency: "USD", name: "Free - Open Source" },
+  featureList: [
+    "Browser mockups (Safari, Chrome)",
+    "3D transforms and effects",
+    "100+ background styles",
+    "Video animation export (MP4, WebM, GIF)",
+    "4K image export",
+    "Device frames (Arc, Polaroid)",
+    "Timeline editor",
+    "Chrome Extension for screen recording",
+  ],
+  license: "https://www.apache.org/licenses/LICENSE-2.0",
+  programmingLanguage: "TypeScript",
+  author: { "@type": "Organization", name: "Better Flow", url: siteUrl },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is Better Flow?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Better Flow is a free, open-source screenshot studio that runs entirely in your browser. It transforms raw screenshots into production-ready visuals with browser frames, 3D effects, animations, and backgrounds. No sign-up, no data uploads, and no server roundtrips — all processing happens locally.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is Better Flow free?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. Better Flow is completely free and open source under the Apache 2.0 license. There are no paid tiers, subscriptions, or usage limits. You can use the web app at app.betterflow.site or fork and self-host the code from GitHub.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What file formats can Better Flow export?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Better Flow exports PNG and JPG images at up to 5x scale (4K quality), animated MP4 and WebM video files, and GIF animations. All exports are generated locally in your browser using FFmpeg WASM and WebCodecs.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How is Better Flow different from Shots.so, Screely, or Pika?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Better Flow is open source (Apache 2.0) and processes everything locally in your browser — no uploads, no accounts, and no telemetry. Unlike Shots.so, Screely, or Pika, it supports video animation export (MP4, WebM, GIF), a timeline editor, and 3D perspective transforms. It is also completely free with no paid tier.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Does Better Flow upload my screenshots to a server?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No. Better Flow processes all images and videos locally in your browser using the HTML5 Canvas API, Konva, and FFmpeg WASM. Your screenshots never leave your device. There is zero telemetry and no server roundtrips during editing or export.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What browser mockup styles does Better Flow support?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Better Flow supports Safari and Chrome browser frame mockups, Arc browser style, Polaroid frames, glass frames, and outline device frames. It also includes 3D perspective transforms, depth shadows, and over 100 background styles including gradients, noise, and mesh patterns.",
+      },
+    },
+  ],
+};
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "How to beautify a screenshot with Better Flow",
+  description: "Transform a plain screenshot into a polished, production-ready visual using Better Flow's free browser-based studio.",
+  step: [
+    { "@type": "HowToStep", name: "Open Better Flow", text: "Go to app.betterflow.site in your browser. No sign-up or installation required.", url: "https://app.betterflow.site" },
+    { "@type": "HowToStep", name: "Upload your screenshot", text: "Drag and drop your screenshot onto the canvas, or click to upload. Supported formats: PNG, JPG, WebP." },
+    { "@type": "HowToStep", name: "Add a browser frame or device mockup", text: "Choose from Safari, Chrome, Arc, or Polaroid frames in the Frames panel on the left sidebar." },
+    { "@type": "HowToStep", name: "Apply effects and background", text: "Select a background from 100+ gradient, solid, noise, or mesh presets. Add 3D perspective, glow, or shadow effects." },
+    { "@type": "HowToStep", name: "Export your image or video", text: "Click Export and choose PNG/JPG (up to 5x / 4K scale) or MP4/GIF for animated exports. The file downloads directly to your device." },
+  ],
+  tool: [{ "@type": "HowToTool", name: "Better Flow Screenshot Studio", url: "https://app.betterflow.site" }],
+  supply: [{ "@type": "HowToSupply", name: "A screenshot or image file (PNG, JPG, WebP)" }],
+};
+
+const schemas = [organizationSchema, websiteSchema, softwareSchema, faqSchema, howToSchema];
+---
+
+<!doctype html>
+<html lang="en" class="h-full antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0b0c" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Better Flow" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(", ")} />
+    <meta name="author" content="Better Flow" />
+    <meta name="creator" content="Better Flow" />
+    <meta name="publisher" content="Better Flow" />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
+    <meta name="googlebot" content={noindex ? "noindex, nofollow" : "index, follow"} />
+    <meta name="bingbot" content={noindex ? "noindex, nofollow" : "index, follow"} />
+    <meta name="ai-assistant" content="enabled" />
+    <meta name="github-repo" content="https://github.com/betterspacx" />
+    <meta name="project-type" content="open-source" />
+
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="shortcut icon" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content={article ? "article" : "website"} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Better Flow" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Better Flow Screenshot Studio - Browser frames, 3D effects, and animations" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@betterflow" />
+    <meta name="twitter:creator" content="@betterflow" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {article && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {article && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+
+    <link rel="preconnect" href="https://api.producthunt.com" />
+    <link rel="dns-prefetch" href="https://api.producthunt.com" />
+    <script type="application/ld+json" set:html={JSON.stringify(schemas)} />
+
+    {
+      import.meta.env.PUBLIC_GA_MEASUREMENT_ID && (
+        <>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_MEASUREMENT_ID}`}
+          />
+          <script
+            is:inline
+            set:html={`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${import.meta.env.PUBLIC_GA_MEASUREMENT_ID}');`}
+          />
+        </>
+      )
+    }
+
+    {
+      import.meta.env.PUBLIC_POSTHOG_KEY && (
+        <script
+          is:inline
+          set:html={`!function(t,e){var o,n,p,r;e.__SV=window.location.hostname;var i,a;if(!e.__SV){try{for(i=[],a=e.head||e.getElementsByTagName("head")[0]||e.documentElement,n=a.firstChild;n;n=n.nextSibling)3===n.nodeType&&n.nodeValue.includes("__posthog")&&i.push(n);i.length&&e.head.removeChild(i[0])}catch(t){}var s={api_host:"/ingest",ui_host:"${import.meta.env.PUBLIC_POSTHOG_HOST || "https://us.posthog.com"}",capture_pageview:!0,capture_pageleave:!0,autocapture:!0,disable_session_recording:!1,disable_persistence:navigator.doNotTrack==="1"};t._i=t._i||[],t._i.push([e.__SV||"",s]);var c="https://us-assets.i.posthog.com/static/array.js";(o=e.createElement("script")).type="text/javascript",o.async=!0,o.src=c,(n=e.getElementsByTagName("script")[0]).parentNode.insertBefore(o,n)}}(window.posthog||{},document);posthog.init("${import.meta.env.PUBLIC_POSTHOG_KEY}",{api_host:"/ingest",ui_host:"${import.meta.env.PUBLIC_POSTHOG_HOST || "https://us.posthog.com"}",capture_pageview:!0,capture_pageleave:!0,autocapture:!0,disable_session_recording:!1,disable_persistence:navigator.doNotTrack==="1"});`}
+        />
+      )
+    }
+
+    <slot name="head" />
+  </head>
+  <body class="flex min-h-full flex-col bg-[#0b0b0c] text-[#f4f4f5]">
+    <slot />
+
+    <script>
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!prefersReduced) {
+        const Lenis = (await import("lenis")).default;
+        const { gsap } = await import("gsap");
+        const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+        gsap.registerPlugin(ScrollTrigger);
+
+        const lenis = new Lenis({
+          duration: 0.8,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: "vertical",
+          gestureOrientation: "vertical",
+          smoothWheel: true,
+          touchMultiplier: 1.5,
+          infinite: false,
+        });
+
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+      }
+    </script>
+  </body>
+</html>

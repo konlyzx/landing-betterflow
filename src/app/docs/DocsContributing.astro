@@ -1,0 +1,129 @@
+---
+import CodeBlock from "@/app/components/docs/CodeBlock.astro";
+
+const animationConventions = [
+  ["Page entrances, stagger, hover", "framer-motion (default)"],
+  ["Scroll-driven animations, pinning", "GSAP + ScrollTrigger"],
+  ["Smooth scrolling", "Lenis (global via root layout)"],
+];
+---
+
+<section class="docs-section">
+  <h1 class="docs-category-title">Contributing</h1>
+  <p class="docs-paragraph">
+    Thank you for your interest in Better Flow! Both the landing page and the screenshot studio are open source and welcome contributions.
+  </p>
+
+  <hr class="docs-separator" />
+
+  <h2 class="docs-category-title">Code of Conduct</h2>
+  <p class="docs-paragraph">
+    This project follows the <a href="https://www.contributor-covenant.org/" class="docs-link">Contributor Covenant</a>. By participating, you are expected to uphold this code. Report unacceptable behavior to <a href="mailto:hello@betterflow.site" class="docs-link">hello@betterflow.site</a>.
+  </p>
+
+  <hr class="docs-separator" />
+
+  <h2 class="docs-category-title">Prerequisites</h2>
+  <ul class="docs-list">
+    <li class="docs-list-item"><span class="docs-highlight">Node.js 18+</span> (LTS recommended)</li>
+    <li class="docs-list-item"><span class="docs-highlight">pnpm</span> (required — do not use npm or yarn)</li>
+  </ul>
+  <CodeBlock>{`npm install -g pnpm`}</CodeBlock>
+
+  <hr class="docs-separator" />
+
+  <h2 class="docs-category-title">Getting Started</h2>
+
+  <h3 class="docs-category-subtitle">Landing Page</h3>
+  <CodeBlock>{`git clone https://github.com/konlyzx/landing-betterflow.git
+cd landing-betterflow
+pnpm install
+pnpm dev`}</CodeBlock>
+
+  <h3 class="docs-category-subtitle">Screenshot Studio</h3>
+  <CodeBlock>{`git clone https://github.com/konlyzx/betterflow.git
+cd betterflow
+pnpm install
+pnpm run dev`}</CodeBlock>
+
+  <hr class="docs-separator" />
+
+  <h2 class="docs-category-title">Coding Standards</h2>
+
+  <h3 class="docs-category-subtitle">General</h3>
+  <ul class="docs-list">
+    <li class="docs-list-item"><span class="docs-highlight">TypeScript strict mode</span> enabled — avoid using <code class="docs-highlight">any</code></li>
+    <li class="docs-list-item"><span class="docs-highlight">Functional components</span> with named exports</li>
+    <li class="docs-list-item"><span class="docs-highlight">Client components:</span> Add <code class="docs-highlight">"use client"</code> at the top of every component that uses hooks, events, or browser APIs</li>
+    <li class="docs-list-item"><span class="docs-highlight">File naming:</span> <code class="docs-highlight">PascalCase.tsx</code> for components, <code class="docs-highlight">kebab-case.ts</code> for utilities</li>
+    <li class="docs-list-item"><span class="docs-highlight">Path alias:</span> <code class="docs-highlight">@/*</code> maps to project root</li>
+  </ul>
+
+  <h3 class="docs-category-subtitle">Animation Conventions</h3>
+  <div class="docs-code" style="margin-bottom: 1.8em;">
+    <pre class="docs-pre" style="padding: 0; overflow: hidden;">
+      <table>
+        <thead>
+          <tr>
+            <th class="docs-highlight" style="font-size: 13px; text-align: left; padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-primary);">Use Case</th>
+            <th class="docs-highlight" style="font-size: 13px; text-align: left; padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-primary);">Library</th>
+          </tr>
+        </thead>
+        <tbody>
+          {animationConventions.map(([useCase, lib]) => (
+            <tr>
+              <td style="padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-secondary); font-size: 14px; color: var(--bf-text-secondary);">{useCase}</td>
+              <td style="padding: 0.5em 1em; border-bottom: 1px solid var(--bf-border-secondary); font-size: 14px; color: var(--bf-text-secondary);"><code class="docs-highlight">{lib}</code></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </pre>
+  </div>
+
+  <ul class="docs-list">
+    <li class="docs-list-item">GSAP-heavy components must use <code class="docs-highlight">dynamic(() =&gt; import(...), {'{ ssr: false }'})</code></li>
+    <li class="docs-list-item">Always respect <code class="docs-highlight">prefers-reduced-motion</code> via <code class="docs-highlight">useReducedMotion()</code> hook</li>
+    <li class="docs-list-item">Use <code class="docs-highlight">as const</code> on framer-motion <code class="docs-highlight">ease</code> arrays to satisfy strict TypeScript</li>
+  </ul>
+
+  <hr class="docs-separator" />
+
+  <h2 class="docs-category-title">Submitting Changes</h2>
+
+  <h3 class="docs-category-subtitle">Branch Naming</h3>
+  <CodeBlock>{`feature/description     # New features
+fix/description         # Bug fixes
+refactor/description    # Code refactoring
+docs/description        # Documentation
+chore/description       # Maintenance`}</CodeBlock>
+
+  <h3 class="docs-category-subtitle">Commit Conventions</h3>
+  <p class="docs-paragraph short">
+    Use <a href="https://www.conventionalcommits.org/" class="docs-link">conventional commits</a>:
+  </p>
+  <CodeBlock>{`feat: add 3D perspective controls
+fix: resolve canvas resize flicker
+docs: update API reference
+refactor: extract export pipeline
+chore: bump dependencies`}</CodeBlock>
+
+  <h3 class="docs-category-subtitle">PR Checklist</h3>
+  <ul class="docs-list">
+    <li class="docs-list-item">TypeScript compiles without errors (<code class="docs-highlight">pnpm build</code>)</li>
+    <li class="docs-list-item">ESLint passes (<code class="docs-highlight">pnpm lint</code>)</li>
+    <li class="docs-list-item">Follows coding standards (strict types, no <code class="docs-highlight">any</code>, named exports)</li>
+    <li class="docs-list-item">Respects reduced motion preferences</li>
+    <li class="docs-list-item">No hardcoded colors or values (uses CSS variables)</li>
+    <li class="docs-list-item">Branch is up to date with main</li>
+  </ul>
+
+  <hr class="docs-separator" />
+
+  <h2 class="docs-category-title">Getting Help</h2>
+  <ul class="docs-list">
+    <li class="docs-list-item"><span class="docs-highlight">GitHub Discussions:</span> <a href="https://github.com/betterspacx" class="docs-link">github.com/betterspacx</a></li>
+    <li class="docs-list-item"><span class="docs-highlight">Email:</span> <a href="mailto:hello@betterflow.site" class="docs-link">hello@betterflow.site</a></li>
+    <li class="docs-list-item"><span class="docs-highlight">Twitter/X:</span> <a href="https://x.com/betterflow" class="docs-link">@betterflow</a></li>
+  </ul>
+</section>

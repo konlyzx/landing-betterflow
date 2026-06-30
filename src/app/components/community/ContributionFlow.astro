@@ -1,0 +1,83 @@
+---
+import SpotlightCard from "@/app/components/ui/SpotlightCard.astro";
+
+const cardStyle = "background:#131316;border:none;border-top:1px solid rgba(255, 255, 255, 0.08);border-radius:24px";
+const STEPS = [
+  { icon: '<circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path>', label: "Discover", description: "Explore the project, read the docs, understand the vision.", action: "Explore Docs", href: "/docs", color: "#ff7e40", spot: "255, 126, 64" },
+  { icon: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>', label: "Discuss", description: "Join conversations, ask questions, share your perspective.", action: "Join Discussion", href: "https://github.com/betterspacx", color: "#ff4b72", spot: "255, 75, 114" },
+  { icon: '<polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline>', label: "Contribute", description: "Submit PRs, fix bugs, add features, improve docs.", action: "Submit PR", href: "https://github.com/betterspacx", color: "#a445ff", spot: "164, 69, 255" },
+  { icon: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>', label: "Build Together", description: "Grow with the community. Review, mentor, shape the future.", action: "Get Involved", href: "https://github.com/betterspacx", color: "#ff7e40", spot: "255, 126, 64" },
+];
+const arrowUpRight = '<path d="M7 7h10v10"></path><path d="M7 17 17 7"></path>';
+---
+
+<section class="relative z-10 overflow-hidden px-6 py-24">
+  <div class="mx-auto max-w-[1324px]">
+    <div class="cf-reveal" style="margin-bottom:32px">
+      <h2 style="font-family:Geist, sans-serif;font-size:32px;font-weight:500;color:#fff;letter-spacing:-0.02em;margin:0">From discovery <span style="color:rgba(255,255,255,0.5)">to impact.</span></h2>
+    </div>
+
+    <div class="hidden md:grid" style="grid-template-columns:repeat(12, 1fr);gap:16px">
+      {STEPS.map((step) => (
+        <div class="cf-card" style="grid-column:span 12;display:flex;flex-direction:column">
+          <SpotlightCard class="flex h-full flex-col rounded-2xl p-8 transition-all duration-300" style={cardStyle} spotlightColor={`rgba(${step.spot}, 0.08)`}>
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl" style={`background:${step.color}08;border:1px solid ${step.color}15`}>
+              <svg class="h-5 w-5" style={`color:${step.color}99`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={step.icon}></svg>
+            </div>
+            <h3 style="font-family:'Geist Sans', sans-serif;font-size:15px;font-weight:600;color:#fff;margin:0 0 6px;letter-spacing:-0.01em">{step.label}</h3>
+            <p style="font-family:'Geist Sans', sans-serif;font-size:13px;line-height:1.55;color:rgba(255, 255, 255, 0.6);margin:0 0 24px;flex:1">{step.description}</p>
+            <a href={step.href} target="_blank" rel="noopener noreferrer" class="group/btn inline-flex items-center gap-2 self-start rounded-lg px-4 py-2 text-sm font-medium transition-all duration-300" style="background:rgba(255, 255, 255, 0.04);border:1px solid rgba(255, 255, 255, 0.06);color:rgba(255, 255, 255, 0.7)">
+              {step.action}
+              <svg class="h-3.5 w-3.5 transition-all duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={arrowUpRight}></svg>
+            </a>
+          </SpotlightCard>
+        </div>
+      ))}
+    </div>
+
+    <div class="flex flex-col gap-5 md:hidden">
+      {STEPS.map((step) => (
+        <div class="cf-card-m rounded-2xl p-6" style={cardStyle}>
+          <div class="flex items-start gap-4">
+            <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl" style={`background:${step.color}08;border:1px solid ${step.color}15`}>
+              <svg class="h-5 w-5" style={`color:${step.color}99`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={step.icon}></svg>
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 style="font-family:'Geist Sans', sans-serif;font-size:15px;font-weight:600;color:#fff;margin:0 0 6px;letter-spacing:-0.01em">{step.label}</h3>
+              <p style="font-family:'Geist Sans', sans-serif;font-size:13px;line-height:1.55;color:rgba(255, 255, 255, 0.6);margin:0">{step.description}</p>
+            </div>
+          </div>
+          <a href={step.href} target="_blank" rel="noopener noreferrer" class="group/btn mt-4 inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-300" style="background:rgba(255, 255, 255, 0.04);border:1px solid rgba(255, 255, 255, 0.06);color:rgba(255, 255, 255, 0.7)">
+            {step.action}
+            <svg class="h-3.5 w-3.5 transition-all duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={arrowUpRight}></svg>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 1024px) {
+    .cf-card { grid-column: span 3 !important; }
+  }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .cf-card { grid-column: span 6 !important; }
+  }
+  .cf-card:hover, .cf-card-m:hover { border-top-color: rgba(255, 255, 255, 0.18); translate: 0 -2px; }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll<HTMLElement>(".cf-reveal").forEach((el) => {
+    gsap.fromTo(el, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 90%" } });
+  });
+  gsap.utils.toArray<HTMLElement>(".cf-card").forEach((el, i) => {
+    gsap.fromTo(el, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, delay: i * 0.18, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" } });
+  });
+  gsap.utils.toArray<HTMLElement>(".cf-card-m").forEach((el, i) => {
+    gsap.fromTo(el, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, delay: i * 0.1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 92%" } });
+  });
+</script>

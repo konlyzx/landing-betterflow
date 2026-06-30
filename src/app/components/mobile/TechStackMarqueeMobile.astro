@@ -1,0 +1,107 @@
+---
+const badges = [
+  { name: "React", url: "https://newshields.vercel.app/api/badge.svg?label=Built%20with&title=React&icon=react_dark&theme=midnight", alt: "Built with React" },
+  { name: "shadcn/ui", url: "/icons/shadcn_ui.svg", alt: "Built with shadcn/ui" },
+  { name: "Next.js", url: "/icons/next.js.svg", alt: "Built with Next.js" },
+  { name: "Tailwind CSS", url: "/icons/tailwind-css.svg", alt: "Built with Tailwind CSS" },
+];
+const TECH_DATA = {
+  React: { name: "React", description: "A JavaScript library for building user interfaces. Created by Meta, it enables fast, declarative UI rendering with components, hooks, and virtual DOM diffing.", role: "UI Framework", website: "react.dev" },
+  "shadcn/ui": { name: "shadcn/ui", description: "Beautifully designed components built with Radix UI and Tailwind CSS. Copy-paste ready, fully accessible, and endlessly customizable.", role: "Component Library", website: "ui.shadcn.com" },
+  "Next.js": { name: "Next.js", description: "The React Framework for production. Handles routing, SSR, static generation, and edge deployment with zero config.", role: "App Framework", website: "nextjs.org" },
+  "Tailwind CSS": { name: "Tailwind CSS", description: "A utility-first CSS framework for rapid UI development. Write inline utility classes instead of custom CSS.", role: "Styling Engine", website: "tailwindcss.com" },
+};
+const techDataJson = JSON.stringify(TECH_DATA);
+const badgesJson = JSON.stringify(badges);
+---
+
+<section class="relative z-10 px-4 py-6">
+  <p class="mx-auto mb-5 max-w-[280px] text-center text-xs leading-relaxed text-[#71717a]">
+    Built with <strong class="font-semibold text-[#a1a1aa]">modern open-source</strong> technologies. TypeScript-first, locally processed, no telemetry.
+  </p>
+
+  <div class="mx-auto grid max-w-[300px] grid-cols-2 gap-3">
+    {badges.map((b) => (
+      <button class="tsmm-badge relative flex h-12 cursor-pointer items-center justify-center overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.02] transition-all duration-200 select-none" data-name={b.name}>
+        <img src={b.url} alt={b.alt} class="h-8 w-auto" draggable="false" />
+      </button>
+    ))}
+  </div>
+
+  <p class="mt-3 text-center text-[10px] text-white/30">Tap a card to learn more</p>
+</section>
+
+<div class="tsmm-detail relative z-10 overflow-hidden px-4" style="height:0;opacity:0" data-tech={techDataJson} data-badges={badgesJson}>
+  <div class="mx-auto max-w-[400px] py-4">
+    <div class="relative rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4 backdrop-blur-xl">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0">
+          <img class="tsmm-detail-img h-8 rounded-lg" alt="" draggable="false" />
+          <div class="tsmm-detail-role mt-2 text-center text-[9px] font-medium tracking-widest text-[#71717a] uppercase"></div>
+        </div>
+        <div class="min-w-0 flex-1">
+          <h3 class="tsmm-detail-name mb-1 text-sm font-semibold text-white"></h3>
+          <p class="tsmm-detail-desc text-xs leading-relaxed text-[#a1a1aa]"></p>
+          <a class="tsmm-detail-link mt-2 inline-flex items-center gap-1 text-[10px] text-[#c9d4ff] transition-colors hover:text-white" target="_blank" rel="noopener noreferrer">
+            <span class="tsmm-detail-linktext"></span>
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" class="opacity-70"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+        </div>
+      </div>
+      <button class="tsmm-detail-close absolute top-3 right-3 flex h-6 w-6 items-center justify-center rounded-full text-white/40 transition-all hover:bg-white/10 hover:text-white/80">
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .tsmm-badge.active { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  const detail = document.querySelector<HTMLElement>(".tsmm-detail");
+  const badges = document.querySelectorAll<HTMLButtonElement>(".tsmm-badge");
+  if (detail) {
+    const TECH_DATA = JSON.parse(detail.dataset.tech || "{}");
+    const BADGES = JSON.parse(detail.dataset.badges || "[]");
+    let activeTech: string | null = null;
+    const img = detail.querySelector<HTMLImageElement>(".tsmm-detail-img");
+    const role = detail.querySelector<HTMLElement>(".tsmm-detail-role");
+    const name = detail.querySelector<HTMLElement>(".tsmm-detail-name");
+    const desc = detail.querySelector<HTMLElement>(".tsmm-detail-desc");
+    const link = detail.querySelector<HTMLAnchorElement>(".tsmm-detail-link");
+    const linktext = detail.querySelector<HTMLElement>(".tsmm-detail-linktext");
+    const closeBtn = detail.querySelector<HTMLElement>(".tsmm-detail-close");
+
+    function open(tech: string) {
+      const data = TECH_DATA[tech];
+      const badge = BADGES.find((b: any) => b.name === tech);
+      if (!data) return;
+      if (img && badge) img.src = badge.url;
+      if (role) role.textContent = data.role;
+      if (name) name.textContent = data.name;
+      if (desc) desc.textContent = data.description;
+      if (link) link.href = `https://${data.website}`;
+      if (linktext) linktext.textContent = `Visit ${data.website}`;
+      gsap.set(detail, { height: "auto" });
+      gsap.from(detail, { height: 0, opacity: 0, duration: 0.3, ease: "power2.out" });
+      gsap.to(detail, { opacity: 1, duration: 0.3 });
+    }
+    function close() {
+      gsap.to(detail, { height: 0, opacity: 0, duration: 0.3, ease: "power2.out" });
+    }
+    function setActive(tech: string | null) {
+      badges.forEach((b) => b.classList.toggle("active", tech !== null && b.dataset.name === tech));
+    }
+    badges.forEach((badge) => {
+      badge.addEventListener("click", () => {
+        const tech = badge.dataset.name!;
+        if (activeTech === tech) { activeTech = null; setActive(null); close(); return; }
+        activeTech = tech; setActive(tech); open(tech);
+      });
+    });
+    closeBtn?.addEventListener("click", () => { activeTech = null; setActive(null); close(); });
+  }
+</script>

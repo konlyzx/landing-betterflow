@@ -1,0 +1,41 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import AlternativePage from "@/app/alternatives/AlternativePage.astro";
+---
+
+<Layout
+  title="Better Flow vs Snappify — Free Screenshot & Code Screenshot Alternative"
+  description="Compare Better Flow vs Snappify. Better Flow is a free open-source alternative with browser mockups, 3D effects, video export, and local processing. No subscription required."
+  keywords={["snappify alternative", "snappify free alternative", "code screenshot tool free", "screenshot presentation tool free", "open source snappify", "better flow vs snappify", "snappify alternative 2026", "screenshot tool developers free"]}
+  canonical="/alternatives/snappify"
+>
+  <AlternativePage
+    competitor="Snappify"
+    competitorUrl="https://snappify.com"
+    tagline="Snappify charges a subscription for code and screenshot presentations. Better Flow is free, open source, and adds browser mockups and video export with no monthly fee."
+    summary="Snappify is a polished tool for creating code screenshots and presentations, but requires a paid subscription for most features. Better Flow is a free, open-source alternative focused on screenshot beautification — with browser frames, 3D effects, animated video export, and 100+ backgrounds. No subscription, no account, and your files never leave your device."
+    verdict="If you're a developer looking for a free Snappify alternative to beautify screenshots without a monthly fee, Better Flow is the answer. It handles browser mockups and visual exports Snappify doesn't cover."
+    pricing={{
+      competitor: "Free tier is very limited. Full access requires a paid subscription starting at $8/month or ~$60/year.",
+      betterFlow: "$0 forever. No subscription, no limits, no account. Apache 2.0 open source — self-host or use the web app for free."
+    }}
+    features={[
+      { name: "Free to use fully", competitor: false, betterFlow: true },
+      { name: "No account required", competitor: false, betterFlow: true },
+      { name: "No subscription", competitor: false, betterFlow: true },
+      { name: "Browser mockups (Safari, Chrome)", competitor: false, betterFlow: true },
+      { name: "Code screenshots", competitor: true, betterFlow: "Via screenshot" },
+      { name: "Gradient backgrounds", competitor: true, betterFlow: true },
+      { name: "3D perspective effects", competitor: false, betterFlow: true },
+      { name: "Video export (MP4 / GIF)", competitor: "Paid", betterFlow: true },
+      { name: "Local processing (no uploads)", competitor: false, betterFlow: true },
+      { name: "Open source", competitor: false, betterFlow: true },
+    ]}
+    faqs={[
+      { q: "Is Better Flow a free alternative to Snappify?", a: "Yes. Better Flow is completely free with no subscription, no account, and no feature limits. It focuses on screenshot beautification with browser frames, 3D effects, and video export — all at no cost." },
+      { q: "Can Better Flow replace Snappify for code screenshots?", a: "Better Flow doesn't have a built-in code editor like Snappify, but you can take a screenshot of your code (or use any code screenshot tool) and then beautify it in Better Flow with browser frames, backgrounds, 3D effects, and animated exports." },
+      { q: "Why is Better Flow free when Snappify charges?", a: "Better Flow is open source under the Apache 2.0 license. There's no commercial model — it's community-built and free for everyone. You can also self-host the entire application for free." },
+      { q: "Does Better Flow export video like Snappify?", a: "Yes. Better Flow exports MP4, WebM, and GIF animations using FFmpeg WASM and WebCodecs — all locally in your browser with no server uploads. This is available for free, unlike Snappify which requires a paid plan for animated exports." },
+    ]}
+  />
+</Layout>

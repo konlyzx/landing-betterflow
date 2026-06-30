@@ -1,0 +1,229 @@
+---
+export interface Props {
+  competitor: string;
+  competitorUrl: string;
+  tagline: string;
+  summary: string;
+  verdict: string;
+  pricing: {
+    competitor: string;
+    betterFlow: string;
+  };
+  features: {
+    name: string;
+    competitor: boolean | string;
+    betterFlow: boolean | string;
+  }[];
+  faqs: { q: string; a: string }[];
+}
+
+import Navbar from "@/app/components/Navbar.astro";
+import Footer from "@/app/components/Footer.astro";
+
+const { competitor, competitorUrl, tagline, summary, verdict, pricing, features, faqs } = Astro.props;
+---
+
+<Navbar />
+
+<main class="relative min-h-screen bg-[#0b0b0c]">
+  <!-- Hero -->
+  <section class="relative z-10 overflow-hidden px-6 pt-40 pb-20">
+    <div class="mx-auto max-w-[860px] text-center">
+      <div
+        class="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium"
+        style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)"
+      >
+        <span style="color:rgba(255,255,255,0.5)">vs</span>
+        <span style="color:rgba(255,255,255,0.8)">{competitor}</span>
+      </div>
+      <h1
+        style="font-family:Geist, sans-serif;font-size:clamp(36px,5vw,60px);font-weight:600;color:#fff;letter-spacing:-0.035em;line-height:1.05;margin:0 0 20px"
+      >
+        Better Flow vs {competitor}
+      </h1>
+      <p style="font-family:'Geist Sans', sans-serif;font-size:18px;line-height:1.6;color:rgba(255,255,255,0.55);margin:0 0 36px;max-width:620px;margin-left:auto;margin-right:auto">
+        {tagline}
+      </p>
+      <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a
+          href="https://app.betterflow.site/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="alt-btn-primary inline-flex items-center gap-2 text-sm font-medium transition-all duration-200 hover:scale-[1.02]"
+          style="background:linear-gradient(110deg,#c9d4ff 0%,#e0d4ff 45%,#f5d4e8 100%);color:#000;border-radius:64px;padding:14px 24px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7)"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          Try Better Flow — Free
+        </a>
+        <a
+          href={competitorUrl}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          class="inline-flex items-center gap-2 text-sm font-medium transition-all duration-200 hover:text-white"
+          style="color:rgba(255,255,255,0.4);padding:14px 20px"
+        >
+          Visit {competitor} →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Summary -->
+  <section class="relative z-10 px-6 py-16">
+    <div class="mx-auto max-w-[860px]">
+      <div
+        class="rounded-2xl p-8"
+        style="background:#131316;border:none;border-top:1px solid rgba(255,255,255,0.08)"
+      >
+        <h2 style="font-family:Geist, sans-serif;font-size:20px;font-weight:500;color:#fff;letter-spacing:-0.02em;margin:0 0 14px">
+          TL;DR — The Short Answer
+        </h2>
+        <p style="font-family:'Geist Sans', sans-serif;font-size:14px;line-height:1.7;color:rgba(255,255,255,0.6);margin:0">
+          {summary}
+        </p>
+        <div class="mt-6 flex items-start gap-3">
+          <div class="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full" style="background:rgba(255,126,64,0.15)">
+            <svg class="h-3 w-3" style="color:#ff7e40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <p style="font-family:'Geist Sans', sans-serif;font-size:14px;line-height:1.6;color:rgba(255,255,255,0.5);margin:0">
+            <strong style="color:rgba(255,255,255,0.8)">Our verdict:</strong> {verdict}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing comparison -->
+  <section class="relative z-10 px-6 py-8">
+    <div class="mx-auto max-w-[860px]">
+      <h2 style="font-family:Geist, sans-serif;font-size:28px;font-weight:500;color:#fff;letter-spacing:-0.02em;margin:0 0 24px">Pricing</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="rounded-2xl p-6" style="background:#131316;border:none;border-top:1px solid rgba(255,255,255,0.08)">
+          <div class="mb-3 flex items-center gap-2">
+            <div class="h-2 w-2 rounded-full" style="background:rgba(255,255,255,0.3)"></div>
+            <span style="font-family:'Geist Sans', sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);letter-spacing:0.05em;text-transform:uppercase">{competitor}</span>
+          </div>
+          <p style="font-family:'Geist Sans', sans-serif;font-size:14px;line-height:1.65;color:rgba(255,255,255,0.6);margin:0">{pricing.competitor}</p>
+        </div>
+        <div class="rounded-2xl p-6" style="background:#131316;border:none;border-top:1px solid rgba(255,126,64,0.3)">
+          <div class="mb-3 flex items-center gap-2">
+            <div class="h-2 w-2 rounded-full" style="background:#ff7e40"></div>
+            <span style="font-family:'Geist Sans', sans-serif;font-size:13px;font-weight:600;color:#ff7e40;letter-spacing:0.05em;text-transform:uppercase">Better Flow</span>
+          </div>
+          <p style="font-family:'Geist Sans', sans-serif;font-size:14px;line-height:1.65;color:rgba(255,255,255,0.6);margin:0">{pricing.betterFlow}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature comparison table -->
+  <section class="relative z-10 px-6 py-16">
+    <div class="mx-auto max-w-[860px]">
+      <h2 style="font-family:Geist, sans-serif;font-size:28px;font-weight:500;color:#fff;letter-spacing:-0.02em;margin:0 0 24px">Feature Comparison</h2>
+      <div class="overflow-hidden rounded-2xl" style="border:1px solid rgba(255,255,255,0.06)">
+        <!-- Header -->
+        <div class="grid grid-cols-3 px-5 py-3" style="background:#131316;border-bottom:1px solid rgba(255,255,255,0.06)">
+          <span style="font-family:'Geist Sans', sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase">Feature</span>
+          <span style="font-family:'Geist Sans', sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;text-align:center">{competitor}</span>
+          <span style="font-family:'Geist Sans', sans-serif;font-size:12px;font-weight:600;color:#ff7e40;letter-spacing:0.08em;text-transform:uppercase;text-align:center">Better Flow</span>
+        </div>
+        {features.map((f, i) => (
+          <div
+            class="grid grid-cols-3 items-center px-5 py-4"
+            style={`background:${i % 2 === 0 ? '#0e0e10' : '#0b0b0c'};border-bottom:1px solid rgba(255,255,255,0.04)`}
+          >
+            <span style="font-family:'Geist Sans', sans-serif;font-size:13px;color:rgba(255,255,255,0.7)">{f.name}</span>
+            <span class="flex justify-center">
+              {typeof f.competitor === 'boolean' ? (
+                f.competitor
+                  ? <svg class="h-4 w-4" style="color:rgba(255,255,255,0.4)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                  : <svg class="h-4 w-4" style="color:rgba(255,255,255,0.2)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              ) : (
+                <span style="font-family:'Geist Sans', sans-serif;font-size:12px;color:rgba(255,255,255,0.45)">{f.competitor}</span>
+              )}
+            </span>
+            <span class="flex justify-center">
+              {typeof f.betterFlow === 'boolean' ? (
+                f.betterFlow
+                  ? <svg class="h-4 w-4" style="color:#ff7e40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                  : <svg class="h-4 w-4" style="color:rgba(255,255,255,0.2)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              ) : (
+                <span style="font-family:'Geist Sans', sans-serif;font-size:12px;color:#ff7e40">{f.betterFlow}</span>
+              )}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="relative z-10 px-6 py-16">
+    <div class="mx-auto max-w-[860px]">
+      <h2 style="font-family:Geist, sans-serif;font-size:28px;font-weight:500;color:#fff;letter-spacing:-0.02em;margin:0 0 24px">
+        Frequently asked questions
+      </h2>
+      <div class="flex flex-col gap-3">
+        {faqs.map((item, i) => (
+          <div class="alt-faq-item rounded-2xl overflow-hidden" style="background:#131316;border:none;border-top:1px solid rgba(255,255,255,0.08)">
+            <button
+              class="alt-faq-trigger w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+              aria-expanded="false"
+              aria-controls={`alt-faq-${i}`}
+            >
+              <span style="font-family:'Geist Sans', sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.9);letter-spacing:-0.01em">{item.q}</span>
+              <svg class="alt-faq-icon h-4 w-4 flex-shrink-0 transition-transform duration-200" style="color:rgba(255,255,255,0.35)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            </button>
+            <div id={`alt-faq-${i}`} class="alt-faq-answer hidden px-6 pb-5">
+              <p style="font-family:'Geist Sans', sans-serif;font-size:13px;line-height:1.65;color:rgba(255,255,255,0.5);margin:0;border-top:1px solid rgba(255,255,255,0.06);padding-top:14px">{item.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative z-10 px-6 py-24">
+    <div class="mx-auto max-w-[680px] text-center">
+      <h2 style="font-family:Geist, sans-serif;font-size:36px;font-weight:600;color:#fff;letter-spacing:-0.035em;margin:0 0 16px">
+        Ready to switch to Better Flow?
+      </h2>
+      <p style="font-family:'Geist Sans', sans-serif;font-size:15px;line-height:1.6;color:rgba(255,255,255,0.5);margin:0 0 36px">
+        100% free, no account required, fully open source. Your screenshots never leave your browser.
+      </p>
+      <a
+        href="https://app.betterflow.site/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-sm font-medium transition-all duration-200 hover:scale-[1.02]"
+        style="background:linear-gradient(110deg,#c9d4ff 0%,#e0d4ff 45%,#f5d4e8 100%);color:#000;border-radius:64px;padding:16px 28px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.7)"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        Open Better Flow — Free
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</main>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>(".alt-faq-trigger").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const item = btn.closest<HTMLElement>(".alt-faq-item")!;
+      const answer = item.querySelector<HTMLElement>(".alt-faq-answer")!;
+      const icon = btn.querySelector<SVGElement>(".alt-faq-icon")!;
+      const isOpen = !answer.classList.contains("hidden");
+      if (isOpen) {
+        answer.classList.add("hidden");
+        btn.setAttribute("aria-expanded", "false");
+        icon.style.transform = "rotate(0deg)";
+      } else {
+        answer.classList.remove("hidden");
+        btn.setAttribute("aria-expanded", "true");
+        icon.style.transform = "rotate(45deg)";
+      }
+    });
+  });
+</script>

@@ -1,0 +1,76 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Navbar from "@/app/components/Navbar.astro";
+import Footer from "@/app/components/Footer.astro";
+
+const alts = [
+  {
+    href: "/alternatives/shots-so",
+    name: "Shots.so",
+    description: "Shots.so is popular but charges for backgrounds and watermark-free exports. Better Flow gives you everything free.",
+  },
+  {
+    href: "/alternatives/screely",
+    name: "Screely",
+    description: "Screely adds browser frames to screenshots. Better Flow does the same plus 3D effects, video export, and 100+ backgrounds.",
+  },
+  {
+    href: "/alternatives/pika",
+    name: "Pika",
+    description: "Pika adds watermarks on the free tier. Better Flow is fully free, no watermarks, no account, and locally processed.",
+  },
+  {
+    href: "/alternatives/snappify",
+    name: "Snappify",
+    description: "Snappify requires a subscription for most features. Better Flow is free and open source with browser mockups and video export.",
+  },
+];
+---
+
+<Layout
+  title="Better Flow Alternatives — Free Open Source Screenshot Beautifier"
+  description="Compare Better Flow with Shots.so, Screely, Pika, and Snappify. Better Flow is the free, open-source alternative with no watermarks, no account, and video export."
+  keywords={["screenshot tool alternatives", "shots.so alternative", "screely alternative", "pika alternative", "snappify alternative", "free screenshot beautifier alternative", "open source screenshot tool alternative"]}
+  canonical="/alternatives"
+>
+  <Navbar />
+
+  <main class="relative min-h-screen bg-[#0b0b0c]">
+    <section class="relative z-10 px-6 pt-40 pb-24">
+      <div class="mx-auto max-w-[860px]">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
+          <span style="color:rgba(255,255,255,0.5)">vs</span>
+          <span style="color:rgba(255,255,255,0.8)">Every screenshot tool</span>
+        </div>
+        <h1 style="font-family:Geist, sans-serif;font-size:clamp(32px,5vw,52px);font-weight:600;color:#fff;letter-spacing:-0.035em;margin:0 0 12px">
+          Better Flow vs the alternatives
+        </h1>
+        <p style="font-family:'Geist Sans', sans-serif;font-size:16px;color:rgba(255,255,255,0.5);margin:0 0 56px">
+          How does Better Flow compare to the most popular screenshot beautifier tools?
+        </p>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          {alts.map((alt) => (
+            <a
+              href={alt.href}
+              class="group block rounded-2xl p-6 transition-all duration-200 hover:scale-[1.02]"
+              style="background:#131316;border:none;border-top:1px solid rgba(255,255,255,0.08)"
+            >
+              <div class="mb-2 flex items-center justify-between">
+                <span style="font-family:Geist, sans-serif;font-size:16px;font-weight:600;color:#fff;letter-spacing:-0.01em">
+                  Better Flow vs {alt.name}
+                </span>
+                <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" style="color:rgba(255,255,255,0.3)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </div>
+              <p style="font-family:'Geist Sans', sans-serif;font-size:13px;line-height:1.6;color:rgba(255,255,255,0.5);margin:0">
+                {alt.description}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>

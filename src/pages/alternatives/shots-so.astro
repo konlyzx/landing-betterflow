@@ -1,0 +1,41 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import AlternativePage from "@/app/alternatives/AlternativePage.astro";
+---
+
+<Layout
+  title="Better Flow vs Shots.so — Free Open Source Alternative"
+  description="Compare Better Flow vs Shots.so. Better Flow is a free, open-source screenshot beautifier with video export, 3D effects, and browser mockups. No account required, no uploads, runs entirely in your browser."
+  keywords={["shots.so alternative", "shots so free alternative", "screenshot beautifier free", "screenshot tool no account", "open source shots so", "browser mockup generator free", "screenshot studio free", "better flow vs shots so", "shots.so alternative 2026"]}
+  canonical="/alternatives/shots-so"
+>
+  <AlternativePage
+    competitor="Shots.so"
+    competitorUrl="https://shots.so"
+    tagline="Shots.so is popular but charges for basic features. Better Flow gives you everything for free — video export, 3D effects, and 100+ backgrounds included."
+    summary="Shots.so is a polished screenshot mockup tool, but it locks key features like custom backgrounds and exports behind a paid plan. Better Flow is 100% free, open-source under Apache 2.0, and does everything Shots.so does — plus video animation export and 3D effects."
+    verdict="If you want a free Shots.so alternative with no paywalls, Better Flow is the obvious choice. It's open source, processes your screenshots locally (zero uploads), and exports to PNG, MP4, WebM, and GIF."
+    pricing={{
+      competitor: "Free tier with watermarks and limited backgrounds. Paid plans start at $8/month for full access to exports and features.",
+      betterFlow: "$0 forever. No paid tier, no watermarks, no account required. All features included. Apache 2.0 open source — fork and self-host if you want."
+    }}
+    features={[
+      { name: "Free to use", competitor: "Limited", betterFlow: true },
+      { name: "No account required", competitor: false, betterFlow: true },
+      { name: "Browser mockups (Safari, Chrome)", competitor: true, betterFlow: true },
+      { name: "Custom backgrounds (100+)", competitor: "Paid", betterFlow: true },
+      { name: "3D perspective transforms", competitor: false, betterFlow: true },
+      { name: "Video export (MP4 / GIF)", competitor: false, betterFlow: true },
+      { name: "No watermarks", competitor: "Paid", betterFlow: true },
+      { name: "Local processing (no uploads)", competitor: false, betterFlow: true },
+      { name: "Open source", competitor: false, betterFlow: true },
+      { name: "4K export", competitor: "Paid", betterFlow: true },
+    ]}
+    faqs={[
+      { q: "Is Better Flow a free alternative to Shots.so?", a: "Yes. Better Flow is 100% free with no paid tier, no watermarks, and no account required. Every feature — browser frames, backgrounds, 3D effects, and video export — is available at no cost." },
+      { q: "Does Better Flow work like Shots.so?", a: "Yes. You upload a screenshot, pick a background or browser frame, adjust settings, and export. The workflow is similar but Better Flow adds 3D perspective transforms, a timeline animation editor, and MP4/GIF video export." },
+      { q: "Does Better Flow upload my screenshots like Shots.so?", a: "No. Better Flow processes everything locally in your browser using HTML5 Canvas and FFmpeg WASM. Your screenshots never leave your device. Shots.so uploads files to their servers for processing." },
+      { q: "Can I self-host Better Flow like Shots.so?", a: "Yes. Better Flow is open source under the Apache 2.0 license. You can fork the repository at github.com/betterspacx and self-host for free, including commercial use." },
+    ]}
+  />
+</Layout>

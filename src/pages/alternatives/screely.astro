@@ -1,0 +1,41 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import AlternativePage from "@/app/alternatives/AlternativePage.astro";
+---
+
+<Layout
+  title="Better Flow vs Screely — Free Screenshot Frame Tool Alternative"
+  description="Compare Better Flow vs Screely. Better Flow is a free open-source alternative with browser frames, video export, 3D effects, and 100+ backgrounds. No account, no uploads, fully local."
+  keywords={["screely alternative", "screely free alternative", "screenshot frame tool", "browser frame screenshot free", "screenshot window frame", "open source screely", "better flow vs screely", "screely alternative 2026", "screenshot browser mockup free"]}
+  canonical="/alternatives/screely"
+>
+  <AlternativePage
+    competitor="Screely"
+    competitorUrl="https://screely.com"
+    tagline="Screely is a simple browser frame tool. Better Flow goes much further — video export, 3D effects, 100+ backgrounds, and it's fully open source."
+    summary="Screely lets you add a browser window frame to screenshots, which is useful but very limited. Better Flow does everything Screely does and much more: 3D perspective effects, animated exports to MP4 and GIF, over 100 background styles, and device frames beyond just browser windows — all completely free."
+    verdict="Screely is a quick tool for simple browser frames. Better Flow is a full screenshot studio. If you need more than basic frames, Better Flow handles everything Screely can't — for free."
+    pricing={{
+      competitor: "Free with basic features. Some advanced background options require registration or are limited.",
+      betterFlow: "$0 forever. No paid tier, no sign-up, no watermarks. All features included under Apache 2.0 open source license."
+    }}
+    features={[
+      { name: "Free to use", competitor: true, betterFlow: true },
+      { name: "No account required", competitor: "Limited", betterFlow: true },
+      { name: "Browser window frames", competitor: true, betterFlow: true },
+      { name: "Multiple browser styles", competitor: "Basic", betterFlow: true },
+      { name: "Custom backgrounds", competitor: "Limited", betterFlow: true },
+      { name: "3D perspective transforms", competitor: false, betterFlow: true },
+      { name: "Video / GIF export", competitor: false, betterFlow: true },
+      { name: "Local processing (no uploads)", competitor: false, betterFlow: true },
+      { name: "Open source", competitor: false, betterFlow: true },
+      { name: "4K high-res export", competitor: false, betterFlow: true },
+    ]}
+    faqs={[
+      { q: "Is Better Flow a good Screely alternative?", a: "Yes. Better Flow does everything Screely does — browser frames for screenshots — but adds 3D effects, video animation export, 100+ backgrounds, and processes everything locally with no uploads." },
+      { q: "Can Better Flow add browser frames to screenshots like Screely?", a: "Yes. Better Flow supports Safari, Chrome, and Arc browser frame mockups, plus Polaroid, glass, and outline device frames. You can customize frame colors, shadows, and combine them with backgrounds." },
+      { q: "Is Better Flow free like Screely?", a: "Both have free tiers, but Better Flow is entirely free — no account, no limits, no paid features. Better Flow is open source under Apache 2.0 with no commercial restrictions." },
+      { q: "What can Better Flow do that Screely can't?", a: "Better Flow adds: 3D perspective transforms, timeline animation editor, video export (MP4, WebM, GIF), 100+ gradient/mesh/noise backgrounds, and local processing with zero uploads. Screely focuses only on basic browser window framing." },
+    ]}
+  />
+</Layout>
