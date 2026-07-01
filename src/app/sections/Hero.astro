@@ -3,7 +3,7 @@ import RotatingText from "../components/ui/RotatingText.astro";
 import VideoShowcase from "../components/VideoShowcase.astro";
 ---
 
-<div class="relative">
+<div class="relative min-h-[calc(100svh-64px)] flex flex-col justify-center">
 <!-- Background layers — scoped to hero only -->
 <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden">
   <!-- Mesh gradient background -->
@@ -31,7 +31,7 @@ import VideoShowcase from "../components/VideoShowcase.astro";
 </div>
 
 <!-- Hero content -->
-<section class="relative z-10 flex flex-col items-center justify-center overflow-hidden px-4 pt-64 pb-24 sm:px-6">
+<section class="relative z-10 flex flex-col items-center justify-center overflow-hidden px-4 py-24 sm:px-6">
   <div class="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col items-center gap-10 text-center">
     <!-- Badge -->
     <div
