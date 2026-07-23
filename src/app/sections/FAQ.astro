@@ -71,6 +71,7 @@ const faqs = [
   @media (min-width: 768px) {
     .faq-grid {
       grid-template-columns: 1fr 1fr;
+      align-items: start;
     }
   }
 
@@ -180,22 +181,34 @@ const faqs = [
     });
   });
 
+  function closeItem(item: HTMLElement) {
+    const answer = item.querySelector<HTMLElement>(".faq-answer")!;
+    const btn = item.querySelector<HTMLButtonElement>(".faq-trigger")!;
+    item.classList.remove("is-open");
+    btn.setAttribute("aria-expanded", "false");
+    gsap.to(answer, { height: 0, opacity: 0, duration: 0.25, ease: "power2.in", onComplete: () => { answer.hidden = true; answer.style.height = ""; } });
+  }
+
+  function openItem(item: HTMLElement) {
+    const answer = item.querySelector<HTMLElement>(".faq-answer")!;
+    const btn = item.querySelector<HTMLButtonElement>(".faq-trigger")!;
+    answer.hidden = false;
+    const fullHeight = answer.scrollHeight;
+    gsap.fromTo(answer, { height: 0, opacity: 0 }, { height: fullHeight, opacity: 1, duration: 0.3, ease: "power2.out", onComplete: () => { answer.style.height = "auto"; } });
+    item.classList.add("is-open");
+    btn.setAttribute("aria-expanded", "true");
+  }
+
   document.querySelectorAll<HTMLButtonElement>(".faq-trigger").forEach((btn) => {
     btn.addEventListener("click", () => {
       const item = btn.closest<HTMLElement>(".faq-item")!;
-      const answer = item.querySelector<HTMLElement>(".faq-answer")!;
       const isOpen = item.classList.contains("is-open");
 
       if (isOpen) {
-        item.classList.remove("is-open");
-        btn.setAttribute("aria-expanded", "false");
-        gsap.to(answer, { height: 0, opacity: 0, duration: 0.25, ease: "power2.in", onComplete: () => { answer.hidden = true; answer.style.height = ""; } });
+        closeItem(item);
       } else {
-        answer.hidden = false;
-        const fullHeight = answer.scrollHeight;
-        gsap.fromTo(answer, { height: 0, opacity: 0 }, { height: fullHeight, opacity: 1, duration: 0.3, ease: "power2.out", onComplete: () => { answer.style.height = "auto"; } });
-        item.classList.add("is-open");
-        btn.setAttribute("aria-expanded", "true");
+        document.querySelectorAll<HTMLElement>(".faq-item.is-open").forEach(closeItem);
+        openItem(item);
       }
     });
   });

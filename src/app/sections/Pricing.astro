@@ -1,0 +1,266 @@
+---
+const plans = [
+  {
+    name: "Open",
+    badge: "Free & Open Source",
+    description: "Everything you need to create beautiful screenshots. All rendering happens locally in your browser.",
+    price: "$0",
+    period: "forever",
+    cta: "Start Creating",
+    href: "https://app.betterflow.site",
+    features: [
+      "Unlimited projects",
+      "4K PNG & JPG export",
+      "MP4, WebM & GIF export",
+      "Browser mockups (Safari, Chrome, Arc)",
+      "3D perspective transforms",
+      "100+ backgrounds & gradients",
+      "Timeline editor & animations",
+      "Open source (Apache 2.0)",
+      "No account required",
+    ],
+  },
+  {
+    name: "Cloud",
+    badge: "BetterFlow Cloud",
+    description: "Cloud storage, collections, version history for power users.",
+    price: "$10",
+    period: "month",
+    cta: "Coming Soon",
+    features: [
+      "Everything in Open",
+      "Cloud-synced projects",
+      "Version history",
+      "Extended cloud storage",
+      "Collections & folders",
+      "Priority support",
+    ],
+  },
+];
+---
+
+<section id="pricing" class="relative z-10 px-6 py-24">
+  <div class="mx-auto max-w-[1324px]">
+    <div class="pricing-reveal mb-14 text-center">
+      <h2 style="font-family:Geist, sans-serif;font-size:32px;font-weight:500;color:#fff;letter-spacing:-0.02em;margin:0 0 12px 0">Simple, transparent pricing</h2>
+      <p class="mx-auto max-w-[500px] text-sm leading-relaxed text-[#71717a]" style="margin:0 auto">
+        The screenshot studio is free and open source. Cloud services are on the way for those who need them.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+      {plans.map((plan) => (
+        <div class="pricing-card">
+          <div class="pricing-badge">{plan.badge}</div>
+          <h3 class="pricing-name">{plan.name}</h3>
+          <p class="pricing-desc">{plan.description}</p>
+
+          <div class="pricing-price-row">
+            <span class="pricing-price">{plan.price}</span>
+            <span class="pricing-period">/{plan.period}</span>
+          </div>
+
+          <a href={plan.href} class="pricing-cta">
+            {plan.cta}
+            <svg class="pricing-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+
+          <ul class="pricing-features">
+            {plan.features.map((f) => (
+              <li class="pricing-feature">
+                <svg class="pricing-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  @media (min-width: 768px) {
+    .pricing-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .pricing-card {
+    background: #131316;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    padding: 28px 26px;
+    display: flex;
+    flex-direction: column;
+    transition: border-top-color 0.3s ease;
+  }
+  .pricing-card::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 1px;
+    width: 150px;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(90deg, transparent 0%, rgba(143,143,143,0.67) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .pricing-card::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    height: 300px;
+    width: 320px;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(from 90deg at 50% 50%, transparent 50%, #131316 50%), radial-gradient(rgba(201,221,255,0.1) 0%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .pricing-card:hover {
+    border-top-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .pricing-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: #ff9a66;
+    background: rgba(255, 126, 64, 0.08);
+    border: 1px solid rgba(255, 126, 64, 0.15);
+    border-radius: 50px;
+    padding: 4px 12px;
+    margin-bottom: 14px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    width: fit-content;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pricing-name {
+    font-family: 'Geist Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pricing-desc {
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 20px 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pricing-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .pricing-price {
+    font-family: 'Geist Sans', sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .pricing-period {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .pricing-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    margin-bottom: 22px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    z-index: 1;
+  }
+  .pricing-cta:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+  .pricing-arrow {
+    transition: transform 0.2s ease;
+  }
+  .pricing-cta:hover .pricing-arrow {
+    transform: translateX(3px);
+  }
+
+  .pricing-features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .pricing-feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: -0.01em;
+  }
+  .pricing-check {
+    flex-shrink: 0;
+    color: #22c55e;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.fromTo(
+    ".pricing-reveal",
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", scrollTrigger: { trigger: ".pricing-reveal", start: "top 90%" } }
+  );
+
+  gsap.utils.toArray<HTMLElement>(".pricing-card").forEach((el, i) => {
+    gsap.fromTo(el, { opacity: 0, y: 20 }, {
+      opacity: 1, y: 0, duration: 0.4, delay: i * 0.1, ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 92%" },
+    });
+  });
+</script>
