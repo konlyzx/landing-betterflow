@@ -30,3 +30,5 @@ Thumbs.db
 
 # changes dev notes
 changes.MD
+.vercel
+.env*
